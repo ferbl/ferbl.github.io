@@ -1,0 +1,15 @@
+using IDE NetBeans + mingw-w64 + MSYS for MinGW
+
+first program, output Hello World
+
+code:
+#include <stdio.h>
+ 
+int main()
+{
+    printf("Hello world");
+    
+    return 0;
+}
+output:Hello world
+
