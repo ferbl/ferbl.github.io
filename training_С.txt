@@ -1,15 +1,34 @@
-using IDE NetBeans + mingw-w64 + MSYS for MinGW
 
-first program, output Hello World
 
+task: output Hello World
 code:
 #include <stdio.h>
- 
+
 int main()
 {
     printf("Hello world");
     
     return 0;
 }
-output:Hello world
+output:
+Hello world
 
+task: input and output number
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int num;
+
+	printf("Enter a number ");
+	
+	scanf("%d", &num);
+	
+	printf("Your number %d ", num);
+	
+	return 0;
+}
+output:
+Enter number 5
+You number 5
