@@ -1,5 +1,3 @@
-
-
 task: output Hello World
 code:
 #include <stdio.h>
@@ -13,22 +11,64 @@ int main()
 output:
 Hello world
 
-task: input and output number
+task: input and output numbers
 code:
 #include <stdio.h>
 
 int main()
 {	
-	int num;
+	int num1, num2;
 
-	printf("Enter a number ");
+	printf("Enter numbers ");
 	
-	scanf("%d", &num);
+	scanf("%d %d", &num1, &num2);
 	
-	printf("Your number %d ", num);
+	printf("You numbers %d and %d", num1, num2);
 	
 	return 0;
 }
 output:
-Enter number 5
-You number 5
+Enter numbers 5 5
+You numbers 5 amd 5
+
+task: input and output character
+code:
+#include <stdio.h>
+
+int main()
+{	
+	char ch;
+
+	printf("Enter a character ");
+	
+	scanf("%c", &ch);
+	
+	printf("Your character %c", ch);
+	
+	return 0;
+}
+output:
+Enter a character z
+Your character z
+
+task: input and output your name
+code:
+#include <stdio.h>
+
+int main()
+{	
+	char string[50];
+
+	printf("Enter your name ");
+	
+	gets(string);
+	
+	printf("Welcome %s", string);
+	
+	return 0;
+}
+output:
+Enter your name ferbl ferbl
+Welcome ferbl ferbl
+
+
