@@ -29,7 +29,7 @@ int main()
 }
 output:
 Enter numbers 5 5
-You numbers 5 amd 5
+You numbers 5 and 5
 
 task: input and output character
 code:
@@ -71,4 +71,93 @@ output:
 Enter your name ferbl ferbl
 Welcome ferbl ferbl
 
+task:
+1) input the number
+2) compare inputted number
+if the number is less than 100, display "Number is less than 100"
+if the number is 100, display "Number is 100"
+if the number is greater than 100, display "Number is greater than 100"
+code:
+#include <stdio.h>
 
+int main()
+{	
+	int number;
+	
+	printf("Enter a number ");
+	scanf("%d", &number);
+	
+	if(number < 100)
+	{
+		printf("Number is less than 100");
+	}
+	else if(number == 100)
+	{
+		printf("Number is 100");
+	}
+	else
+	{
+		printf("Number is greater than 100");
+	}
+	
+	return 0;
+}
+output:
+Enter a number 5
+Number is less than 100
+output:
+Enter a number 100
+Number is 100
+output:
+Enter a number 299
+Number is greater than 100
+
+task: 
+1)
+2) 
+code:
+#include <stdio.h>
+
+int main()
+{	
+	char grade;
+	printf("Enter your grade ");
+	scanf("%c", &grade);
+	
+	switch(grade)
+	{
+		case 'A':
+		printf("Excellent");
+		break;
+		
+		case 'B':
+		printf("Keep it up");
+		break;
+		
+		case 'C':
+		printf("Well done");
+		break;
+		
+		case 'D':
+		printf("You passed");
+		break;
+		
+		case 'F':
+		printf("Better luck next time");
+		break;
+		
+		default:
+		printf("Invalid grade");
+	}
+	
+	return 0;
+}
+output:
+Enter your grade A
+Excellent
+output:
+Enter your grade D
+You passed
+output:
+Enter your grade z
+Invalid grade
