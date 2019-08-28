@@ -239,4 +239,233 @@ output:
 Enter your char d
 Reverse char D
 
+task:
+swap two numbers
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int x = 5;
+	int y = 55;
+	int temporary;
+	
+	temporary = x;
+	x = y;
+	y = temporary;
+	
+	printf("x = %d \n", x);
+	printf("y = %d \n", y);
+	
+	return 0;
+}
+output:
+x = 55
+y = 5
+
+task:
+find the greatest and smallest number
+code:
+#include <stdio.h>
+
+int a;
+int b;
+
+int main()
+{	
+	printf("Enter the two number to find the greatest and smallest number ");
+	
+	scanf("%d %d", &a, &b);
+	
+	if(a == b)
+	{
+		printf("The numbers are equal");
+	}
+	else if(a > b)
+	{
+		printf("%d greatess \n", a);
+		printf("%d smallest \n", b);
+	}
+	else
+	{
+		printf("%d smallest \n", a);
+		printf("%d greatess \n", b);
+	}
+	
+	return 0;
+}
+output:
+Enter the two number to find the greatest and smallest number 55 5
+55 greatess
+5 smallest
+output:
+Enter the two number to find the greatest and smallest number 15 100
+15 smallest
+100 greatess
+output:
+Enter the two number to find the greatest and smallest number 5 5
+The numbers are equal
+
+task:
+display numbers from 0 to 9
+if x is less 10 then a is increased by 1
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int x = 0;
+	
+	for(x = 0; x < 10; x++)
+	{
+		printf("x = %d \n", x);
+	}
+	
+	return 0;
+}
+output:
+x = 0
+x = 1
+x = 2
+x = 3
+x = 4
+x = 5
+x = 6
+x = 7
+x = 8
+x = 9
+
+task:
+display numbers from 0 to 9
+if x is less 10 then a is increased by 1
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int x = 0;
+	
+	while(x < 10)
+	{
+		printf("x = %d \n", x);
+		
+		x++;
+	}
+	
+	return 0;
+}
+output:
+x = 0
+x = 1
+x = 2
+x = 3
+x = 4
+x = 5
+x = 6
+x = 7
+x = 8
+x = 9
+
+task:
+display numbers from 10 to 1
+decrement x by 1
+if x is more 0
+repeat the cycle
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int x = 10;
+	
+	do
+	{
+		printf("x = %d \n", x);
+		
+		x--;
+	}
+	while(x > 0);
+	
+	return 0;
+}
+output:
+x = 10
+x = 9
+x = 8
+x = 7
+x = 6
+x = 5
+x = 4
+x = 3
+x = 2
+x = 1
+
+task:
+display a rectangle
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int a;
+	int b;
+	
+	for(a = 0; a < 5; a++)
+	{
+		for(b = 0; b < 3; b++)
+		{
+			printf("*");
+		}
+		printf("\n");
+	}
+	
+	return 0;
+}
+output:
+***
+***
+***
+***
+***
+
+task:
+calculate factorial
+5! = 1 · 2 · 3 · 4 · 5 = 120
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int i;
+	int n;
+	int fact = 1;
+
+	printf("Enter a number ");
+	scanf("%d", &n);
+	
+	for(i = 1; i <= n; i++)
+	{		
+		fact = fact * i;
+		
+		printf("i = %d \n", i);
+		printf("fact = %d \n", fact);
+	}
+	
+	printf("Factorial of %d is %d", n, fact);
+	
+	return 0;
+}
+output:
+Enter a number 5
+i = 1
+fact = 1
+i = 2
+fact = 2
+i = 3
+fact = 6
+i = 4
+fact = 24
+i = 5
+fact = 120
+Factorial of 5 is 120
 
