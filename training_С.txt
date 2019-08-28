@@ -113,8 +113,11 @@ Enter a number 299
 Number is greater than 100
 
 task: 
-1)
-2) 
+1) input your grade
+2) compare inputted grade
+if the grade is A, display "Excellent"
+if the grade is B, display "Keep it up" etc. 
+if the grade is not equal to A B C D F, display "Invalid grade"
 code:
 #include <stdio.h>
 
@@ -127,27 +130,27 @@ int main()
 	switch(grade)
 	{
 		case 'A':
-		printf("Excellent");
-		break;
+			printf("Excellent");
+			break;
 		
 		case 'B':
-		printf("Keep it up");
-		break;
+			printf("Keep it up");
+			break;
 		
 		case 'C':
-		printf("Well done");
-		break;
+			printf("Well done");
+			break;
 		
 		case 'D':
-		printf("You passed");
-		break;
+			printf("You passed");
+			break;
 		
 		case 'F':
-		printf("Better luck next time");
-		break;
+			printf("Better luck next time");
+			break;
 		
 		default:
-		printf("Invalid grade");
+			printf("Invalid grade");
 	}
 	
 	return 0;
@@ -161,3 +164,79 @@ You passed
 output:
 Enter your grade z
 Invalid grade
+
+task:
+1) input your char
+2) compare inputted char
+if the grade is a A e E i I o O u U, display "is a vowel"
+if the grade is not a A e E i I o O u U, display "is not vowel"
+code:
+#include <stdio.h>
+
+int main()
+{	
+	char ch;
+	printf("Enter your char ");
+	scanf("%c", &ch);
+	
+	switch(ch)
+	{
+		case 'a':
+		case 'A':
+		case 'e':
+		case 'E':
+		case 'i':
+		case 'I':
+		case 'o':
+		case 'O':
+		case 'u':
+		case 'U':
+			printf("%c is a vowel", ch);
+			break;
+			
+		default:
+			printf("%c is not vowel", ch);
+	}
+	
+	return 0;
+}
+output:
+Enter your char a
+a is a vowel
+output:
+Enter your char z
+z is not vowel
+
+task:
+add library <ctype.h>, 
+islower(ch) is a lowercase character?
+toupper(ch), char to uppercase
+tolower(ch), char to lowercase
+if the char is lowercase, display uppercase
+if the char is uppercase, display lowercase
+code:
+#include <stdio.h>
+#include <ctype.h>
+
+int main()
+{	
+	char ch;
+	printf("Enter your char ");
+	ch = getchar();
+	
+	if(islower(ch))
+	{
+		printf("Reverse char %c", toupper(ch));
+	}
+	else
+	{
+		printf("Reverse char %c", tolower(ch));
+	}
+	
+	return 0;
+}
+output:
+Enter your char d
+Reverse char D
+
+
