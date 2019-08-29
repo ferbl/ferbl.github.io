@@ -620,3 +620,93 @@ output:
 Enter a number 25
 The number 25 is not a polindrome
 
+task:
+calculate the sum of all digits 123
+1 + 2 + 3 = 6
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int number;
+	int remainder;
+	int sum;
+	
+	printf("Enter the number to calculate the sum of all digits ");
+	scanf("%d", &number);
+	
+	while(number != 0)
+	{
+		remainder = number % 10;
+		printf("remainder = %d \n", remainder);
+		
+		sum += remainder;
+		printf("sum = %d \n", sum);
+		
+		number = number / 10;
+		printf("number = %d \n", number);
+		
+		printf("\n");
+	}
+	
+	printf("Sum of all digits %d", sum);
+	
+	return 0;
+}
+output:
+Enter the number to calculate the sum of all digits 123
+remainder = 3
+sum = 3
+number = 12
+
+remainder = 2
+sum = 5
+number = 1
+
+remainder = 1
+sum = 6
+number = 0
+
+Sum of all digits 6
+
+task:
+calculate the length of the string
+code:
+#include <stdio.h>
+
+int main()
+{	
+	char string[100];
+	int number = 0;
+
+	printf("Enter the string ");
+	gets(string);
+	
+	while(string[number] != '\0')
+	{
+		printf("%c = %d \n", string[number], number);
+		
+		number++;
+		
+		printf("%d \n", number);
+	}
+	
+	printf("The length of the string is %d", number);
+	
+	return 0;
+}
+output:
+Enter the string ferbl
+f = 0
+1
+e = 1
+2
+r = 2
+3
+b = 3
+4
+l = 4
+5
+The length of the string is 5
+
+
