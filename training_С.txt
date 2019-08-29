@@ -469,3 +469,154 @@ i = 5
 fact = 120
 Factorial of 5 is 120
 
+task:
+calculate the fibonacci
+0 + 1 + 1 + 2 + 3 + 5
+code:
+#include <stdio.h>
+
+void fibonacci(int num);
+
+int main()
+{	
+	int num = 0;
+	
+	printf("Enter the number to calculate the fibonacci ");
+	
+	scanf("%d", &num);
+	
+	fibonacci(num);
+	
+	return 0;
+}
+
+void fibonacci(int num)
+{
+	int a = 0;
+	int b = 1;
+	int c;
+	int i = 3;
+
+	if(num == 1)
+	{
+		printf("%d", a);
+	}
+	
+	if(num >= 2)
+	{
+		printf("%d %d ", a, b);
+	}
+	
+	while(num >= i)
+	{
+		c = a + b;
+		
+		printf("%d ", c);
+		
+		a = b;
+		b = c;
+		
+		i++;
+	}
+}
+output:
+Enter the number to calculate the fibonacci 6
+0 1 1 2 3 5
+
+task: reverse number 25
+0 * 10 = 0
+0 + (25 % 10 = 5) = 5
+25 / 10 = 2.5 ~ 2
+
+5 * 10 = 50
+50 + (2 % 10 = 2) = 52
+2 / 10 = 0.2 ~ 0
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int number;
+	int reverse = 0;
+	
+	printf("Enter a number ");
+	scanf("%d", &number);
+	
+	while(number != 0)
+	{
+		reverse = reverse * 10;
+		printf("reverse1 = %d, number1 = %d \n", reverse, number);
+		
+		reverse = reverse + number % 10; 
+		printf("reverse2 = %d, number2 = %d \n", reverse, number);
+		
+		number = number / 10;
+		printf("reverse3 = %d, number3 = %d \n", reverse, number);
+		
+		printf("\n");
+	}
+	
+	printf("Reverse number %d ", reverse);
+	
+	return 0;
+}
+output:
+Enter a number 25
+reverse1 = 0, number1 = 25
+reverse2 = 5, number2 = 25
+reverse3 = 5, number3 = 2
+
+reverse1 = 50, number1 = 2
+reverse2 = 52, number2 = 2
+reverse3 = 52, number3 = 0
+
+Reverse number 52
+
+task:
+check if the number is a palindrome
+code:
+#include <stdio.h>
+
+int reverseNumber(int num);
+
+int main()
+{	
+	int number;
+	
+	printf("Enter a number ");
+	scanf("%d", &number);
+	
+	if(number == reverseNumber(number))
+	{
+		printf("The number %d is a polindrome", number);
+	}
+	else
+	{
+		printf("The number %d is not a polindrome", number);
+	}
+	
+	return 0;
+}
+
+int reverseNumber(int num)
+{
+	int reverse = 0;
+	
+	while(num != 0)
+	{
+		reverse = reverse * 10;
+		
+		reverse = reverse + num % 10; 
+		
+		num = num / 10;
+	}
+	
+	return reverse;
+}
+output:
+Enter a number 121
+The number 121 is a polindrome
+output:
+Enter a number 25
+The number 25 is not a polindrome
+
