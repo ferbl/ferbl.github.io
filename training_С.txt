@@ -710,6 +710,141 @@ Enter 3 elements
 The average number is 7.333333
 
 task:
+find the armstrong number
+(1 * 1 * 1) + (5 * 5 * 5) + (3 * 3 * 3) = 153
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int begin = 152;
+	int end = 154;
+	int remainder;
+	int number;
+	int sum;
+
+	printf("Search armstrong number \n");
+	
+	for(begin; end >= begin; begin++)
+	{
+		number = begin;
+		printf("*number = %d \n", number);
+		
+		sum = 0;
+		
+		while(number != 0)
+		{
+			remainder = number % 10;
+			printf("#remainder = %d \n", remainder);
+			
+			sum += remainder*remainder*remainder;
+			printf("!sum = %d \n", sum);
+			
+			number = number / 10;
+			printf("num = %d \n", number);
+		}
+		
+		printf("\n");
+		
+		if(sum == begin)
+		{
+			printf("This is armstrong number %d \n\n", begin);
+		}
+	}
+	
+	
+	return 0;
+}
+output:
+Search armstrong number
+*number = 152
+#remainder = 2
+!sum = 8
+num = 15
+#remainder = 5
+!sum = 133
+num = 1
+#remainder = 1
+!sum = 134
+num = 0
+
+*number = 153
+#remainder = 3
+!sum = 27
+num = 15
+#remainder = 5
+!sum = 152
+num = 1
+#remainder = 1
+!sum = 153
+num = 0
+
+This is armstrong number 153
+
+*number = 154
+#remainder = 4
+!sum = 64
+num = 15
+#remainder = 5
+!sum = 189
+num = 1
+#remainder = 1
+!sum = 190
+num = 0
+
+task:
+check if the entered number is armstrong number
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int numberInput;
+	int numberCheck;
+	int remainder;
+	int sum = 0;
+	
+	
+	printf("Check if the entered number is an armstrong number ");
+	scanf("%d", &numberInput);
+	
+	numberCheck = numberInput;
+	
+	while(numberCheck != 0)
+	{
+		remainder = numberCheck % 10;
+		
+		sum += remainder*remainder*remainder;
+		
+		numberCheck = numberCheck / 10;
+	}
+	
+	printf("sum = %d \n\n", sum);
+	
+	if(numberInput == sum)
+	{
+		printf("This is the armstrong number");
+	}
+	else
+	{
+		printf("This is not armstrong number");
+	}
+	
+	return 0;
+}
+output:
+Check if the entered number is an armstrong number 153
+sum = 153
+
+This is the armstrong number
+output:
+Check if the entered number is an armstrong number 55
+sum = 250
+
+This is not armstrong number
+
+task:
+
 
 task:
 calculate the length of the string
