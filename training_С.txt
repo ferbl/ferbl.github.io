@@ -709,4 +709,73 @@ l = 4
 5
 The length of the string is 5
 
+task:
+reverse a string
+string Org [f-0 e-1 r-2 b-3 l-4]
+string Rev [l-0 b-1 r-2 e-3 f-4]
+l-4 -> l-0
+code:
+#include <stdio.h>
 
+int main()
+{	
+	char stringOrg[100];
+	char stringRev[100];
+	int length = 0;
+	
+	int begin;
+	int end;
+
+	printf("Enter the string ");
+	gets(stringOrg);
+	
+	
+	while(stringOrg[length] != '\0')
+	{
+		printf("%c - %d \n", stringOrg[length], length);
+		
+		length++;
+		
+		printf("%d \n", length);
+	}
+	
+	
+	end = length - 1;
+	printf("delete '\\0', end = %d \n\n", end);
+	
+	
+	for(begin = 0; length > begin; begin++)
+	{
+		printf("begin = %d, end = %d \n", begin, end);
+		
+		stringRev[begin] = stringOrg[end];
+		
+		end--;
+	}
+	
+	printf("\n");
+	printf("Your reverse a string %s", stringRev);
+	
+	return 0;
+}
+output:
+Enter the string ferbl
+f - 0
+1
+e - 1
+2
+r - 2
+3
+b - 3
+4
+l - 4
+5
+delete '\0', end = 4
+
+begin = 0, end = 4
+begin = 1, end = 3
+begin = 2, end = 2
+begin = 3, end = 1
+begin = 4, end = 0
+
+Your reverse a string lbref
