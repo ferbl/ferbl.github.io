@@ -670,6 +670,48 @@ number = 0
 Sum of all digits 6
 
 task:
+сalculate the average of the entered numbers
+5 + 7 + 10 = 22 / 3 = 7.33333
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int elements;
+	float sum = 0;
+	float input;
+	float average;
+	int i;
+
+	printf("Enter the number of elements to find the average ");
+	scanf("%d", &elements);
+	
+	printf("Enter %d elements \n", elements);
+	
+	for(i = 0; elements > i; i++)
+	{
+		scanf("%f", &input);
+		
+		sum += input;
+	}
+	
+	average = sum / elements;
+	
+	printf("The average number is %f", average);
+	
+	return 0;
+}
+output:
+Enter the number of elements to find the average 3
+Enter 3 elements
+5
+7
+10
+The average number is 7.333333
+
+task:
+
+task:
 calculate the length of the string
 code:
 #include <stdio.h>
