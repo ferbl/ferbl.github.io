@@ -844,8 +844,107 @@ sum = 250
 This is not armstrong number
 
 task:
+whether the number is even or odd
+& - AND
+checks decimal in binary form
+1 - 1 = 1
+1 - 0 = 0
+0 - 0 = 0
+10 decimal = 1010 binary
+9 decimal = 1001 binary
+1 decimal = 0001 binary
+10 & 1
+1010
+0001
+0000 = 0 decimal = even
+9 & 1
+1001
+0001
+0001 = 1 decimal = odd
+if(0 = false)
+if(1 = true)
+code:
+#include <stdio.h>
 
+int main()
+{		
+	printf("10 & 1 = %d ", 10 & 1);
+	
+	if(10 & 1)
+	{
+		printf("odd");
+	}
+	else
+	{
+		printf("even");
+	}
+	
+	printf("\n");
+	
+	printf("9 & 1 = %d ", 9 & 1);
+	
+	if(9 & 1)
+	{
+		printf("odd");
+	}
+	else
+	{
+		printf("even");
+	}
+	
+	
+	return 0;
+}
+output:
+10 & 1 = 0 even
+9 & 1 = 1 odd
 
+---
+task:
+transfer number from decimal to binary
+4 / 2 = 2 remainder 0
+2 / 2 = 1 remainder 0
+1 / 2 = 0 remainder 1
+binary number is written from bottom to top
+4 decimal = 100 binary
+code:
+#include <stdio.h>
+
+void DecimalToBinary(int number);
+
+int main()
+{	
+	DecimalToBinary(4);
+
+	return 0;
+}
+
+void DecimalToBinary(int number)
+{
+	printf("DecimalToBinary(int %d) \n", number);
+	
+	if(number > 1)
+	{
+		DecimalToBinary(number / 2);
+		
+		printf("number = %d \n", number);
+	}
+	
+	printf("binary = %d \n\n", number % 2);
+}
+output:
+DecimalToBinary(int 4)
+DecimalToBinary(int 2)
+DecimalToBinary(int 1)
+binary = 1
+
+number = 2
+binary = 0
+
+number = 4
+binary = 0
+
+---
 task:
 calculate the length of the string
 code:
