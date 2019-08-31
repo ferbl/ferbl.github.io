@@ -1131,8 +1131,43 @@ input=10, big=5
 greatest number 10
 
 task:
+calculate exponent number
 code:
+#include <stdio.h>
 
+int main()
+{	
+	int number;
+	int exponent;
+	int exponentSave;
+	int value = 1;
+
+	printf("enter number ");
+	scanf("%d", &number);
+	
+	printf("enter exponent ");
+	scanf("%d", &exponent);
+	
+	exponentSave = exponent;
+	
+	while(exponent > 0)
+	{
+		value *= number;
+		
+		exponent--;
+	}
+	
+	printf("%d^%d = %d", number, exponentSave, value);
+	
+	return 0;
+}
+output:
+enter number 4
+enter exponent 3
+4^3 = 64
+
+task:
+code:
 
 ---
 task:
