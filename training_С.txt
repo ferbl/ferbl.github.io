@@ -1014,10 +1014,6 @@ enter 3 numbers
 Sum = 6
 
 task:
-
-
----
-task:
 check if the number is prime
 code:
 #include <stdio.h>
@@ -1087,6 +1083,56 @@ num = 9
 num=9 % i=2 = 1
 num=9 % i=3 = 0
 composite number
+
+task:
+find the greatest input number
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int number;
+	int input;
+	int big;
+	int i;
+
+	printf("how many numbers will you enter to find the greatest? ");
+	scanf("%d", &number);
+	
+	printf("enter %d numbers \n", number);
+	
+	printf("first ");
+	scanf("%d", &big);
+	
+	for(i = 2; number >= i; i++)
+	{
+		scanf("%d", &input);
+		
+		printf("input=%d, big=%d \n", input, big);
+		
+		if(input > big)
+		{
+			big = input;
+		}
+	}
+	
+	printf("greatest number %d", big);
+	
+	return 0;
+}
+output:
+how many numbers will you enter to find the greatest? 3
+enter 3 numbers
+first 5
+3
+input=3, big=5
+10
+input=10, big=5
+greatest number 10
+
+task:
+code:
+
 
 ---
 task:
