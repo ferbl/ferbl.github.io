@@ -899,6 +899,64 @@ output:
 10 & 1 = 0 even
 9 & 1 = 1 odd
 
+task:
+check if the number is even or odd
+(10 / 2) = 5 * 2 = 10 == 10 (true) - even
+(5 / 2) = 2 * 2 = 4 == 5 (false) - odd
+code:
+#include <stdio.h>
+
+int main()
+{		
+	int number;
+
+	printf("enter a number to check if the number is even or odd ");
+	scanf("%d", &number);
+	
+	if((number / 2) * 2 == number)
+	{
+		printf("This is an even number");
+	}
+	else
+	{
+		printf("This is an odd number");
+	}
+
+	return 0;
+}
+output:
+Enter a number to check if the number is even or odd 10
+This is an even number
+output:
+Enter a number to check if the number is even or odd 5
+This is an odd number
+
+task:
+find the factors of the number
+code:
+#include <stdio.h>
+
+int main()
+{		
+	int number;
+	int i;
+
+	printf("enter a number to find the factor of ");
+	scanf("%d", &number);
+	
+	for(i = 1; number / 2 >= i; i++)
+	{
+		if(number % i == 0)
+		{
+			printf("%d \n", i);
+		}
+	}
+
+	return 0;
+}
+output:
+
+
 ---
 task:
 transfer number from decimal to binary
