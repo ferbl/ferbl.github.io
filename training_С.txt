@@ -939,23 +939,82 @@ code:
 int main()
 {		
 	int number;
-	int i;
+	int factor = 1;
 
 	printf("enter a number to find the factor of ");
 	scanf("%d", &number);
 	
-	for(i = 1; number / 2 >= i; i++)
-	{
-		if(number % i == 0)
+	for(factor; number >= factor; factor++)
+	{		
+		printf("number=%d %% factor=%d = remainder=%d \n", number, factor, number % factor);
+
+		if(number % factor == 0)
 		{
-			printf("%d \n", i);
+			printf("found factor = %d \n", factor);
 		}
 	}
 
 	return 0;
 }
 output:
+enter a number to find the factor of 12
+number=12 % factor=1 = remainder=0
+found factor = 1
+number=12 % factor=2 = remainder=0
+found factor = 2
+number=12 % factor=3 = remainder=0
+found factor = 3
+number=12 % factor=4 = remainder=0
+found factor = 4
+number=12 % factor=5 = remainder=2
+number=12 % factor=6 = remainder=0
+found factor = 6
+number=12 % factor=7 = remainder=5
+number=12 % factor=8 = remainder=4
+number=12 % factor=9 = remainder=3
+number=12 % factor=10 = remainder=2
+number=12 % factor=11 = remainder=1
+number=12 % factor=12 = remainder=0
+found factor = 12
 
+task:
+find the sum of the entered numbers
+code:
+#include <stdio.h>
+
+int main()
+{		
+	int number;
+	int input;
+	int sum = 0;
+	int i;
+
+	printf("how many numbers will you sum? ");
+	scanf("%d", &number);
+	
+	printf("enter %d numbers \n", number);
+	
+	for(i = 1; number >= i; i++)
+	{
+		scanf("%d", &input);
+		
+		sum += input;
+	}
+	
+	printf("Sum = %d", sum);
+
+	return 0;
+}
+output:
+how many numbers will you sum? 3
+enter 3 numbers
+1
+2
+3
+Sum = 6
+
+task:
+code:
 
 ---
 task:
