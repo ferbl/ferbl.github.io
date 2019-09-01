@@ -1167,7 +1167,88 @@ enter exponent 3
 4^3 = 64
 
 task:
+check if the entered number is an integer or a floating point
 code:
+#include <stdio.h>
+
+int main()
+{	
+	char number[10];
+	int flag = 0;
+	int i = 0;
+	
+	printf("enter a number to check if is integer or float ");
+	scanf("%s", number);
+	
+	while(number[i] != '\0')
+	{
+		if(number[i] == '.')
+		{
+			flag = 1;
+			
+			break;
+		}
+		
+		i++;
+	}
+	
+	
+	if(flag)
+	{
+		printf("this float-point number");
+	}
+	else
+	{
+		printf("this integer number");
+	}
+	
+	return 0;
+}
+output:
+enter a number to check if is integer or float 15.9
+this float-point number
+output:
+enter a number to check if is integer or float 16
+this integer number
+
+task:
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int number;
+	int value;
+	int i;
+
+	printf("what number do you need as a multiplication table? ");
+	scanf("%d", &number);
+	
+	for(i = 1; i <= 10; i++)
+	{
+		value = number * i;
+		
+		printf("%d * %d = %d \n", number, i, value);
+	}
+	
+	return 0;
+}
+output:
+what number do you need as a multiplication table? 5
+5 * 1 = 5
+5 * 2 = 10
+5 * 3 = 15
+5 * 4 = 20
+5 * 5 = 25
+5 * 6 = 30
+5 * 7 = 35
+5 * 8 = 40
+5 * 9 = 45
+5 * 10 = 50
+
+task:
+code:
+
 
 ---
 task:
