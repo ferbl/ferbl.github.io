@@ -1167,6 +1167,120 @@ enter exponent 3
 4^3 = 64
 
 task:
+display the multiplication table of the entered number
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int number;
+	int value;
+	int i;
+
+	printf("what number do you need as a multiplication table? ");
+	scanf("%d", &number);
+	
+	for(i = 1; i <= 10; i++)
+	{
+		value = number * i;
+		
+		printf("%d * %d = %d \n", number, i, value);
+	}
+	
+	return 0;
+}
+output:
+what number do you need as a multiplication table? 5
+5 * 1 = 5
+5 * 2 = 10
+5 * 3 = 15
+5 * 4 = 20
+5 * 5 = 25
+5 * 6 = 30
+5 * 7 = 35
+5 * 8 = 40
+5 * 9 = 45
+5 * 10 = 50
+
+task:
+enter and display array elements
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int number;
+	int array[2]; 
+	
+	printf("enter the first element of the array ");
+	scanf("%d", &array[0]);
+	
+	printf("enter the second element of the array ");
+	scanf("%d", &array[1]);
+	
+	printf("enter the third element of the array ");
+	scanf("%d", &array[2]);
+	
+	
+	printf("array[0] = %d \n", array[0]);
+	printf("array[1] = %d \n", array[1]);
+	printf("array[2] = %d \n", array[2]);
+	
+	return 0;
+}
+output:
+enter the first element of the array 45
+enter the second element of the array 54
+enter the third element of the array 15
+array[0] = 45
+array[1] = 54
+array[2] = 15
+
+task:
+enter and display array elements
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[100]; 
+	int number;
+	int i;
+	
+	printf("how many elements will you enter into the array? ");
+	scanf("%d", &number);
+	
+	printf("enter %d elements \n", number);
+	
+	for(i = 0; number > i; i++)
+	{
+		scanf("%d", &array[i]);
+	}
+	
+	
+	printf("array contains ");
+	
+	for(i = 0; number > i; i++)
+	{
+		printf("%d ", array[i]);
+	}
+	
+	return 0;
+}
+output:
+how many elements will you enter into the array? 3
+enter 3 elements
+55
+56
+45
+array contains 55 56 45
+
+task:
+code:
+
+
+---
+task:
 check if the entered number is an integer or a floating point
 code:
 #include <stdio.h>
@@ -1210,90 +1324,6 @@ this float-point number
 output:
 enter a number to check if is integer or float 16
 this integer number
-
-task:
-code:
-#include <stdio.h>
-
-int main()
-{	
-	int number;
-	int value;
-	int i;
-
-	printf("what number do you need as a multiplication table? ");
-	scanf("%d", &number);
-	
-	for(i = 1; i <= 10; i++)
-	{
-		value = number * i;
-		
-		printf("%d * %d = %d \n", number, i, value);
-	}
-	
-	return 0;
-}
-output:
-what number do you need as a multiplication table? 5
-5 * 1 = 5
-5 * 2 = 10
-5 * 3 = 15
-5 * 4 = 20
-5 * 5 = 25
-5 * 6 = 30
-5 * 7 = 35
-5 * 8 = 40
-5 * 9 = 45
-5 * 10 = 50
-
-task:
-code:
-
-
----
-task:
-transfer number from decimal to binary
-4 / 2 = 2 remainder 0
-2 / 2 = 1 remainder 0
-1 / 2 = 0 remainder 1
-binary number is written from bottom to top
-4 decimal = 100 binary
-code:
-#include <stdio.h>
-
-void DecimalToBinary(int number);
-
-int main()
-{	
-	DecimalToBinary(4);
-
-	return 0;
-}
-
-void DecimalToBinary(int number)
-{
-	printf("DecimalToBinary(int %d) \n", number);
-	
-	if(number > 1)
-	{
-		DecimalToBinary(number / 2);
-		
-		printf("number = %d \n", number);
-	}
-	
-	printf("binary = %d \n\n", number % 2);
-}
-output:
-DecimalToBinary(int 4)
-DecimalToBinary(int 2)
-DecimalToBinary(int 1)
-binary = 1
-
-number = 2
-binary = 0
-
-number = 4
-binary = 0
 
 ---
 task:
@@ -1406,3 +1436,48 @@ begin = 3, end = 1
 begin = 4, end = 0
 
 Your reverse a string lbref
+
+---
+task:
+transfer number from decimal to binary
+4 / 2 = 2 remainder 0
+2 / 2 = 1 remainder 0
+1 / 2 = 0 remainder 1
+binary number is written from bottom to top
+4 decimal = 100 binary
+code:
+#include <stdio.h>
+
+void DecimalToBinary(int number);
+
+int main()
+{	
+	DecimalToBinary(4);
+
+	return 0;
+}
+
+void DecimalToBinary(int number)
+{
+	printf("DecimalToBinary(int %d) \n", number);
+	
+	if(number > 1)
+	{
+		DecimalToBinary(number / 2);
+		
+		printf("number = %d \n", number);
+	}
+	
+	printf("binary = %d \n\n", number % 2);
+}
+output:
+DecimalToBinary(int 4)
+DecimalToBinary(int 2)
+DecimalToBinary(int 1)
+binary = 1
+
+number = 2
+binary = 0
+
+number = 4
+binary = 0
