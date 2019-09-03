@@ -1579,9 +1579,85 @@ enter a number to check if is integer or float 16
 this integer number
 
 task:
+replace number in array
+code:
+#include <stdio.h>
+
+void displayArray();
+
+	int array[100];
+	int elements;
+	int position;
+	int newNumber;
+	int i;
+	
+int main()
+{	
+	printf("how many elements to add to the array? ");
+	scanf("%d", &elements);
+	
+	
+	printf("Enter %d elements \n", elements);
+	
+	for(i = 0; elements > i; i++)
+	{
+		scanf("%d", &array[i]);
+	}
+	
+	
+	displayArray();
+	
+	
+	printf("which position to replace? \n");
+	scanf("%d", &position);
+	
+	
+	printf("what number? \n");
+	scanf("%d", &newNumber);
+	
+	array[position] = newNumber;
+	
+	displayArray();
+	
+	return 0;
+}
+
+void displayArray()
+{
+	printf("\n");
+	printf("array contains \n");
+	
+	for(i = 0; elements > i; i++)
+	{	
+		printf("position %d = %d \n", i,array[i]);
+	}
+}
+output:
+how many elements to add to the array? 3
+Enter 3 elements
+11
+22
+33
+
+array contains
+position 0 = 11
+position 1 = 22
+position 2 = 33
+which position to replace?
+1
+what number?
+55
+
+array contains
+position 0 = 11
+position 1 = 55
+position 2 = 33
+
+task:
 code:
 
 
+---
 task:
 transfer number from decimal to binary
 4 / 2 = 2 remainder 0
