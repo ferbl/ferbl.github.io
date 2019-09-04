@@ -1655,25 +1655,15 @@ position 2 = 33
 
 task:
 insert a number into an array with a shift of numbers
-pos 0 = 11
-pos 1 = 22
-pos 2 = 33 
-elements = 3
-position = 1
-insertNum = 77
-pos 2 = 33 -> pos 3
-pos 1 = 22 -> pos 2
-pos 1 = insertNum; 
 code:
 #include <stdio.h>
-	
+
 int main()
 {	
 	int array[100];
 	int elements;
 	int insertNum;
 	int position;
-	int length;
 	int i;
 
 	printf("how many elements to add to the array? ");
@@ -1687,7 +1677,7 @@ int main()
 	}
 	
 	
-	printf("--positions of elements \n");
+	printf("positions of elements \n");
 	
 	for(i = 0; elements > i; i++)
 	{
@@ -1703,21 +1693,23 @@ int main()
 	scanf("%d", &insertNum);
 	
 	
-	length = elements - 1;
+	i = elements - 1;
 	
 	
-	for(length; length >= position; length--)
+	for(i; i >= position; i--)
 	{
-		printf("length = %d \n", length);
+		printf("i=%d >= pos=%d \n", i, position);
 		
-		array[length+1] = array[length];
+		printf("%d << %d \n", array[i+1], array[i]);
+		
+		array[i+1] = array[i];
 	}
+	
 	
 	array[position] = insertNum;
 	
 	
-	
-	printf("--positions of elements \n");
+	printf("positions of elements \n");
 	
 	for(i = 0; elements >= i; i++)
 	{
@@ -1732,19 +1724,96 @@ enter 3 elements
 11
 22
 33
---positions of elements
+positions of elements
 positions 0 = 11
 positions 1 = 22
 positions 2 = 33
 at what position to insert a new element? 1
-what number? 77
-length = 2
-length = 1
---positions of elements
+what number? 55
+i=2 >= pos=1
+0 << 33
+i=1 >= pos=1
+33 << 22
+positions of elements
 positions 0 = 11
-positions 1 = 77
+positions 1 = 55
 positions 2 = 22
 positions 3 = 33
+
+task:
+delete an element in an array with a shift of numbers
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[100];
+	int elements;
+	int position;
+	int i;
+
+	printf("how many elements to add to the array? ");
+	scanf("%d", &elements);
+	
+	printf("enter %d elements \n", elements);
+	
+	for(i = 0; elements > i; i++)
+	{
+		scanf("%d", &array[i]);
+	}
+	
+	
+	printf("positions of elements \n");
+	for(i = 0; elements > i; i++)
+	{
+		printf("positions %d = %d \n", i, array[i]);
+	}
+	
+	
+	printf("what position to remove? ");
+	scanf("%d", &position);
+	
+	
+	i = position;
+	
+	
+	for(i; elements > i; i++)
+	{
+		printf("el=%d > i=%d \n", elements, i);
+		
+		printf("%d << %d \n", array[i], array[i+1]);
+		
+		array[i] = array[i+1];
+	}
+	
+	
+	printf("positions of elements \n");
+	for(i = 0; elements > i; i++)
+	{
+		printf("positions %d = %d \n", i, array[i]);
+	}
+	
+	return 0;
+}
+output:
+how many elements to add to the array? 3
+enter 3 elements
+11
+22
+33
+positions of elements
+positions 0 = 11
+positions 1 = 22
+positions 2 = 33
+what position to remove? 1
+el=3 > i=1
+22 << 33
+el=3 > i=2
+33 << 0
+positions of elements
+positions 0 = 11
+positions 1 = 33
+positions 2 = 0
 
 task:
 code:
