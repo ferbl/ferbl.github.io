@@ -1816,8 +1816,100 @@ positions 1 = 33
 positions 2 = 0
 
 task:
+delete an element in an array with a shift of numbers
 code:
+#include <stdio.h>
 
+	int array[100];
+	int elements;
+	int found;
+	int pos;
+	int num;
+	int i;
+
+void displayArray()
+{
+	printf("array includes \n");
+	
+	for(i = 0; elements > i; i++)
+	{
+		printf("%d ", array[i]);
+	}
+}
+
+int main()
+{	
+	printf("how many elements to add to the array? ");
+	scanf("%d", &elements);
+	
+	printf("Enter %d elements \n", elements);
+	
+	for(i = 0; elements > i; i++)
+	{
+		scanf("%d", &array[i]);
+	}
+	
+	
+	displayArray();
+	
+	
+	printf("\n");
+	printf("which number to remove? ");
+	scanf("%d", &num);
+	
+	for(i = 0; elements > i; i++)
+	{
+		if(array[i] == num)
+		{
+			found = 1;
+			
+			pos = i;
+			
+			printf("position = %d \n", pos);
+			
+			break;
+		}
+	}
+
+	
+	if(found == 1)
+	{
+		for(i = pos; elements > i; i++)
+		{
+			printf("el=%d > i=%d \n", elements, i);
+			
+			printf("%d << %d \n", array[i], array[i+1]);
+			
+			array[i] = array[i+1];
+		}
+	}
+	else
+	{
+		printf("element not found");
+	}
+	
+	
+	displayArray();
+	
+	
+	return 0;
+}
+output:
+how many elements to add to the array? 3
+Enter 3 elements
+11
+22
+33
+array includes
+11 22 33
+which number to remove? 22
+position = 1
+el=3 > i=1
+22 << 33
+el=3 > i=2
+33 << 0
+array includes
+11 33 0
 
 ---
 task:
