@@ -1926,6 +1926,101 @@ el=3 > i=2
 array includes
 11 33 0
 
+task:
+find the larger and smaller element in the array
+0-11  1-22  2-33
+big = 0-11   
+1-22 > 0-11   big = 1-22    
+2-33 > 1-22   big = 2-33
+0-11  1-22  2-33
+small = 0-11
+1-22 > 0-11   small = 0-11  
+2-33 > 0-11   small = 0-11
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[100];
+	int elements;
+	int big;
+	int small;
+	int i;
+
+	printf("how many elements to add to the array? ");
+	scanf("%d", &elements);
+	
+	
+	printf("enter %d elements \n", elements);
+	
+	
+	for(i=0; elements > i; i++)
+	{
+		scanf("%d", &array[i]);
+	}
+	
+	
+	printf("search for a big element... \n");
+	
+
+	big = array[0];
+	
+	
+	for(i = 1; elements > i; i++)
+	{
+		printf("%d=%d > big=%d \n", i, array[i], big);
+		
+		if(array[i] > big)
+		{
+			big = array[i];
+			
+			printf("big = %d \n", big);
+		}
+	}
+	
+	
+	printf("search for a small element... \n");
+	
+	
+	small = array[0];
+	
+	
+	for(i = 1; elements > i; i++)
+	{
+		printf("small=%d > %d=%d \n", small, i, array[i]);
+		
+		if(small > array[i])
+		{
+			small = array[i];
+			
+			printf("small = %d \n", small);
+		}
+	}
+	
+	
+	printf("large element in the array is %d \n", big);
+	
+	printf("smallest element in the array is %d \n", small);
+	
+	return 0;
+}
+output:
+how many elements to add to the array? 3
+enter 3 elements
+11
+22
+33
+search for a big element...
+1=22 > big=11
+big = 22
+2=33 > big=22
+big = 33
+search for a small element...
+small=11 > 1=22
+small=11 > 2=33
+large element in the array is 33
+smallest element in the array is 11
+
 ---
 task:
 transfer number from decimal to binary
