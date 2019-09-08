@@ -2021,6 +2021,48 @@ small=11 > 2=33
 large element in the array is 33
 smallest element in the array is 11
 
+task:
+calculate the sum of numbers in an array
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[100];
+	int elements;
+	int sum;
+	int i;
+	
+	printf("how many elements to add to the array? ");
+	scanf("%d", &elements);
+	
+	
+	printf("enter %d elements \n", elements);
+	
+	for(i = 0; elements > i; i++)
+	{
+		scanf("%d", &array[i]);
+		
+		sum += array[i];
+	}
+	
+	
+	printf("sum = %d", sum);
+	
+	
+	return 0;
+}
+output:
+how many elements to add to the array? 3
+enter 3 elements
+11
+22
+33
+sum = 66
+
+task:
+code:
+
 ---
 task:
 transfer number from decimal to binary
