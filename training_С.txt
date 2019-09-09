@@ -2065,6 +2065,208 @@ code:
 
 ---
 task:
+swap the numbers in the array
+temp <- 0-11
+0-11 <- 1-22
+1-22 <- temp
+temp <- 0-11 <- 1-22 <- temp
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[100];
+	int temporary;
+	
+	array[0] = 11;
+	array[1] = 22;
+	
+	temporary = array[0];
+	
+	array[0] = array[1];
+	
+	array[1] = temporary;
+	
+	
+	printf("array[0] = %d, array[1] = %d \n", array[0], array[1]);
+	
+	return 0;
+}
+output:
+array[0] = 22, array[1] = 11
+
+task:
+sort numbers in an array
+code:
+#include <stdio.h>
+
+	int array[100];
+	int elements;
+	int temp;
+	int i;
+	int u;
+	int y;
+	
+void displayArray()
+{	
+	for(y = 0; elements > y; y++)
+	{
+		printf("%d ", array[y]);
+	}
+	
+	printf("\n");
+}
+
+int main()
+{	
+	printf("how many elements to add to the array? ");
+	scanf("%d", &elements);
+	
+	
+	printf("enter %d elements \n", elements);
+	
+	for(i = 0; elements > i; i++)
+	{
+		scanf("%d", &array[i]);
+	}
+	
+	
+	printf("array sorting... \n");
+	displayArray();
+	
+	for(i = 0; elements-1 > i; i++)
+	{
+		for(u = 0; elements-1 > u; u++)
+		{
+			printf("%d > %d \n", array[u], array[u+1]);
+			
+			if(array[u] > array[u+1])
+			{
+				temp = array[u];
+				
+				array[u] = array[u+1];
+				
+				array[u+1] = temp;
+			}
+			
+			displayArray();
+		}
+	}
+	
+	return 0;
+}
+output:
+how many elements to add to the array? 3
+enter 3 elements
+33
+22
+11
+array sorting...
+33 22 11
+33 > 22
+22 33 11
+33 > 11
+22 11 33
+22 > 11
+11 22 33
+22 > 33
+11 22 33
+
+task:
+sort numbers in an array
+33>22 11
+22 33>11 swapped = 1(true - check again) 
+22>11 33
+11 22>33 swapped = 1(true - check again)
+11>22 33
+11 22>33 swapped = 0(false - stop)
+code:
+#include <stdio.h>
+
+	int array[100];
+	int elements;
+	int swapped = 1;
+	int temp;
+	int i;
+	int u;
+	
+void displayArray()
+{	
+	for(u = 0; elements > u; u++)
+	{
+		printf("%d ", array[u]);
+	}
+	
+	printf("\n");
+}
+
+int main()
+{	
+	printf("how many elements to add to the array? ");
+	scanf("%d", &elements);
+	
+	
+	printf("enter %d elements \n", elements);
+	
+	for(i = 0; elements > i; i++)
+	{
+		scanf("%d", &array[i]);
+	}
+	
+	
+	printf("array sorting... \n");
+	
+	
+	while(swapped)
+	{
+		swapped = 0;
+		i = 0;
+		
+		while(elements-1 > i)
+		{
+			displayArray();
+			printf(" | %d > %d | ", array[i], array[i+1]);
+			
+			if(array[i] > array[i+1])
+			{
+				temp = array[i];
+				
+				array[i] = array[i+1];
+				
+				array[i+1] = temp;
+
+				swapped = 1;
+			}
+			
+			displayArray();
+			i++;
+		}
+	}
+	
+	return 0;
+}
+output:
+how many elements to add to the array? 3
+enter 3 elements
+33
+22
+11
+array sorting...
+33 22 11
+ | 33 > 22 | 22 33 11
+22 33 11
+ | 33 > 11 | 22 11 33
+22 11 33
+ | 22 > 11 | 11 22 33
+11 22 33
+ | 22 > 33 | 11 22 33
+11 22 33
+ | 11 > 22 | 11 22 33
+11 22 33
+ | 22 > 33 | 11 22 33
+
+---
+task:
 transfer number from decimal to binary
 4 / 2 = 2 remainder 0
 2 / 2 = 1 remainder 0
