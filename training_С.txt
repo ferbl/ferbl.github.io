@@ -2267,6 +2267,106 @@ array sorting...
 
 ---
 task:
+remove duplicate numbers in an array
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[100];
+	int noDupl[100];
+	int elements;
+	int find;
+	int i;
+	int u;
+	
+	printf("how many elements to add to the array? ");
+	scanf("%d", &elements);
+	
+	
+	printf("enter %d elements \n", elements);
+	
+	for(i = 0; elements > i; i++)
+	{
+		scanf("%d", &array[i]);
+	}
+	
+	
+	printf("removing duplicates in an array ... \n");
+	
+	find = 0;
+	
+	for(i = 0; elements > i; i++)
+	{
+		printf("i=%d \n", i);
+		printf("find=%d > u=0 \n", find);
+		
+		for(u = 0; find > u; u++)
+		{
+			printf("array[i=%d]=%d == noDupl[u=%d]=%d \n", i, array[i], u, noDupl[u]);
+			
+			if(array[i] == noDupl[u])
+			{
+				printf("break \n");
+				
+				break;
+			}
+		}
+		
+		printf("u=%d == find=%d \n", u, find);
+		
+		if(u == find)
+		{
+			printf("noDupl[u=%d]=%d <- array[i=%d]=%d \n", u, noDupl[u], i, array[i]);
+			
+			noDupl[u] = array[i];
+			
+			find++;
+		}
+	}
+	
+	
+	printf("array contains ");
+	
+	for(i = 0; find > i; i++)
+	{
+		printf("%d ", noDupl[i]);
+	}
+	
+	
+	return 0;
+}
+output:
+how many elements to add to the array? 4
+enter 4 elements
+11
+66
+11
+44
+removing duplicates in an array ...
+i=0
+find=0 > u=0
+u=0 == find=0
+noDupl[u=0]=0 <- array[i=0]=11
+i=1
+find=1 > u=0
+array[i=1]=66 == noDupl[u=0]=11
+u=1 == find=1
+noDupl[u=1]=0 <- array[i=1]=66
+i=2
+find=2 > u=0
+array[i=2]=11 == noDupl[u=0]=11
+break
+u=0 == find=2
+i=3
+find=2 > u=0
+array[i=3]=44 == noDupl[u=0]=11
+array[i=3]=44 == noDupl[u=1]=66
+u=2 == find=2
+noDupl[u=2]=0 <- array[i=3]=44
+array contains 11 66 44
+---
+task:
 transfer number from decimal to binary
 4 / 2 = 2 remainder 0
 2 / 2 = 1 remainder 0
