@@ -2061,6 +2061,118 @@ enter 3 elements
 sum = 66
 
 task:
+output of a two-dimensional array
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[2][3];
+	
+	array[0][0] = 1;
+	array[0][1] = 2;
+	array[0][2] = 3;
+	
+	printf("%d \n", array[0][0]);
+	printf("%d \n", array[0][1]);
+	printf("%d \n", array[0][2]);
+	
+	array[1][0] = 4;
+	array[1][1] = 5;
+	array[1][2] = 6;
+	
+	printf("%d \n", array[1][0]);
+	printf("%d \n", array[1][1]);
+	printf("%d \n", array[1][2]);
+	
+	return 0;
+}
+output:
+1
+2
+3
+4
+5
+6
+
+task:
+output of a two-dimensional array
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[2][3] =
+	{
+		{1, 2, 3},
+		{4, 5, 6}
+	};
+	
+	printf("%d \n", array[0][0]);
+	printf("%d \n", array[0][1]);
+	printf("%d \n", array[0][2]);
+	printf("%d \n", array[1][0]);
+	printf("%d \n", array[1][1]);
+	printf("%d \n", array[1][2]);
+	
+	return 0;
+}
+output:
+1
+2
+3
+4
+5
+6
+
+task:
+output of a two-dimensional array
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[2][3];
+	int i;
+	int u;
+	
+	
+	for(i = 0; 2 > i; i++)
+	{
+		for(u = 0; 3 > u; u++)
+		{
+			printf("array[%d][%d] ", i, u);
+			scanf("%d", &array[i][u]);
+		}
+	}
+	
+	
+	printf("array contains \n");
+	
+	for(i = 0; 2 > i; i++)
+	{
+		for(u = 0; 3 > u; u++)
+		{
+			printf("%d ", array[i][u]);
+		}
+		
+		printf("\n");
+	}
+	
+	return 0;
+}
+output:
+array[0][0] 1
+array[0][1] 2
+array[0][2] 3
+array[1][0] 4
+array[1][1] 5
+array[1][2] 6
+array contains
+1 2 3
+4 5 6
+
+task:
 code:
 
 ---
