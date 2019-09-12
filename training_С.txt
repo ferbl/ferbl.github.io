@@ -2332,6 +2332,258 @@ array contains...
 this is a sparse matrix
 
 task:
+display the reverse matrix
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[10][10];
+	int reverse[10][10];
+	int rows;
+	int columns;
+	int i;
+	int u;
+	
+	printf("how many rows will be in the matrix? \n");
+	printf(" x \n x \n x \n ? \n");
+	scanf("%d", &rows);
+	
+	
+	printf("how many columns will be in the matrix? \n");
+	printf(" x x x ? \n");
+	scanf("%d", &columns);
+	
+	
+	printf("enter %d elements \n", rows * columns);
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			scanf("%d", &array[i][u]);
+		}
+	}
+	
+	
+	printf("array contains... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", array[i][u]);
+		}
+		printf("\n");
+	}
+	
+	
+	printf("array -> reverse... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("arr: %d %d \n", i, u);
+			printf("rev: %d %d \n\n", u, i);
+			
+			reverse[u][i] = array[i][u];
+		}
+	}
+	
+	
+	printf("reverse contains... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", reverse[i][u]);
+		}
+		printf("\n");
+	}
+	
+	
+	return 0;
+}
+output:
+how many rows will be in the matrix?
+ x
+ x
+ x
+ ?
+3
+how many columns will be in the matrix?
+ x x x ?
+3
+enter 9 elements
+1
+2
+3
+4
+5
+6
+7
+8
+9
+array contains...
+1 2 3
+4 5 6
+7 8 9
+array -> reverse...
+arr: 0 0
+rev: 0 0
+
+arr: 0 1
+rev: 1 0
+
+arr: 0 2
+rev: 2 0
+
+arr: 1 0
+rev: 0 1
+
+arr: 1 1
+rev: 1 1
+
+arr: 1 2
+rev: 2 1
+
+arr: 2 0
+rev: 0 2
+
+arr: 2 1
+rev: 1 2
+
+arr: 2 2
+rev: 2 2
+
+reverse contains...
+1 4 7
+2 5 8
+3 6 9
+
+task:
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	int array[10][10];
+	int reverse[10][10];
+	int rows;
+	int columns;
+	int i;
+	int u;
+	
+	printf("how many rows will be in the matrix? \n");
+	printf(" x \n x \n x \n ? \n");
+	scanf("%d", &rows);
+	
+	
+	printf("how many columns will be in the matrix? \n");
+	printf(" x x x ? \n");
+	scanf("%d", &columns);
+	
+	
+	printf("enter %d elements \n", rows * columns);
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			scanf("%d", &array[i][u]);
+		}
+	}
+	
+	
+	printf("array contains... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", array[i][u]);
+		}
+		printf("\n");
+	}
+	
+	
+	printf("array -> reverse... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{			
+			reverse[u][i] = array[i][u];
+		}
+	}
+	
+	
+	printf("reverse contains... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", reverse[i][u]);
+		}
+		printf("\n");
+	}
+	
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			if(array[i][u] != reverse[i][u])
+			{
+				printf("is not a symmetric matrix");
+				
+				exit(0);
+			}
+		}
+	}
+	
+	
+	printf("is a symmetric matrix");
+	
+	
+	return 0;
+}
+output:
+how many rows will be in the matrix?
+ x
+ x
+ x
+ ?
+3
+how many columns will be in the matrix?
+ x x x ?
+3
+enter 9 elements
+1
+2
+3
+2
+4
+5
+3
+5
+6
+array contains...
+1 2 3
+2 4 5
+3 5 6
+array -> reverse...
+reverse contains...
+1 2 3
+2 4 5
+3 5 6
+is a symmetric matrix
+
+task:
 code:
 
 ---
