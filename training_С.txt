@@ -2173,6 +2173,165 @@ array contains
 4 5 6
 
 task:
+enter and display the matrix
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[10][10];
+	int rows;
+	int columns;
+	int i;
+	int u;
+	
+	printf("how many rows will be in the matrix? \n");
+	printf(" x \n x \n x \n ? \n");
+	scanf("%d", &rows);
+	
+	
+	printf("how many columns will be in the matrix? \n");
+	printf(" x x x ? \n");
+	scanf("%d", &columns);
+	
+	
+	printf("enter %d elements \n", rows*columns);
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			scanf("%d", &array[i][u]);
+		}
+	}
+	
+	
+	printf("array contains... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", array[i][u]);
+		}
+		printf("\n");
+	}
+	
+	return 0;
+}
+output:
+how many rows will be in the matrix?
+ x
+ x
+ x
+ ?
+2
+how many columns will be in the matrix?
+ x x x ?
+3
+enter 6 elements
+1
+2
+3
+4
+5
+6
+array contains...
+1 2 3
+4 5 6
+
+task:
+whether the matrix is a sparse matrix
+sparse matrix is a one in which the majority of the values are zero
+0 0 0
+0 6 5
+6 elements / 2 = 3  half the matrix
+4 elements = 0   2 elements = nonzero
+4 > 3 = zeros are greater than nonzero values -> sparse matrix
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int array[10][10];
+	int count = 0;
+	int rows;
+	int columns;
+	int i;
+	int u;
+	
+	printf("how many rows will be in the matrix? \n");
+	printf(" x \n x \n x \n ? \n");
+	scanf("%d", &rows);
+	
+	
+	printf("how many columns will be in the matrix? \n");
+	printf(" x x x ? \n");
+	scanf("%d", &columns);
+	
+	
+	printf("enter %d elements \n", rows * columns);
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			scanf("%d", &array[i][u]);
+			
+			if(array[i][u] == 0)
+			{
+				count++;
+			}
+		}
+	}
+	
+	
+	printf("array contains... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", array[i][u]);
+		}
+		printf("\n");
+	}
+	
+	
+	if(count > (rows * columns) / 2)
+	{
+		printf("this is a sparse matrix");
+	}
+	else
+	{
+		printf("it is not a sparse matrix");
+	}
+	
+	return 0;
+}
+output:
+how many rows will be in the matrix?
+ x
+ x
+ x
+ ?
+2
+how many columns will be in the matrix?
+ x x x ?
+3
+enter 6 elements
+0
+0
+0
+0
+6
+9
+array contains...
+0 0 0
+0 6 9
+this is a sparse matrix
+
+task:
 code:
 
 ---
