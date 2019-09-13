@@ -2816,6 +2816,220 @@ calculating the normal of the matrix...
 sum = 285
 normal = 16.881943
 
+task:
+calculate the sum of two matrices
+1 2    +    1 2     =   2 4
+3 4         3 4         6 8
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int firstMatrix[10][10];
+	int secondMatrix[10][10];
+	int sum[10][10];
+	int rows;
+	int columns;
+	int i;
+	int u;
+
+	printf("how many rows will be in the matrix? ");
+	scanf("%d", &rows);
+	
+	
+	printf("how many columns will be in the matrix? ");
+	scanf("%d", &columns);
+	
+	
+	printf("enter %d elements in the first matrix \n", rows * columns);
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			scanf("%d", &firstMatrix[i][u]);
+		}
+	}
+	
+	
+	printf("firts array contains... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", firstMatrix[i][u]);
+		}
+		printf("\n");
+	}
+	
+	
+	printf("enter %d elements in the second matrix \n", rows * columns);
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			scanf("%d", &secondMatrix[i][u]);
+		}
+	}
+	
+	
+	printf("second array contains... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", secondMatrix[i][u]);
+		}
+		printf("\n");
+	}
+	
+	
+	printf("sum two matrices... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			sum[i][u] = firstMatrix[i][u] + secondMatrix[i][u];
+		}
+	}
+	
+	
+	printf("sum = \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", sum[i][u]);
+		}
+		printf("\n");
+	}
+	
+	
+	return 0;
+}
+output:
+how many rows will be in the matrix? 2
+how many columns will be in the matrix? 2
+enter 4 elements in the first matrix
+1
+2
+3
+4
+firts array contains...
+1 2
+3 4
+enter 4 elements in the second matrix
+1
+2
+3
+4
+second array contains...
+1 2
+3 4
+sum two matrices...
+sum =
+2 4
+6 8
+
+task:
+subtraction of two matrix
+1 2     -    1 2      =     0 0
+3 4          3 4            0 0
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int firstMatrix[10][10];
+	int secondMatrix[10][10];
+	int sub[10][10];
+	int rows;
+	int columns;
+	int i;
+	int u;
+
+	printf("how many rows will be in the matrix? ");
+	scanf("%d", &rows);
+	
+	
+	printf("how many columns will be in the matrix? ");
+	scanf("%d", &columns);
+	
+	
+	printf("enter %d elements in the first matrix \n", rows * columns);
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			scanf("%d", &firstMatrix[i][u]);
+		}
+	}
+	
+	
+	printf("enter %d elements in the second matrix \n", rows * columns);
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			scanf("%d", &secondMatrix[i][u]);
+		}
+	}
+	
+	
+	printf("subtraction of two matrices... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			sub[i][u] = firstMatrix[i][u] - secondMatrix[i][u];
+		}
+	}
+	
+	
+	printf("subtraction = \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", sub[i][u]);
+		}
+		printf("\n");
+	}
+	
+	
+	return 0;
+}
+output:
+how many rows will be in the matrix? 2
+how many columns will be in the matrix? 2
+enter 4 elements in the first matrix
+1
+2
+3
+4
+enter 4 elements in the second matrix
+1
+2
+3
+4
+subtraction of two matrices...
+subtraction =
+0 0
+0 0
+
+task:
+code:
+
+
 ---
 task:
 swap the numbers in the array
