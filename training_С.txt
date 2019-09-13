@@ -2646,8 +2646,175 @@ determinant
 4 - 6 = -2
 
 task:
+calculate the trace of a square matrix
+square matrix is when the rows and columns are equal
+trace square matrix - sum of elements on the main diagonal
+1 2 3
+4 5 6
+7 8 9
+1 + 5 + 9 = 15
 code:
+#include <stdio.h>
 
+int main()
+{	
+	int array[10][10];
+	int rows;
+	int columns;
+	int trace = 0;
+	int i;
+	int u;
+
+	printf("how many rows and columns will be in the matrix? ");
+	scanf("%d", &rows);
+	columns = rows;
+	
+	
+	printf("enter %d elements \n", rows * columns);
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			scanf("%d", &array[i][u]);
+		}
+	}
+	
+	
+	printf("array contains... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", array[i][u]);
+		}
+		printf("\n");
+	}
+	
+	
+	printf("calculating the trace of the matrix... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		trace += array[i][i];
+	}
+	
+	
+	printf("trace = %d", trace);
+	
+	return 0;
+}
+output:
+how many rows and columns will be in the matrix? 3
+enter 9 elements
+1
+2
+3
+4
+5
+6
+7
+8
+9
+array contains...
+1 2 3
+4 5 6
+7 8 9
+calculating the trace of the matrix...
+trace = 15
+
+task:
+calculate the normal of a square matrix
+1 2 3
+4 5 6
+7 8 9
+normal = 
+(1*1) + (2*2) + (3*3) + (4*4) + (5*5) + (6*6) + (7*7) + (8*8) + (9*9)
+  1   +   4   +   9   +  16   +  25   +  36   +  49   +  64   +  81
+    ____
+= \/285 = 16.881943
+
+code:
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{	
+	int array[10][10];
+	int rows;
+	int columns;
+	int sum = 0;
+	float normal = 0;
+	int i;
+	int u;
+
+	printf("how many rows and columns will be in the matrix? ");
+	scanf("%d", &rows);
+	columns = rows;
+	
+	
+	printf("enter %d elements \n", rows * columns);
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			scanf("%d", &array[i][u]);
+		}
+	}
+	
+	
+	printf("array contains... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{
+			printf("%d ", array[i][u]);
+		}
+		printf("\n");
+	}
+	
+	
+	printf("calculating the normal of the matrix... \n");
+	
+	for(i = 0; rows > i; i++)
+	{
+		for(u = 0; columns > u; u++)
+		{		
+			sum += array[i][u] * array[i][u];
+		}
+	}
+	
+	printf("sum = %d \n", sum);
+	
+	
+	normal = sqrt(sum);
+	
+	printf("normal = %f", normal);
+	
+	return 0;
+}
+output:
+how many rows and columns will be in the matrix? 3
+enter 9 elements
+1
+2
+3
+4
+5
+6
+7
+8
+9
+array contains...
+1 2 3
+4 5 6
+7 8 9
+calculating the normal of the matrix...
+sum = 285
+normal = 16.881943
 
 ---
 task:
