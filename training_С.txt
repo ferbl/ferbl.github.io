@@ -3027,8 +3027,148 @@ subtraction =
 0 0
 
 task:
+multiplication of two matrices
+1 2  *  5 6  =  1*5+2*7  1*6+2*8  =  19 22
+3 4     7 8     3*5+4*7  3*6+4*8     43 50
 code:
+#include <stdio.h>
 
+int main()
+{	
+	int firstMatrix[10][10];
+	int secondMatrix[10][10];
+	int multiplyMatrix[10][10];
+	int rows;
+	int columns;
+	int sum;
+	int a;
+	int b;
+	int c;
+
+	printf("how many rows and columns will be in the matrix? ");
+	scanf("%d", &rows);
+	columns = rows;
+	
+	
+	printf("enter %d elements in the first matrix \n", rows * columns);
+	
+	for(a = 0; rows > a; a++)
+	{
+		for(b = 0; columns > b; b++)
+		{
+			scanf("%d", &firstMatrix[a][b]);
+		}
+	}
+	
+	
+	printf("first matrix contains... \n");
+	
+	for(a = 0; rows > a; a++)
+	{
+		for(b = 0; columns > b; b++)
+		{
+			printf("%d ", firstMatrix[a][b]);
+		}
+		printf("\n");
+	}
+	
+	
+	printf("enter %d elements in the second matrix \n", rows * columns);
+		
+	for(a = 0; rows > a; a++)
+	{
+		for(b = 0; columns > b; b++)
+		{
+			scanf("%d", &secondMatrix[a][b]);
+		}
+	}
+	
+	
+	printf("second matrix contains... \n");
+	
+	for(a = 0; rows > a; a++)
+	{
+		for(b = 0; columns > b; b++)
+		{
+			printf("%d ", secondMatrix[a][b]);
+		}
+		printf("\n");
+	}
+	
+	
+	printf("multiplication of two matrices... \n");
+	
+	for(a = 0; rows > a; a++)
+	{
+		for(b = 0; columns > b; b++)
+		{
+			for(c = 0; rows > c; c++)
+			{
+				printf("a=%d b=%d c=%d \n", a, b, c);
+				
+				sum += firstMatrix[a][c] * secondMatrix[c][b];
+			}
+			
+		printf("\n");
+			
+		multiplyMatrix[a][b] = sum;
+			
+		sum = 0;
+		}
+	}
+	
+	
+	printf("multiplication = \n");
+	
+	for(a = 0; rows > a; a++)
+	{
+		for(b = 0; columns > b; b++)
+		{
+			printf("%d ", multiplyMatrix[a][b]);
+		}
+		printf("\n");
+	}
+	
+	
+	return 0;
+}
+output:
+how many rows and columns will be in the matrix? 2
+enter 4 elements in the first matrix
+1
+2
+3
+4
+first matrix contains...
+1 2
+3 4
+enter 4 elements in the second matrix
+5
+6
+7
+8
+second matrix contains...
+5 6
+7 8
+multiplication of two matrices...
+a=0 b=0 c=0
+a=0 b=0 c=1
+
+a=0 b=1 c=0
+a=0 b=1 c=1
+
+a=1 b=0 c=0
+a=1 b=0 c=1
+
+a=1 b=1 c=0
+a=1 b=1 c=1
+
+multiplication =
+19 22
+43 50
+
+task:
+code:
 
 ---
 task:
