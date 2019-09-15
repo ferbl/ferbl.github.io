@@ -3031,9 +3031,6 @@ multiplication of two matrices
 1 2  *  5 6  =  1*5+2*7  1*6+2*8  =  19 22
 3 4     7 8     3*5+4*7  3*6+4*8     43 50
 
-1 * 5 + 2 * 7  1 * 6 + 2 * 8
-3 * 5 + 4 * 7  3 * 6 + 4 * 8
-
 1 2     5 6
 3 4     7 8
 
@@ -3189,7 +3186,119 @@ multiplication =
 43 50
 
 task:
+display the address of the variable
+A = 55 -> located in memory at address 22fe4c
+B = 11 -> located in memory at address 22fe48
 code:
+#include <stdio.h>
+
+int main()
+{	
+	int A = 55;
+	
+	int B = 11;
+	
+	
+	printf("address of variable A = %x \n", &A);
+	
+	printf("address of variable B = %x \n", &B);
+	
+	
+	return 0;
+}
+output:
+address of variable A = 22fe4c
+address of variable B = 22fe48
+
+task:
+pointer to a variable
+A = 55 -> located in memory at address 22fe44
+address A -> B
+B -> points to address 22fe44
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int A = 55;
+	
+	int *B;
+	
+	
+	printf("address of variable A = %x \n", &A);
+	
+	printf("address of variable B = %x \n\n", B);
+	
+	
+	B = &A;
+	
+	
+	printf("address of variable A = %x \n", &A);
+	
+	printf("address of variable B = %x \n", B);
+	
+	
+	return 0;
+}
+output:
+address of variable A = 22fe44
+address of variable B = 1
+
+address of variable A = 22fe44
+address of variable B = 22fe44
+
+task:
+pointer to a variable
+A = 55 -> located in memory at address 22fe44
+address A -> B
+B -> points to address 22fe44
+A = 11
+B = A -> 11
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int A = 55;
+	
+	int *B;
+	
+	
+	B = &A;
+	
+	
+	printf("address of variable A = %x \n", &A);
+	
+	printf("address of variable B = %x \n", B);
+	
+	
+	printf("A = %d \n", A);
+	
+	printf("B = %d \n \n", *B);
+	
+	
+	A = 11;
+	
+	
+	printf("A = %d \n", A);
+	
+	printf("B = %d \n", *B);
+	
+	
+	return 0;
+}
+output:
+address of variable A = 22fe44
+address of variable B = 22fe44
+A = 55
+B = 55
+
+A = 11
+B = 11
+
+task:
+code:
+
 
 ---
 task:
