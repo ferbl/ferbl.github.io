@@ -3297,6 +3297,51 @@ A = 11
 B = 11
 
 task:
+size of variable
+code:
+#include <stdio.h>
+
+int main()
+{	
+	char Char = 'a';
+
+	int Int = 5;
+	
+	float Float = 17.5;
+	
+	double Double = 784.465;
+	
+	int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+	
+	
+	printf("size: \n \n");
+	
+	printf("char = %lu \n", sizeof(Char));
+	
+	printf("int = %lu \n", sizeof(Int));
+	
+	printf("float = %lu \n", sizeof(Float));
+	
+	printf("double = %lu \n", sizeof(Double));
+	
+	printf("int + double = %lu \n", sizeof(Int + Double));
+	
+	printf("int array = %lu \n", sizeof(array));
+	
+	
+	return 0;
+}
+output:
+size:
+
+char = 1
+int = 4
+float = 4
+double = 8
+int + double = 8
+int array = 36
+
+task:
 code:
 
 
