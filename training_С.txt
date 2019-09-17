@@ -3326,7 +3326,7 @@ int main()
 	
 	printf("int + double = %lu \n", sizeof(Int + Double));
 	
-	printf("int array = %lu \n", sizeof(array));
+	printf("int array (4*9) = %lu \n", sizeof(array));
 	
 	
 	return 0;
@@ -3339,7 +3339,64 @@ int = 4
 float = 4
 double = 8
 int + double = 8
-int array = 36
+int array (4*9) = 36
+
+task:
+allocate dynamically memorу
+*memory
+elements = 3
+sizeof(int) = 4
+allocate (elements * sizeof(int)) = 12byte -> *memorу
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	int *memory;
+	int elements = 3;
+	
+	
+	printf("dynamically allocate memory... \n");
+	
+	memory = malloc(elements * sizeof(int));
+	
+	
+	printf("data input... \n");
+	
+	memory[0] = 55;
+	memory[1] = 11;
+	memory[2] = 44;
+	
+	
+	printf("%d \n", memory[0]);
+	printf("%d \n", memory[1]);
+	printf("%d \n \n", memory[2]);
+	
+	
+	printf("clearing dynamically allocated memory \n");
+	
+	free(memory);
+	
+	
+	printf("%d \n", memory[0]);
+	printf("%d \n", memory[1]);
+	printf("%d \n", memory[2]);
+	
+	
+	return 0;
+}
+output:
+dynamically allocate memory...
+data input...
+55
+11
+44
+
+clearing dynamically allocated memory
+5002640
+0
+4981080
 
 task:
 code:
