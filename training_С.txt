@@ -3399,6 +3399,55 @@ clearing dynamically allocated memory
 4981080
 
 task:
+enter numbers into a dynamic array
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	int *array;
+	int elements;
+	int i;
+	
+
+	printf("how many elements to add the dynamic array? ");
+	scanf("%d", &elements);
+	
+	
+	array = malloc(elements * sizeof(int));
+	
+	
+	printf("enter %d elements \n", elements);
+	
+	for(i = 0; elements > i; i++)
+	{
+		scanf("%d", &array[i]);
+	}
+	
+	
+	printf("array contains... \n");
+	
+	for(i = 0; elements > i; i++)
+	{
+		printf("%d \n", array[i]);
+	}
+	
+	
+	return 0;
+}
+output:
+how many elements to add the array? 3
+enter 3 elements
+11
+22
+33
+array contains...
+11
+22
+33
+
+task:
 code:
 
 
