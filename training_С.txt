@@ -3448,6 +3448,44 @@ array contains...
 33
 
 task:
+pointer to an array element
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	int number[1];
+	int *pointer[1];
+	
+	
+	number[0] = 55;
+	
+	
+	pointer[0] = &number[0];
+	
+	
+	printf("number = %d \n", number[0]);
+	printf("pointer = %d \n \n", *pointer[0]);
+	
+	
+	number[0] = 11;
+	
+	
+	printf("number = %d \n", number[0]);
+	printf("pointer = %d \n", *pointer[0]);
+	
+	
+	return 0;
+}
+output:
+number = 55
+pointer = 55
+
+number = 11
+pointer = 11
+
+task:
 code:
 
 
