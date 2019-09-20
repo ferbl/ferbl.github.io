@@ -3491,6 +3491,32 @@ code:
 
 ---
 task:
+output words from an array
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	char *words[2];
+	
+	
+	words[0] = "first";
+	words[1] = "second";
+	
+	
+	printf("%s \n", words[0]);
+	printf("%s \n", words[1]);
+	
+	
+	return 0;
+}
+output:
+first
+second
+
+---
+task:
 swap the numbers in the array
 temp <- 0-11
 0-11 <- 1-22
