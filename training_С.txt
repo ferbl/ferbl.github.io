@@ -3486,6 +3486,165 @@ number = 11
 pointer = 11
 
 task:
+output an element of array using a pointer
+array[0] = 11
+array[1] = 22
+array[2] = 33
+pointer 0 <- array[0]
+pointer 0 = array[0]  pointer++
+pointer 1 = array[1]  pointer++
+pointer 2 = array[2]
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	int elements = 3;
+	
+	int array[elements];
+	int *pointer;
+	int i;
+	
+	
+	array[0] = 11;
+	array[1] = 22;
+	array[2] = 33;
+	
+	
+	pointer = &array[0];
+	
+	
+	for(i = 0; elements > i; i++)
+	{
+		printf("%d \n", *pointer);
+		
+		pointer++;
+	}
+	
+	
+	return 0;
+}
+output:
+11
+22
+33
+
+task:
+output an element of array using a pointer
+elements = 3
+array[0] = 11
+array[1] = 22
+array[2] = 33
+pointer 2 <- array[elements - 1]
+pointer 2 = array[2]  pointer--
+pointer 1 = array[1]  pointer--
+pointer 0 = array[0]
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	int elements = 3;
+	
+	int array[elements];
+	int *pointer;
+	int i;
+	
+	
+	array[0] = 11;
+	array[1] = 22;
+	array[2] = 33;
+	
+	
+	pointer = &array[elements - 1];
+	
+	
+	for(i = 0; elements > i; i++)
+	{
+		printf("%d \n", *pointer);
+		
+		pointer--;
+	}
+	
+	
+	return 0;
+}
+output:
+33
+22
+11
+
+task:
+compare two numbers using a pointers
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	int *pointerFirst;
+	float *pointerSecond;
+	
+	int numberFirst = 55;
+	float numberSecond = 55.11;
+	
+	
+	pointerFirst = &numberFirst;
+	pointerSecond = &numberSecond;
+	
+	
+	if(*pointerFirst > *pointerSecond)
+	{
+		printf("55 > 55.11 \n");
+	}
+	else
+	{
+		printf("55 < 55.11 \n");
+	}
+	
+	
+	return 0;
+}
+output:
+55 < 55.11
+
+task:
+display the number of pointer to pointer
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	int number;
+	int *pointer;
+	int **pointerToPointer;
+	
+	
+	number = 55;
+	
+	pointer = &number;
+	
+	pointerToPointer = &pointer;
+	
+	
+	printf("number = %d \n", number);
+	
+	printf("pointer = %d \n", *pointer);
+	
+	printf("pointerToPointer = %d \n", **pointerToPointer);
+	
+	
+	return 0;
+}
+output:
+number = 55
+pointer = 55
+pointerToPointer = 55
+
+task:
 code:
 
 
