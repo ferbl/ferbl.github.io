@@ -3486,6 +3486,50 @@ number = 11
 pointer = 11
 
 task:
+output an array of chars using a pointer
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	char word[] = "one";
+	
+	char *pointer;
+	
+	
+	printf("array of chars -> word \n");
+	
+	printf("%s \n", word);
+
+	
+	pointer = word;
+	
+	
+	printf("chars output using a pointer \n");
+	
+	printf("%c \n", *pointer);
+	
+	pointer++;
+	
+	printf("%c \n", *pointer);
+	
+	pointer++;
+	
+	printf("%c \n", *pointer);
+	
+	
+	return 0;
+}
+output:
+array of chars -> word
+one
+chars output using a pointer
+o
+n
+e
+
+task:
 output an element of array using a pointer
 array[0] = 11
 array[1] = 22
