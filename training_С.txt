@@ -3530,6 +3530,36 @@ n
 e
 
 task:
+output an array of chars using a pointer
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	char word[] = "one";
+	char *point;
+	
+	
+	point = word;
+	
+	
+	while(*point)
+	{
+		printf("%c \n", *point);
+		
+		point++;
+	}
+	
+	
+	return 0;
+}
+output:
+o
+n
+e
+
+task:
 output an element of array using a pointer
 array[0] = 11
 array[1] = 22
@@ -3687,6 +3717,100 @@ output:
 number = 55
 pointer = 55
 pointerToPointer = 55
+
+task:
+join two array of char using pointers
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	char word[] = "one";
+	char *point;
+	
+	
+	point = word;
+	
+	
+	while(*point)
+	{	
+		printf("%c \n", *point);
+
+		point++;
+	}
+	
+	
+	*point = 't';
+	
+	point++;
+	*point = 'w';
+	
+	point++;
+	*point = 'o';
+	
+	
+	printf("%s \n", word);
+	
+	
+	return 0;
+}
+output:
+o
+n
+e
+onetwo
+
+task:
+join two array of char using pointers
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{	
+	char wordOne[] = "one";
+	char wordTwo[] = "two";
+	char *pointOne;
+	char *pointTwo;
+	
+	
+	pointOne = wordOne;
+	pointTwo = wordTwo;
+	
+	
+	while(*pointOne)
+	{	
+		printf("%c \n", *pointOne);
+
+		pointOne++;
+	}
+	
+	while(*pointTwo)
+	{
+		printf("%c = %c \n", *pointOne, *pointTwo);
+		
+		*pointOne = *pointTwo;
+		
+		pointOne++;
+		
+		pointTwo++;
+	}
+	
+	
+	printf("%s \n", wordOne);
+	
+	
+	return 0;
+}
+output:
+o
+n
+e
+  = t
+  = w
+  = o
+onetwo
 
 task:
 code:
