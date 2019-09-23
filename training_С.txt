@@ -3813,8 +3813,97 @@ e
 onetwo
 
 task:
+add one char to array using a pointer
 code:
+#include <stdio.h>
 
+void addOneChar(char *pointer);
+
+int main()
+{	
+	char string[100];
+	
+	
+	printf("enter the string ");
+	gets(string);
+	
+	
+	addOneChar(string);
+	
+	
+	printf("%s \n", string);
+	
+	
+	return 0;
+}
+
+void addOneChar(char *pointer)
+{
+	while(*pointer)
+	{
+		printf("%c \n", *pointer);
+		
+		pointer++;
+	}
+	
+	*pointer = 'S';
+}
+output:
+enter the string one
+o
+n
+e
+oneS
+
+task:
+join two array of char using pointers
+code:
+#include <stdio.h>
+
+void join(char *pointerOne, char *pointerTwo);
+
+int main()
+{	
+	char stringOne[100];
+	char stringTwo[100]; 
+	
+	
+	printf("enter the first string ");
+	gets(stringOne);
+	
+	
+	printf("enter the second string ");
+	gets(stringTwo);
+	
+	
+	join(stringOne, stringTwo);
+	
+	
+	printf("%s", stringOne);
+	
+	
+	return 0;
+}
+
+void join(char *pointerOne, char *pointerTwo)
+{
+	while(*pointerOne)
+	{
+		pointerOne++;
+	}
+	
+	while(*pointerTwo)
+	{
+		*pointerOne = *pointerTwo;
+		
+		pointerOne++;
+		pointerTwo++;
+	}
+}
+output:
+enter the first string one
+enter the second string two
+onetwo
 
 task:
 find the length of a string using pointers
@@ -3845,7 +3934,7 @@ int length(char *pointer)
 	
 	while(*pointer != '\0')
 	{
-		*pointer++;
+		pointer++;
 		
 		i++;
 	}
@@ -3857,8 +3946,264 @@ enter a string ferbl
 string length is 5
 
 task:
+reverse a string using pointers
 code:
+#include <stdio.h>
 
+void string_reverse(char *string);
+int string_length(char *pointer);
+
+int main()
+{	
+	char string[100];
+	
+	
+	printf("enter the string ");
+	gets(string);
+	
+	
+	string_reverse(string);
+	
+	
+	printf("reverse string = %s \n", string);
+	
+	
+	return 0;
+}
+
+void string_reverse(char *string)
+{
+	char *begin = string;
+	char *end = string;
+	char temp;
+	
+	int length = string_length(string);
+	int i;
+	
+	
+	printf("looking for the last character... \n");
+	
+	for(i = 0; (length - 1) > i; i++)
+	{
+		printf("%c \n", *end);
+		
+		end++;
+	}
+	
+	printf("end char = %c \n \n", *end);
+	
+	
+	printf("turn over the string... \n");
+	
+	for(i = 0; (length / 2) > i; i++)
+	{
+		printf("i = %d \n", i);
+		
+		printf("%c <- %c \n", temp, *end);
+		temp = *end;
+		
+		printf("%c <- %c \n", *end, *begin);
+		*end = *begin;
+		
+		printf("%c <- %c \n", *begin, temp);
+		*begin = temp;
+		
+		begin++;
+		end--;
+		
+		printf("%s \n \n", string);
+	}
+}
+
+int string_length(char *pointer)
+{
+	int i = 0;
+	
+	while(*pointer != '\0')
+	{
+		pointer++;
+		
+		i++;
+	}
+	
+	return i;
+}
+output:
+enter the string abc
+looking for the last character...
+a
+b
+end char = c
+
+turn over the string...
+i = 0
+  <- c
+c <- a
+a <- c
+cba
+
+reverse string = cba
+
+task:
+swap two numbers using pointers
+code:
+#include <stdio.h>
+
+void swap_two_numbers(int *numOne, int *numTwo);
+
+int main()
+{	
+	int numberOne;
+	int numberTwo;
+	
+
+	printf("enter the first number ");
+	scanf("%d", &numberOne);
+	
+	printf("enter the second number ");
+	scanf("%d", &numberTwo);
+	
+	
+	printf("numberOne = %d \n", numberOne);
+	printf("numberTwo = %d \n \n", numberTwo);
+	
+	
+	printf("swap two numbers... \n \n");
+	
+	swap_two_numbers(&numberOne, &numberTwo);
+	
+	
+	printf("numberOne = %d \n", numberOne);
+	printf("numberTwo = %d \n", numberTwo);
+	
+	
+	return 0;
+}
+
+void swap_two_numbers(int *numOne, int *numTwo)
+{
+	int temp;
+	
+	temp = *numOne;
+	
+	*numOne = *numTwo;
+	
+	*numTwo = temp;
+}
+output:
+enter the first number 11
+enter the second number 22
+numberOne = 11
+numberTwo = 22
+
+swap two numbers...
+
+numberOne = 22
+numberTwo = 11
+
+task:
+pointer to a function
+code:
+#include <stdio.h>
+
+int sum(int numOne, int numTwo);
+
+int main()
+{	
+	int (*pointer) (int, int);
+	
+	
+	pointer = sum;
+	
+	
+	printf("1 + 1 = %d \n", sum(1, 1));
+	
+	
+	printf("1 + 1 = %d \n", pointer(1, 1));
+	
+	
+	return 0;
+}
+
+int sum(int numOne, int numTwo)
+{
+	return numOne + numTwo;
+}
+output:
+1 + 1 = 2
+1 + 1 = 2
+
+task:
+display NULL
+code:
+#include <stdio.h>
+
+int main()
+{	
+	int *number_int = NULL;
+	float *number_float = NULL;
+	char *character = NULL;
+	
+	
+	printf("number_int = %d \n", number_int);
+	printf("number_float = %f \n", number_float);
+	printf("character = %c \n", character);
+	
+	
+	return 0;
+}
+output:
+number_int = 0
+number_float = 0.000000
+character =
+
+task:
+use ctype.h library
+code:
+#include <stdio.h>
+#include <ctype.h>
+
+void function(char value);
+
+int main()
+{	
+	char value1 = 'A';
+	char value2 = 'b';
+	char value3 = '4';
+	char value4 = ' ';
+	
+	function(value1);
+	function(value2);
+	function(value3);
+	function(value4);
+	
+	return 0;
+}
+
+void function(char value)
+{
+	if(isupper(value))
+	{
+		printf("%c is upper char \n", value);
+	}
+	else if(islower(value))
+	{
+		printf("%c is lower char \n", value);
+	}
+	else if(isdigit(value))
+	{
+		printf("%c is decimal digit \n", value);
+	}
+	else if(isspace(value))
+	{
+		printf("%c is space \n", value);
+	}
+}
+output:
+A is upper char
+b is lower char
+4 is decimal digit
+  is space
 
 ---
 task:
