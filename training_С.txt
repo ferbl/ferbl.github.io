@@ -3816,6 +3816,50 @@ task:
 code:
 
 
+task:
+find the length of a string using pointers
+code:
+#include <stdio.h>
+
+int length(char *pointer);
+
+int main()
+{	
+	char string[100];
+	
+	
+	printf("enter a string ");
+	
+	gets(string);
+	
+	
+	printf("string length is %d", length(string));
+	
+	
+	return 0;
+}
+
+int length(char *pointer)
+{
+	int i = 0;
+	
+	while(*pointer != '\0')
+	{
+		*pointer++;
+		
+		i++;
+	}
+	
+	return i;
+}
+output:
+enter a string ferbl
+string length is 5
+
+task:
+code:
+
+
 ---
 task:
 output words from an array
