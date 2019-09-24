@@ -4158,53 +4158,80 @@ number_float = 0.000000
 character =
 
 task:
-use ctype.h library
+whether the character is uppercase or lowercase
+isupper() ABCDEFGHIJKLMNOPQRSTUVWXYZ
+islower() abcdefghijklmnopqrstuvwxyz
 code:
 #include <stdio.h>
 #include <ctype.h>
 
-void function(char value);
+void check_upper_or_lower(char character);
 
 int main()
 {	
-	char value1 = 'A';
-	char value2 = 'b';
-	char value3 = '4';
-	char value4 = ' ';
+	char valueOne = 'A';
+	char valueTwo = 'a';
 	
-	function(value1);
-	function(value2);
-	function(value3);
-	function(value4);
+	check_upper_or_lower(valueOne);
+	check_upper_or_lower(valueTwo);
 	
 	return 0;
 }
 
-void function(char value)
+void check_upper_or_lower(char character)
 {
-	if(isupper(value))
+	if(isupper(character))
 	{
-		printf("%c is upper char \n", value);
+		printf("%c is upper char \n", character);
 	}
-	else if(islower(value))
+	
+	if(islower(character))
 	{
-		printf("%c is lower char \n", value);
-	}
-	else if(isdigit(value))
-	{
-		printf("%c is decimal digit \n", value);
-	}
-	else if(isspace(value))
-	{
-		printf("%c is space \n", value);
+		printf("%c is lower char \n", character);
 	}
 }
 output:
 A is upper char
-b is lower char
-4 is decimal digit
-  is space
+a is lower char
 
+task:
+convert char to upper case
+code:
+#include <stdio.h>
+#include <ctype.h>
+
+int main()
+{	
+	char value = 'a';
+	
+	printf("a -> %c", toupper(value));
+	
+	return 0;
+}
+output:
+a -> A
+
+task:
+convert char to lower case
+code:
+#include <stdio.h>
+#include <ctype.h>
+
+int main()
+{	
+	char value = 'A';
+	
+	printf("A -> %c", tolower(value));
+	
+	return 0;
+}
+output:
+A -> a
+
+task:
+code:
+
+  
 ---
 task:
 output words from an array
