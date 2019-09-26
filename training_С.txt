@@ -4158,42 +4158,210 @@ number_float = 0.000000
 character =
 
 task:
-whether the character is uppercase or lowercase
+use ctype.h library
 code:
 #include <stdio.h>
 #include <ctype.h>
 
-void check_upper_or_lower(char character);
-
 int main()
 {	
-	char valueOne = 'A';
-	char valueTwo = 'a';
+	char array[] = {'A', 'b', '5', '@', ',', ' ', '\t'};
+	int length = sizeof(array);
+	int i;
 	
-	check_upper_or_lower(valueOne);
-	check_upper_or_lower(valueTwo);
+	
+	printf("array contains... \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		printf("%c - char \n", array[i]);
+	}
+	
+	
+	printf("\n whether the character is alphabetic... isalpha() \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		if(isalpha(array[i]))
+		{
+			printf("%c - yes \n", array[i]);
+		}
+	}
+	
+	
+	printf("\n whether the character is alphanumeric... isalnum() \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		if(isalnum(array[i]))
+		{
+			printf("%c - yes \n", array[i]);
+		}
+	}
+	
+	
+	printf("\n whether the character is decimal digit... isdigit() \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		if(isdigit(array[i]))
+		{
+			printf("%c - yes \n", array[i]);
+		}
+	}
+	
+	
+	printf("\n whether the character is hexadecimal digit... isxdigit() \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		if(isxdigit(array[i]))
+		{
+			printf("%c - yes \n", array[i]);
+		}
+	}
+	
+	
+	printf("\n whether the character is uppercase... isupper() \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		if(isupper(array[i]))
+		{
+			printf("%c - yes \n", array[i]);
+		}
+	}
+	
+	
+	printf("\n whether the character is lowercase... islower() \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		if(islower(array[i]))
+		{
+			printf("%c - yes \n", array[i]);
+		}
+	}
+	
+	
+	printf("\n whether the character is punctuation ... ispunct() \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		if(ispunct(array[i]))
+		{
+			printf("%c - yes \n", array[i]);
+		}
+	}
+	
+	
+	printf("\n whether the character is control ... iscntrl() \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		if(iscntrl(array[i]))
+		{
+			printf("%c - yes \n", array[i]);
+		}
+	}
+	
+	
+	printf("\n whether the character is white space ... isspace() \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		if(isspace(array[i]))
+		{
+			printf("%c - yes \n", array[i]);
+		}
+	}
+	
+	
+	printf("\n whether the character is print ... isprint() \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		if(isprint(array[i]))
+		{
+			printf("%c - yes \n", array[i]);
+		}
+	}
+	
+	
+	printf("\n whether the character is graphical ... isgraph() \n");
+	
+	for(i = 0; length > i; i++)
+	{
+		if(isgraph(array[i]))
+		{
+			printf("%c - yes \n", array[i]);
+		}
+	}
+	
 	
 	return 0;
 }
-
-void check_upper_or_lower(char character)
-{
-	if(isupper(character))
-	{
-		printf("%c is upper char \n", character);
-	}
-	
-	if(islower(character))
-	{
-		printf("%c is lower char \n", character);
-	}
-}
 output:
-A is upper char
-a is lower char
+array contains...
+A - char
+b - char
+5 - char
+@ - char
+, - char
+  - char
+         - char
+
+ whether the character is alphabetic... isalpha()
+A - yes
+b - yes
+
+ whether the character is alphanumeric... isalnum()
+A - yes
+b - yes
+5 - yes
+
+ whether the character is decimal digit... isdigit()
+5 - yes
+
+ whether the character is hexadecimal digit... isxdigit()
+A - yes
+b - yes
+5 - yes
+
+ whether the character is uppercase... isupper()
+A - yes
+
+ whether the character is lowercase... islower()
+b - yes
+
+ whether the character is punctuation ... ispunct()
+@ - yes
+, - yes
+
+ whether the character is control ... iscntrl()
+         - yes
+
+ whether the character is white space ... isspace()
+  - yes
+         - yes
+
+ whether the character is print ... isprint()
+A - yes
+b - yes
+5 - yes
+@ - yes
+, - yes
+  - yes
+
+ whether the character is graphical ... isgraph()
+A - yes
+b - yes
+5 - yes
+@ - yes
+, - yes
 
 task:
-convert char to upper case
+convert char to uppercase using ctype.h library
 code:
 #include <stdio.h>
 #include <ctype.h>
@@ -4210,7 +4378,7 @@ output:
 a -> A
 
 task:
-convert char to lower case
+convert char to lowercase using ctype.h library
 code:
 #include <stdio.h>
 #include <ctype.h>
@@ -4227,178 +4395,9 @@ output:
 A -> a
 
 task:
-whether the character is an alphabet
-code:
-#include <stdio.h>
-#include <ctype.h>
-
-void check_is_alphabet(char character);
-
-int main()
-{	
-	char valueOne = 'A';
-	char valueTwo = 'b';
-	char valueThree = '5';
-	char valueFour = '@';
-	
-	
-	check_is_alphabet(valueOne);
-	check_is_alphabet(valueTwo);
-	check_is_alphabet(valueThree);
-	check_is_alphabet(valueFour);
-	
-	
-	return 0;
-}
-
-void check_is_alphabet(char character)
-{
-	if(isalpha(character))
-	{
-		printf("%c is alphabet \n", character);
-	}
-	else
-	{
-		printf("%c is not alphabet \n", character);
-	}
-}
-output:
-A is alphabet
-b is alphabet
-5 is not alphabet
-@ is not alphabet
-
-task:
-whether the character is an alphanumeric
-code:
-#include <stdio.h>
-#include <ctype.h>
-
-void check_is_alphanumeric(char character);
-
-int main()
-{	
-	char valueOne = 'D';
-	char valueTwo = 'w';
-	char valueThree = '1';
-	char valueFour = '%';
-	
-	
-	check_is_alphanumeric(valueOne);
-	check_is_alphanumeric(valueTwo);
-	check_is_alphanumeric(valueThree);
-	check_is_alphanumeric(valueFour);
-	
-	
-	return 0;
-}
-
-void check_is_alphanumeric(char character)
-{
-	if(isalnum(character))
-	{
-		printf("%c is alphanumeric \n", character);
-	}
-	else
-	{
-		printf("%c is not alphanumeric \n", character);
-	}
-}
-output:
-D is alphanumeric
-w is alphanumeric
-1 is alphanumeric
-% is not alphanumeric
-
-task:
-whether the character is white space
-code:
-#include <stdio.h>
-#include <ctype.h>
-
-void check_is_white_space(char character);
-
-int main()
-{	
-	char valueOne = 'f';
-	char valueTwo = ' ';
-	char valueThree = '\n';
-	char valueFour = '\t';
-	
-	
-	check_is_white_space(valueOne);
-	check_is_white_space(valueTwo);
-	check_is_white_space(valueThree);
-	check_is_white_space(valueFour);
-	
-	
-	return 0;
-}
-
-void check_is_white_space(char character)
-{
-	if(isspace(character))
-	{
-		printf("%c is white space \n", character);
-	}
-	else
-	{
-		printf("%c is not white space \n", character);
-	}
-}
-output:
-f is not white space
-  is white space
-
- is white space
-         is white space
-  
-task:
-whether the character is punctuation
-code:
-#include <stdio.h>
-#include <ctype.h>
-
-void check_is_punctuation(char character);
-
-int main()
-{	
-	char valueOne = '#';
-	char valueTwo = ',';
-	char valueThree = 'f';
-	char valueFour = '\t';
-	
-	
-	check_is_punctuation(valueOne);
-	check_is_punctuation(valueTwo);
-	check_is_punctuation(valueThree);
-	check_is_punctuation(valueFour);
-	
-	
-	return 0;
-}
-
-void check_is_punctuation(char character)
-{
-	if(ispunct(character))
-	{
-		printf("%c is punctuation \n", character);
-	}
-	else
-	{
-		printf("%c is not punctuation \n", character);
-	}
-}
-output:
-# is punctuation
-, is punctuation
-f is not punctuation
-         is not punctuation
-	 
-task:
 code:
 
-
+ 
 ---
 task:
 output words from an array
