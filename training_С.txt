@@ -4457,6 +4457,92 @@ output:
 string
 
 task:
+compare string
+code:
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{	
+	char arrayOne[100] = "string";
+	char arrayTwo[100] = "string";
+	int compare;
+	
+	
+	compare = strcmp(arrayOne, arrayTwo);
+	
+	
+	if(compare == 0)
+	{
+		printf("strings are equal");
+	}
+	else
+	{
+		printf("strings are not equal");
+	}
+	
+	
+	return 0;
+}
+output:
+strings are equal
+
+task:
+compare string
+code:
+#include <stdio.h>
+
+int stringCompare(char one[], char two[]);
+
+int main()
+{	
+	char arrayOne[100] = "string";
+	char arrayTwo[100] = "string";
+	
+	
+	if(stringCompare(arrayOne, arrayTwo))
+	{
+		printf("strings are equal");
+	}
+	else
+	{
+		printf("strings are not equal");
+	}
+	
+	
+	return 0;
+}
+
+int stringCompare(char one[], char two[])
+{
+	int i = 0;
+	
+	while(one[i] == two[i])
+	{
+		printf("%c == %c \n", one[i], two[i]);
+		
+		
+		if(one[i] == '\0' && two[i] == '\0')
+		{
+			return 1;
+		}
+		
+		i++;
+	}
+	
+	return 0;
+}
+output:
+s == s
+t == t
+r == r
+i == i
+n == n
+g == g
+  ==
+strings are equal
+
+task:
 code:
 
  
