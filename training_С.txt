@@ -4395,6 +4395,68 @@ output:
 A -> a
 
 task:
+copy the string
+copy <- array
+code:
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{	
+	char array[100] = "string";
+	char copy[100];
+	
+	
+	strcpy(copy, array);
+	
+	
+	printf("%s \n", copy);
+	
+	
+	return 0;
+}
+output:
+string
+
+task:
+copy the string
+code:
+#include <stdio.h>
+
+void stringCopy(char one[], char two[]);
+
+int main()
+{	
+	char array[100] = "string";
+	char copy[100];
+	
+	
+	stringCopy(copy, array);
+	
+	
+	printf("%s \n", copy);
+	
+	
+	return 0;
+}
+
+void stringCopy(char one[], char two[])
+{
+	int i = 0;
+	
+	while(two[i] != '\0')
+	{
+		one[i] = two[i];
+		
+		i++;
+	}
+	
+	one[i] = '\0';
+}
+output:
+string
+
+task:
 code:
 
  
