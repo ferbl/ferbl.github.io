@@ -4565,6 +4565,66 @@ output:
 lbref
 
 task:
+remove spaces in string
+code:
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{	
+	char array[100] = "a  b c";
+	char noSpaces[100];
+	int length;
+	int count = 0;
+	int i;
+	
+	
+	length = strlen(array);
+	
+	
+	for(i = 0; length > i; i++)
+	{		
+		printf("1) array[i=%d] = '%c' \n", i, array[i]);
+		
+		if(array[i] != ' ')
+		{
+			printf("2) noSpaces[count=%d] = array[i=%d] \n", count, i);
+			noSpaces[count] = array[i];
+			
+			
+			printf("3) count++ \n \n");
+			count++;
+		}
+	}
+	
+	
+	noSpaces[count] = '\0';
+	
+	
+	printf("%s \n", noSpaces);
+	
+	
+	return 0;
+}
+output:
+1) array[i=0] = 'a'
+2) noSpaces[count=0] = array[i=0]
+3) count++
+
+1) array[i=1] = ' '
+1) array[i=2] = ' '
+1) array[i=3] = 'b'
+2) noSpaces[count=1] = array[i=3]
+3) count++
+
+1) array[i=4] = ' '
+1) array[i=5] = 'c'
+2) noSpaces[count=2] = array[i=5]
+3) count++
+
+abc
+
+task:
 code:
 
  
