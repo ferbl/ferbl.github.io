@@ -4565,6 +4565,107 @@ output:
 lbref
 
 task:
+find the length of string
+code:
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{	
+	char array[100];
+	int length;
+	
+	
+	printf("enter a string \n");
+	gets(array);
+	
+	
+	length = strlen(array);
+	
+	
+	printf("length = %d", length);
+	
+	
+	return 0;
+}
+output:
+enter a string
+abc
+length = 3
+
+task:
+find the length of string
+sizeof() counts \0 character
+code:
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{	
+	char array[] = "abc";
+	int length_Sizeof;
+	int length_Strlen;
+	
+	
+	length_Sizeof = sizeof(array);
+	
+	length_Strlen = strlen(array);
+	
+	
+	printf("length Sizeof = %d \n", length_Sizeof);
+	
+	printf("length strlen = %d \n", length_Strlen);
+	
+	
+	return 0;
+}
+output:
+length Sizeof = 4
+length strlen = 3
+
+task:
+find the length of string
+code:
+#include <stdio.h>
+
+int string_length(char array[]);
+
+int main()
+{	
+	char array[100];
+	int length;
+	
+	
+	printf("enter a string \n");
+	gets(array);
+	
+	
+	length = string_length(array);
+	
+	
+	printf("length = %d", length);
+	
+	
+	return 0;
+}
+
+int string_length(char array[])
+{
+	int i = 0;
+	
+	while(array[i] != '\0')
+	{
+		i++;
+	}
+	
+	return i;
+}
+output:
+enter a string
+abc
+length = 3
+
+task:
 remove spaces in string
 code:
 #include <stdio.h>
@@ -4627,7 +4728,7 @@ abc
 task:
 code:
 
- 
+
 ---
 task:
 output words from an array
