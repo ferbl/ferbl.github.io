@@ -4543,6 +4543,28 @@ g == g
 strings are equal
 
 task:
+reverse a string
+code:
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{	
+	char array[100] = "ferbl";
+	
+	
+	strrev(array);
+	
+	
+	printf("%s \n", array);
+	
+	
+	return 0;
+}
+output:
+lbref
+
+task:
 code:
 
  
