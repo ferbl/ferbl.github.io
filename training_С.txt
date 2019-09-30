@@ -4913,6 +4913,167 @@ y = 0
 z = 0
 
 task:
+convert character to lowercase
+code:
+#include <stdio.h>
+
+int main()
+{	
+	char symbol = 'A';
+	
+	
+	if(symbol >= 'A' && symbol <= 'Z')
+	{
+		printf("a = %d ascii \n", 'a');
+		printf("A = %d ascii \n\n", 'A');
+		
+		printf("a - A = 32 \n");
+		printf("97 - 65 = %d \n\n", 'a' - 'A');
+		
+		printf("A -> a \n\n");
+		
+		printf("A + 32 = a \n");
+		printf("65 + 32 = %d \n\n", 'A' + 32);
+		
+		
+		symbol = symbol + ('a' - 'A');
+	}
+	
+	
+	printf("%c \n", symbol);
+	
+		
+	return 0;
+}
+output:
+a = 97 ascii
+A = 65 ascii
+
+a - A = 32
+97 - 65 = 32
+
+A -> a
+
+A + 32 = a
+65 + 32 = 97
+
+a
+
+task:
+count the number of vowels
+code:
+#include <stdio.h>
+
+int count_vovels(char array[]);
+int isVowel(char symbol);
+
+int main()
+{	
+	char string[] = "Aabc";
+	
+	
+	printf("number of vowels = %d", count_vovels(string));
+		
+	
+	return 0;
+}
+
+int count_vovels(char array[])
+{
+	int count;
+	int flag;
+	int i = 0;
+	
+	
+	while(array[i] != '\0')
+	{		
+		printf("%c isVowel = %d \n", array[i], isVowel(array[i]));
+
+		flag = isVowel( array[i] ); 
+		
+		
+		if(flag)
+		{
+			count++;
+		}
+		
+		
+		i++;
+	}
+
+	return count;
+}
+
+int isVowel(char symbol)
+{
+	if(symbol >= 'A' && symbol <= 'Z')
+	{		
+		symbol = symbol + ('a' - 'A');
+	}
+	
+	
+	if(symbol == 'a' || symbol == 'e' || 
+	   symbol == 'i' || symbol == 'o' || 
+	   symbol == 'u')
+	{
+		return 1;
+	}
+	
+	return 0;
+}
+output:
+A isVowel = 1
+a isVowel = 1
+b isVowel = 0
+c isVowel = 0
+number of vowels = 2
+
+task:
+count the number of vowels
+code:
+#include <stdio.h>
+#include <string.h>
+
+int count_vovels(char array[]);
+
+int main()
+{	
+	char string[] = "AaBoz";
+	
+	
+	printf("number of vowels = %d \n", count_vovels(string));
+	
+	
+	return 0;
+}
+
+int count_vovels(char array[])
+{
+	char vovels[] = "aeiouAEIOU";
+	int length = strlen(array);
+	int count = 0;
+	int i;
+	int u;
+	
+	
+	for(i = 0; length > i; i++)
+	{
+		for(u = 0; 10 > u; u++)
+		{
+			if(array[i] == vovels[u])
+			{
+				count++;
+				break;
+			}
+		}
+	}
+	
+	return count;
+}
+output:
+number of vowels = 3
+
+task:
 code:
 
 
