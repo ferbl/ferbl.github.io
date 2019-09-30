@@ -4729,52 +4729,72 @@ task:
 calculate frequency chars in string
 code:
 #include <stdio.h>
-#include <string.h>
 
 int main()
 {	
-	char array[] = "Aa b Zzz";
-	char ascii_lowercase[] = "abcdefghijklmnopqrstuvwxyz";
-	char ascii_uppercase[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char array[] = "abbzzz";
 	int frequency_chars[26] = {0};
-	int length;
+	int temp;
 	int i = 0;
-	int u = 0;
 	
 	
-	length = strlen(array);
+	printf("array contains... \n");
 	
-	
-	for(i = 0; length > i; i++)
+	while(array[i] != '\0')
 	{
-		for(u = 0; 26 > u; u++)
-		{
-			if(array[i] == ascii_lowercase[u])
-			{
-				frequency_chars[u]++;
-				break;
-			}
-			else if(array[i] == ascii_uppercase[u])
-			{
-				frequency_chars[u]++;
-				break;
-			}
+		printf("%c = %d ascii \n", array[i], array[i]);
+		
+		i++;
+	}
+	i = 0;
+	
+	
+	while(array[i] != '\0')
+	{
+		if(array[i] >= 'a' && array[i] <= 'z')
+		{			
+			printf("temp = %d - %d \n", array[i], 'a');
+			printf("%d \n", array[i] - 'a');
+	
+			temp = array[i] - 'a';
+			
+			frequency_chars[temp]++;
 		}
+		
+		i++;
 	}
 	
 	
 	for(i = 0; 26 > i; i++)
 	{
-		printf("%c = %d \n", ascii_lowercase[i], frequency_chars[i]);
+		printf("%c = %d \n", i + 'a', frequency_chars[i]);
 	}
 	
 	
 	return 0;
 }
-
 output:
-a = 2
-b = 1
+array contains...
+a = 97 ascii
+b = 98 ascii
+b = 98 ascii
+z = 122 ascii
+z = 122 ascii
+z = 122 ascii
+temp = 97 - 97
+0
+temp = 98 - 97
+1
+temp = 98 - 97
+1
+temp = 122 - 97
+25
+temp = 122 - 97
+25
+temp = 122 - 97
+25
+a = 1
+b = 2
 c = 0
 d = 0
 e = 0
@@ -4799,6 +4819,98 @@ w = 0
 x = 0
 y = 0
 z = 3
+
+task:
+calculate frequency chars in string
+code:
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{	
+	char array[] = "acf";
+	char ascii_lowercase[] = "abcdefghijklmnopqrstuvwxyz";
+	char ascii_uppercase[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	int frequency_chars[26] = {0};
+	int length;
+	int i = 0;
+	int u = 0;
+	
+	
+	length = strlen(array);
+	
+	
+	for(i = 0; length > i; i++)
+	{
+		printf("%d \n", i);
+		
+		for(u = 0; 26 > u; u++)
+		{
+			printf("array[i=%d]=%c == ascii[u=%d]=%c \n", i, array[i], u, ascii_lowercase[u]);
+			
+			
+			if(array[i] == ascii_lowercase[u])
+			{
+				frequency_chars[u]++;
+				break;
+			}
+			else if(array[i] == ascii_uppercase[u])
+			{
+				frequency_chars[u]++;
+				break;
+			}
+		}
+	}
+	
+	
+	for(i = 0; 26 > i; i++)
+	{
+		printf("%c = %d \n", ascii_lowercase[i], frequency_chars[i]);
+	}
+	
+	
+	return 0;
+}
+output:
+0
+array[i=0]=a == ascii[u=0]=a
+1
+array[i=1]=c == ascii[u=0]=a
+array[i=1]=c == ascii[u=1]=b
+array[i=1]=c == ascii[u=2]=c
+2
+array[i=2]=f == ascii[u=0]=a
+array[i=2]=f == ascii[u=1]=b
+array[i=2]=f == ascii[u=2]=c
+array[i=2]=f == ascii[u=3]=d
+array[i=2]=f == ascii[u=4]=e
+array[i=2]=f == ascii[u=5]=f
+a = 1
+b = 0
+c = 1
+d = 0
+e = 0
+f = 1
+g = 0
+h = 0
+i = 0
+j = 0
+k = 0
+l = 0
+m = 0
+n = 0
+o = 0
+p = 0
+q = 0
+r = 0
+s = 0
+t = 0
+u = 0
+v = 0
+w = 0
+x = 0
+y = 0
+z = 0
 
 task:
 code:
