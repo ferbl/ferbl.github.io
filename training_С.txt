@@ -5079,6 +5079,65 @@ code:
 
 ---
 task:
+sum of two numbers using recursion
+code:
+#include <stdio.h>
+
+int sum;
+
+int sum_two_numbers(int one, int two)
+{
+	int temp = 0;
+	
+	printf("		recursion \n");
+	printf("one = %d, two = %d \n", one, two);
+	
+	if(two == 0)
+	{		
+		printf("stop recursion \n");
+		printf("return one = %d \n", one);
+		return one;
+	}
+	
+	
+	printf("temp = sum_two_numbers(%d, %d - 1) \n", one, two);
+	temp = sum_two_numbers(one, two - 1);
+	
+	
+	printf("sum = (temp=%d) + 1    two = %d \n", temp, two);
+	sum = temp + 1;
+	
+	
+	printf("return sum = %d \n", sum);
+	
+	return sum;
+}
+
+int main()
+{		
+	printf("%d \n", sum_two_numbers(10, 2));
+	
+	return 0;
+}
+output:
+                recursion
+one = 10, two = 2
+temp = sum_two_numbers(10, 2 - 1)
+                recursion
+one = 10, two = 1
+temp = sum_two_numbers(10, 1 - 1)
+                recursion
+one = 10, two = 0
+stop recursion
+return one = 10
+sum = (temp=10) + 1    two = 1
+return sum = 11
+sum = (temp=11) + 1    two = 2
+return sum = 12
+12
+
+---
+task:
 output words from an array
 code:
 #include <stdio.h>
