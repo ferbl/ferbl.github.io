@@ -5074,6 +5074,69 @@ output:
 number of vowels = 3
 
 task:
+factorial calculation using recursion
+code:
+#include <stdio.h>
+
+int fact(int num)
+{
+	printf("\t \t \t \t -> fact(int num) \n");
+	
+	printf("num = %d \n", num);
+	
+	
+	if(num >= 1)
+	{
+		printf("return num * fact( num - 1 ) \n");
+		
+		return num * fact( num - 1 );
+	}
+	else
+	{
+		printf("\t \t \t \t <- return 1 \n");
+		
+		return 1;
+	}
+}
+
+int main()
+{		
+	int number = 5;
+	int factorial;
+	
+	
+	printf("calculating factorial... \n");
+	
+	factorial = fact(number);
+	
+	
+	printf("factorial %d = %d \n", number, factorial);
+	
+	return 0;
+}
+output:
+calculating factorial...
+                                 -> fact(int num)
+num = 5
+return num * fact( num - 1 )
+                                 -> fact(int num)
+num = 4
+return num * fact( num - 1 )
+                                 -> fact(int num)
+num = 3
+return num * fact( num - 1 )
+                                 -> fact(int num)
+num = 2
+return num * fact( num - 1 )
+                                 -> fact(int num)
+num = 1
+return num * fact( num - 1 )
+                                 -> fact(int num)
+num = 0
+                                 <- return 1
+factorial 5 = 120
+
+task:
 code:
 
 
