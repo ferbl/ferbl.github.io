@@ -5074,6 +5074,44 @@ output:
 number of vowels = 3
 
 task:
+sum numbers from 1 to 5 using recursion
+code:
+#include <stdio.h>
+
+int sum;
+
+int get_sum(int number)
+{	
+	printf("sum = %d, number = %d \n", sum, number);
+	
+	if(number > 0)
+	{
+		sum = sum + number;
+		
+		get_sum( number - 1 );
+	}
+	
+	return sum;
+}
+
+int main()
+{		
+	printf("sum from 1 to 5 \n");
+	
+	get_sum(5);
+	
+	return 0;
+}
+output:
+sum from 1 to 5
+sum = 0, number = 5
+sum = 5, number = 4
+sum = 9, number = 3
+sum = 12, number = 2
+sum = 14, number = 1
+sum = 15, number = 0
+
+task:
 calculate fibonacci using recursion
 code:
 #include <stdio.h>
