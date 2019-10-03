@@ -5082,7 +5082,7 @@ int sum;
 
 int get_sum(int number)
 {	
-	printf("sum = %d, number = %d \n", sum, number);
+	printf("number = %d, sum = %d \n", number, sum);
 	
 	if(number > 0)
 	{
@@ -5105,12 +5105,12 @@ int main()
 }
 output:
 sum from 1 to 5
-sum = 0, number = 5
-sum = 5, number = 4
-sum = 9, number = 3
-sum = 12, number = 2
-sum = 14, number = 1
-sum = 15, number = 0
+number = 5, sum = 0
+number = 4, sum = 5
+number = 3, sum = 9
+number = 2, sum = 12
+number = 1, sum = 14
+number = 0, sum = 15
 return 15, number 0
 return 15, number 1
 return 15, number 2
@@ -5120,6 +5120,7 @@ return 15, number 5
 
 task:
 calculate fibonacci using recursion
+0 10 10 20 30 50 80
 code:
 #include <stdio.h>
 
@@ -5127,7 +5128,7 @@ void fibonacci(int first, int second, int length);
 
 int main()
 {		
-	fibonacci(0, 1, 8);
+	fibonacci(0, 10, 5);
 	
 	return 0;
 }
@@ -5148,23 +5149,109 @@ void fibonacci(int first, int second, int length)
 	}
 }
 output:
-first = 0, second = 1, length = 8
-sum 1
-first = 1, second = 1, length = 7
-sum 2
-first = 1, second = 2, length = 6
-sum 3
-first = 2, second = 3, length = 5
-sum 5
-first = 3, second = 5, length = 4
-sum 8
-first = 5, second = 8, length = 3
-sum 13
-first = 8, second = 13, length = 2
-sum 21
-first = 13, second = 21, length = 1
-sum 34
-first = 21, second = 34, length = 0
+first = 0, second = 10, length = 5
+sum 10
+first = 10, second = 10, length = 4
+sum 20
+first = 10, second = 20, length = 3
+sum 30
+first = 20, second = 30, length = 2
+sum 50
+first = 30, second = 50, length = 1
+sum 80
+first = 50, second = 80, length = 0
+
+task:
+calculate sum of digits of a number using recursion
+code:
+#include <stdio.h>
+
+int sum;
+
+int sum_digits_of_number(int number)
+{	
+	printf("-> number = %d, sum = %d \n", number, sum);
+
+	sum += number % 10;
+	
+	if(number > 0)
+	{
+		sum_digits_of_number( number / 10 );
+	}
+	
+	printf("return sum = %d, number = %d \n", sum, number);
+	return sum;
+}
+
+int main()
+{			
+	printf("sum of digits of a number = %d \n",sum_digits_of_number(57));
+	
+	return 0;
+}
+output:
+-> number = 57, sum = 0
+-> number = 5, sum = 7
+-> number = 0, sum = 12
+return sum = 12, number = 0
+return sum = 12, number = 5
+return sum = 12, number = 57
+sum of digits of a number = 12
+
+task:
+check if the string is a palindrome using recursion
+code:
+#include <stdio.h>
+
+int isPalindrome(char array[], int begin, int end);
+
+int main()
+{			
+	char string[] = "foof";
+	
+	printf("%s \n", string);
+	
+	
+	if(isPalindrome(string, 0, 3))
+	{
+		printf("%s is palindrome", string);
+	}
+	else
+	{
+		printf("%s is not palindrome", string);
+	}
+	
+	return 0;
+}
+
+int isPalindrome(char array[], int begin, int end)
+{
+	printf("begin = %d, end = %d \n", begin, end);
+	
+	if(begin >= end)
+	{
+		return 1;
+	}
+	
+	if(array[begin] == array[end])
+	{
+		printf("%c == %c \n", array[begin], array[end]);
+		
+		isPalindrome(array, begin + 1, end - 1);
+	}
+	else
+	{
+		return 0;
+	}
+}
+output:
+foof
+begin = 0, end = 3
+f == f
+begin = 1, end = 2
+o == o
+begin = 2, end = 1
+foof is palindrome
 
 task:
 code:
