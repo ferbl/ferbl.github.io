@@ -5254,6 +5254,121 @@ begin = 2, end = 1
 foof is palindrome
 
 task:
+check if the number is a palindrome using recursion
+code:
+#include <stdio.h>
+
+int reverse(int number);
+
+int main()
+{		
+	int num;
+	
+	printf("--->"); scanf("%d", &num);
+
+	if(reverse(num) == num)
+	{
+		printf("%d is polindrome", num);
+	}
+	else
+	{
+		printf("%d is not polindrome", num);
+	}
+	
+	return 0;
+}
+
+int sum = 0;
+
+int reverse(int number)
+{
+	int residue = 0;
+	
+	printf("\t number = %d \n", number);
+	
+	if(number != 0)
+	{
+		printf("residue = %d \n", number % 10);
+		residue = number % 10;
+		
+		printf("sum %d = sum %d * 10 \n", sum * 10, sum);
+		sum = sum * 10;
+		
+		printf("sum %d = sum %d + residue %d \n", sum + residue, sum, residue);
+		sum = sum + residue;
+		
+		reverse( number / 10 );
+	}
+	else
+	{
+		return sum;
+	}
+}
+output:
+--->515
+         number = 515
+residue = 5
+sum 0 = sum 0 * 10
+sum 5 = sum 0 + residue 5
+         number = 51
+residue = 1
+sum 50 = sum 5 * 10
+sum 51 = sum 50 + residue 1
+         number = 5
+residue = 5
+sum 510 = sum 51 * 10
+sum 515 = sum 510 + residue 5
+         number = 0
+515 is polindrome
+output:
+
+task:
+raise a number to a power using recursion
+code:
+#include <stdio.h>
+
+int exponent(int x, int y);
+
+int main()
+{		
+	int first;
+	int second;
+
+	printf("x^y \n");
+	
+	printf("x ->"); scanf("%d", &first);
+	
+	printf("y ->"); scanf("%d", &second);
+	
+	
+	printf("exponent %d^%d = %d", first, second, exponent(first, second));
+	
+	
+	return 0;
+}
+
+int exponent(int x, int y)
+{
+	if(y == 0)
+	{
+		printf("return 1 \n");
+		return 1;
+	}
+	
+	printf("x %d * exponent(x %d, y %d - 1) \n", x, x, y);
+	
+	return x * exponent(x, y - 1);
+}
+output:
+x^y
+x ->8
+y ->2
+x 8 * exponent(x 8, y 2 - 1)
+x 8 * exponent(x 8, y 1 - 1)
+return 1
+exponent 8^2 = 64
+
+task:
 code:
 
 
