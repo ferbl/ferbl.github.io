@@ -5369,6 +5369,71 @@ return 1
 exponent 8^2 = 64
 
 task:
+find the maximum number in an array using recursion
+code:
+#include <stdio.h>
+int get_max_number(int array[]);
+
+int length;
+
+int main()
+{		
+	int numbers[] = {20, 30, 10};
+	
+	
+	length = sizeof(numbers) / sizeof(int);
+	printf("length = %d \n", length);
+	
+	
+	printf("max = %d", get_max_number(numbers));
+	
+	return 0;
+}
+
+int max = 0;
+int i = 0;
+
+int get_max_number(int array[])
+{	
+	printf("i = %d \n", i);
+	
+	if(length > i)
+	{
+		printf("array[i] %d > max %d \n", array[i], max);
+		
+		if(array[i] > max)
+		{
+			printf("max <- %d \n", array[i]);
+			
+			max = array[i];
+		}
+		
+		i++;
+		
+		get_max_number(array);
+	}
+	
+	printf("return max %d \n", max);
+	return max;
+}
+output:
+length = 3
+i = 0
+array[i] 20 > max 0
+max <- 20
+i = 1
+array[i] 30 > max 20
+max <- 30
+i = 2
+array[i] 10 > max 30
+i = 3
+return max 30
+return max 30
+return max 30
+return max 30
+max = 30
+
+task:
 code:
 
 
