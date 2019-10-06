@@ -5514,6 +5514,71 @@ return 1
 11 is prime number
 
 task:
+find the LCM (lowest common multiple) using recursion
+code:
+#include <stdio.h>
+int get_LCM(int one, int two);
+
+int main()
+{		
+	int first = 2;
+	int second = 3;
+	
+	printf("LCM = %d \n", get_LCM(first, second));
+	
+	return 0;
+}
+
+int i = 1;
+
+int get_LCM(int one, int two)
+{
+	printf("i = %d \n", i);
+	printf("one = %d, two = %d \n", one, two);
+	printf("i %% one = %d, i %% two = %d \n", i % one, i % two);
+	
+	if(i % one == 0 && i % two == 0)
+	{
+		printf("stop %d \n", i);
+	}
+	else
+	{
+		i++;
+		get_LCM(one, two);
+	}
+	
+	printf("return %d \n", i);
+	return i;
+}
+output:
+i = 1
+one = 2, two = 3
+i % one = 1, i % two = 1
+i = 2
+one = 2, two = 3
+i % one = 0, i % two = 2
+i = 3
+one = 2, two = 3
+i % one = 1, i % two = 0
+i = 4
+one = 2, two = 3
+i % one = 0, i % two = 1
+i = 5
+one = 2, two = 3
+i % one = 1, i % two = 2
+i = 6
+one = 2, two = 3
+i % one = 0, i % two = 0
+stop 6
+return 6
+return 6
+return 6
+return 6
+return 6
+return 6
+LCM = 6
+
+task:
 code:
 
 
