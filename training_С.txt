@@ -5582,6 +5582,60 @@ task:
 code:
 
 
+task:
+find the GCD (greatest common divisor) using recursion
+code:
+#include <stdio.h>
+
+int get_GCD(int one, int two);
+
+int main()
+{		
+	int first = 60;
+	int second = 36;
+	
+	printf("GCD = %d", get_GCD(first, second));
+	
+	return 0;
+}
+
+int get_GCD(int one, int two)
+{
+	printf("one = %d, two = %d \n", one, two);
+	
+	if(one > two)
+	{
+		printf("%d - %d = %d \n", one, two, one - two);
+		
+		get_GCD(one - two, two);
+	}
+	else if(two > one)
+	{
+		printf("%d - %d = %d \n", two, one, two - one);
+		
+		get_GCD(one, two - one);
+	}
+	else
+	{
+		printf("return %d \n", one);
+		return one;
+	}
+}
+output:
+one = 60, two = 36
+60 - 36 = 24
+one = 24, two = 36
+36 - 24 = 12
+one = 24, two = 12
+24 - 12 = 12
+one = 12, two = 12
+return 12
+GCD = 12
+
+task:
+code:
+
+
 ---
 task:
 factorial calculation using recursion
