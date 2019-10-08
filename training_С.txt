@@ -5722,6 +5722,56 @@ return 12
 GCD = 12
 
 task:
+reverse string using recursion
+code:
+#include <stdio.h>
+char *reverse(char *array);
+
+int main()
+{		
+	char string[100] = "abc";
+	
+	printf("original - %s \n", string);
+	
+	printf("reverse - %s \n", reverse(string));
+}
+
+char reverse_array[100];
+int i = 0;
+
+char *reverse(char *array)
+{
+	printf("%c \n", *array);
+	
+	if(*array)
+	{
+		reverse(array + 1);
+		
+		printf("reverse_array[ i %d ] <- %c \n", i, *array);
+		reverse_array[i] = *array;
+		
+		i++;
+	}
+	
+	printf("return \n");
+	return reverse_array;
+}
+output:
+original - abc
+a
+b
+c
+
+return
+reverse_array[ i 0 ] <- c
+return
+reverse_array[ i 1 ] <- b
+return
+reverse_array[ i 2 ] <- a
+return
+reverse - cba
+
+task:
 code:
 
 
