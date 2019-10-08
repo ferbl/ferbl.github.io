@@ -5579,11 +5579,100 @@ return 6
 LCM = 6
 
 task:
+calculate Sum of First N numbers using head recursion
 code:
+#include <stdio.h>
+int head_recursion(int number);
 
+int main()
+{		
+	int num = 5;
+	
+	printf("head recursion... \n");
+	printf("%d \n", head_recursion(num));
+}
+
+int sum;
+
+int head_recursion(int number)
+{
+	printf("recursion, number = %d \n", number);
+	
+	if(number == 1)
+	{
+		printf("return 1 \n");
+		return 1;
+	}
+	else
+	{
+		sum = number + head_recursion(number - 1);
+		
+		printf("sum = number %d + head_recursion(number - 1) \n", number);
+	}
+	
+	printf("return sum = %d \n", sum);
+	return sum;
+}
+output:
+head recursion...
+recursion, number = 5
+recursion, number = 4
+recursion, number = 3
+recursion, number = 2
+recursion, number = 1
+return 1
+sum = number 2 + head_recursion(number - 1)
+return sum = 3
+sum = number 3 + head_recursion(number - 1)
+return sum = 6
+sum = number 4 + head_recursion(number - 1)
+return sum = 10
+sum = number 5 + head_recursion(number - 1)
+return sum = 15
+15
 
 task:
-find the GCD (greatest common divisor) using recursion
+calculate Sum of First N numbers using tail recursion
+code:
+#include <stdio.h>
+int tail_recursion(int number, int sum);
+
+int main()
+{		
+	int num = 5;
+	
+	printf("tail recursion... \n");
+	printf("%d \n", tail_recursion(num, 0));
+}
+
+int tail_recursion(int number, int sum)
+{
+	printf("number = %d, sum = %d \n", number, sum);
+	
+	if(number == 0)
+	{
+		printf("return sum = %d \n", sum);
+		return sum;
+	}
+	else
+	{
+		return tail_recursion(number - 1, sum + number);
+	}
+}
+output:
+tail recursion...
+number = 5, sum = 0
+number = 4, sum = 5
+number = 3, sum = 9
+number = 2, sum = 12
+number = 1, sum = 14
+number = 0, sum = 15
+return sum = 15
+15
+
+task:
+find the GCD (greatest common divisor) using tail recursion
+Euclidean Algorithm Using Subtraction
 code:
 #include <stdio.h>
 
