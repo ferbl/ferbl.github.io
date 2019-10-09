@@ -5772,6 +5772,42 @@ return
 reverse - cba
 
 task:
+save two people information using structure
+code:
+#include <stdio.h>
+#include <string.h>
+
+struct Person
+{
+	char name[100];
+	int age;
+};
+
+int main()
+{		
+	struct Person persone_one;
+	struct Person persone_two;
+	
+	strcpy(persone_one.name, "First");
+	persone_one.age = 11;
+	
+	strcpy(persone_two.name, "Second");
+	persone_two.age = 22;
+	
+	
+	printf("%s \n", persone_one.name);
+	printf("%d \n", persone_one.age);
+	
+	printf("%s \n", persone_two.name);
+	printf("%d \n", persone_two.age);
+}
+output:
+First
+11
+Second
+22
+
+task:
 code:
 
 
