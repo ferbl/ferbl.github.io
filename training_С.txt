@@ -5772,7 +5772,7 @@ return
 reverse - cba
 
 task:
-save two people information using structure
+save information about two persone using structure
 code:
 #include <stdio.h>
 #include <string.h>
@@ -5795,17 +5795,92 @@ int main()
 	persone_two.age = 22;
 	
 	
-	printf("%s \n", persone_one.name);
-	printf("%d \n", persone_one.age);
+	printf("Name: %s \n", persone_one.name);
+	printf("Age: %d \n", persone_one.age);
 	
-	printf("%s \n", persone_two.name);
-	printf("%d \n", persone_two.age);
+	printf("Name: %s \n", persone_two.name);
+	printf("Age: %d \n", persone_two.age);
+}
+output:
+Name: First
+Age: 11
+Name: Second
+Age: 22
+
+task:
+enter information about two persone using structure
+typedef - creates an alias data type
+code:
+#include <stdio.h>
+
+typedef struct Person
+{
+	char name[100];
+	int age;
+} persone;
+
+int main()
+{		
+	persone one;
+	persone two;
+	
+	scanf("%s", one.name);
+	scanf("%d", &one.age);
+	
+	scanf("%s", two.name);
+	scanf("%d", &two.age);
+	
+	
+	printf("Name: %s \n", one.name);
+	printf("Age: %d \n", one.age);
+	
+	printf("Name: %s \n", two.name);
+	printf("Age: %d \n", two.age);
 }
 output:
 First
 11
 Second
 22
+Name: First
+Age: 11
+Name: Second
+Age: 22
+
+task:
+save money information of two persone using structure
+code:
+#include <stdio.h>
+#include <string.h>
+
+typedef struct Bank
+{
+	int money;
+} bank;
+
+typedef struct Person
+{
+	char *name;
+	bank my_bank;
+} persone;
+
+int main()
+{		
+	persone one;
+	persone two;
+	
+	one.name = "First";
+	two.name = "Second";
+	
+	one.my_bank.money = 50;
+	two.my_bank.money = 10;
+	
+	printf("%s = $%d  \n", one.name, one.my_bank.money);
+	printf("%s = $%d \n", two.name, two.my_bank.money);
+}
+output:
+First = $50
+Second = $10
 
 task:
 code:
