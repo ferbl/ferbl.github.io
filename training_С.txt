@@ -5722,7 +5722,7 @@ return 12
 GCD = 12
 
 task:
-reverse string using recursion
+reverse string using recursion and pointer
 code:
 #include <stdio.h>
 char *reverse(char *array);
@@ -5817,17 +5817,17 @@ typedef struct Person
 {
 	char name[100];
 	int age;
-} persone;
+} person;
 
 int main()
 {		
-	persone one;
-	persone two;
+	person one;
+	person two;
 	
-	scanf("%s", one.name);
+	scanf("%s", &one.name);
 	scanf("%d", &one.age);
 	
-	scanf("%s", two.name);
+	scanf("%s", &two.name);
 	scanf("%d", &two.age);
 	
 	
@@ -5851,7 +5851,6 @@ task:
 save money information of two persone using structure
 code:
 #include <stdio.h>
-#include <string.h>
 
 typedef struct Bank
 {
@@ -5862,12 +5861,12 @@ typedef struct Person
 {
 	char *name;
 	bank my_bank;
-} persone;
+} person;
 
 int main()
 {		
-	persone one;
-	persone two;
+	person one;
+	person two;
 	
 	one.name = "First";
 	two.name = "Second";
@@ -5881,6 +5880,42 @@ int main()
 output:
 First = $50
 Second = $10
+
+task:
+enter information about person using structure and pointer
+code:
+#include <stdio.h>
+#include <string.h>
+
+struct Person
+{
+	char name[100];
+	char surname[100];
+	int age;
+};
+
+int main()
+{		
+	struct Person one;
+	
+	struct Person *pointer;
+	
+	pointer = &one;
+	
+	strcpy(pointer->name, "First");
+	scanf("%s", &pointer->surname);
+	scanf("%d", &pointer->age);
+	
+	printf("Name: %s \n", pointer->name);
+	printf("Surname: %s \n", pointer->surname);
+	printf("Age: %d \n", pointer->age);
+}
+output:
+One
+11
+Name: First
+Surname: One
+Age: 11
 
 task:
 code:
