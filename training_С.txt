@@ -6030,12 +6030,19 @@ int main()
 	printf("how many person add? ");
 	scanf("%d", &num_of_person);
 	
+	printf("size name = %d \n", sizeof(person->name));
+	printf("size age = %d \n", sizeof(person->age));
+	
+	
+	printf("will take memory = %d * %d \n",  num_of_person, sizeof(struct Person));
 	
 	person = malloc(num_of_person * sizeof(struct Person));
 	
 	
 	for(i = 0; num_of_person > i; i++)
 	{
+		printf(">>address = %d \n", person + i);
+		
 		printf("Enter name ");
 		scanf("%s", &(person + i)->name);
 		
@@ -6050,15 +6057,25 @@ int main()
 	}
 }
 output:
-how many person add? 2
+how many person add? 3
+size name = 100
+size age = 4
+will take memory = 3 * 104
+>>address = 3100000
 Enter name First
 Enter age 11
+>>address = 3100104
 Enter name Second
 Enter age 22
+>>address = 3100208
+Enter name Third
+Enter age 33
 Name = First
 Age = 11
 Name = Second
 Age = 22
+Name = Third
+Age = 33
 
 task:
 code:
