@@ -6078,6 +6078,34 @@ Name = Third
 Age = 33
 
 task:
+get a list of file names
+code:
+#include <stdio.h>
+#include <dirent.h>
+
+int main()
+{	
+	DIR *list_of_files;
+	struct dirent *file;
+	
+	printf("get a list of files... \n");
+	list_of_files = opendir(".");
+	
+	while(file = readdir(list_of_files))
+	{	
+		printf("%s \n", file->d_name);
+	}
+	
+	return 0;
+}
+output:
+get a list of files...
+.
+..
+a.exe
+main.c
+
+task:
 code:
 
 
