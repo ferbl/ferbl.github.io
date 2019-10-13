@@ -6096,6 +6096,8 @@ int main()
 		printf("%s \n", file->d_name);
 	}
 	
+	closedir(list_of_files);
+	
 	return 0;
 }
 output:
@@ -6104,6 +6106,41 @@ get a list of files...
 ..
 a.exe
 main.c
+
+task:
+writing string to file
+code:
+#include <stdio.h>
+
+int main()
+{	
+	FILE *file;
+	char string[100];
+	
+	printf("create a file for writing... \n");
+	
+	file = fopen("my_file.txt", "w");
+
+
+	printf("enter the text ->>");
+	
+	gets(string);
+	
+	
+	printf("writing text to a file... \n");
+	
+	fprintf(file, "%s", string);
+	
+	
+	printf("successful \n");
+	
+	return 0;
+}
+output:
+create a file for writing...
+enter the text ->>ABC
+writing text to a file...
+successful
 
 task:
 code:
