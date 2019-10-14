@@ -6109,6 +6109,8 @@ main.c
 
 task:
 writing string to file
+fopen("file.txt", "w") - creates file for writing
+if file exists it overwritten
 code:
 #include <stdio.h>
 
@@ -6117,7 +6119,7 @@ int main()
 	FILE *file;
 	char string[100];
 	
-	printf("create a file for writing... \n");
+	printf("creating file for writing... \n");
 	
 	file = fopen("my_file.txt", "w");
 
@@ -6127,20 +6129,72 @@ int main()
 	gets(string);
 	
 	
-	printf("writing text to a file... \n");
+	printf("writing string to file... \n");
 	
 	fprintf(file, "%s", string);
 	
 	
 	printf("successful \n");
+	printf("closing the file \n");
+	
+	fclose(file);
 	
 	return 0;
 }
 output:
-create a file for writing...
+creating file for writing...
 enter the text ->>ABC
-writing text to a file...
+writing string to file...
 successful
+closing the file
+
+task:
+reading file string
+code:
+#include <stdio.h>
+
+int main()
+{	
+	FILE *file;
+	char string[100];
+	
+	
+	printf("opening file for reading.... \n");
+	
+	file = fopen("my_file.txt", "r");
+	
+	
+	if(file == NULL)
+	{
+		printf("file not found \n");
+	}
+	else
+	{
+		printf("saving first string of file -> array string... \n");
+		
+		fscanf(file, "%s", &string);
+		
+		
+		printf("close the file... \n");
+		
+		fclose(file);
+	}
+	
+	
+	printf("%s \n", string);
+	
+	
+	return 0;
+}
+file my_file.txt:
+ABC
+CBA
+BCA
+output:
+opening file for reading....
+saving first string of file -> array string...
+close the file...
+ABC
 
 task:
 code:
