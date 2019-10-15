@@ -6197,6 +6197,65 @@ close the file...
 ABC
 
 task:
+writing binary information about person to file
+fwrite(address data block, size data, amount this type data, pointer to file)
+code:
+#include <stdio.h>
+
+struct Person
+{
+	char name[10];
+	int age;
+};
+
+int main()
+{	
+	FILE *file;
+	struct Person person;
+	char add_another_person = 'y';
+	
+	printf("creating binary file for writing... \n");
+	
+	file = fopen("my_file.bin", "w");
+	
+	
+	if(file == NULL)
+	{
+		printf("file not found");
+	}
+	
+	while(add_another_person == 'y')
+	{
+		printf("Enter name ");
+		scanf("%s", &person.name);
+		
+		printf("Enter age ");
+		scanf("%d", &person.age);
+		
+		fwrite(&person, sizeof(person), 1, file);
+		
+		printf("add another person? (y/n) ");
+		scanf("%s", &add_another_person);
+	}
+	
+	
+	printf("successful \n");
+	fclose(file);
+	
+	
+	return 0;
+}
+output:
+creating binary file for writing...
+Enter name First
+Enter age 11
+add another person? (y/n) y
+Enter name Second
+Enter age 22
+add another person? (y/n) n
+successful
+
+task:
 code:
 
 
