@@ -6256,6 +6256,57 @@ add another person? (y/n) n
 successful
 
 task:
+reading binary file about person
+fread(address data block, size data, amount this type data, pointer to file)
+returns 1 if read
+returns 0 if not read
+code:
+#include <stdio.h>
+
+struct Person
+{
+	char name[10];
+	int age;
+};
+
+int main()
+{	
+	FILE *file;
+	struct Person person;
+	
+	printf("opening binary file for reading... \n");
+	
+	file = fopen("my_file.bin", "r");
+	
+	
+	if(file == NULL)
+	{
+		printf("file not found \n");
+	}
+
+	
+	while( fread(&person, sizeof(person), 1, file) )
+	{
+		printf("Name - %s \n", person.name);
+		printf("Age - %d \n", person.age);
+	}
+	
+	
+	printf("close the file \n");
+	fclose(file);
+	
+	
+	return 0;
+}
+output:
+opening binary file for reading...
+Name - First
+Age - 11
+Name - Second
+Age - 22
+close the file
+
+task:
 code:
 
 
