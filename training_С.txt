@@ -6307,6 +6307,68 @@ Age - 22
 close the file
 
 task:
+read information about a specific person
+fseek(pointer to file, moving pointer to N bytes, from what place in the file)
+SEEK_SET - moves pointer from begin of file
+SEEK_END - moves pointer from end of file
+SEEK_CUR - moves pointer from current location
+code:
+#include <stdio.h>
+
+struct Person
+{
+	char name[10];
+	int age;
+};
+
+int main()
+{	
+	FILE *file;
+	struct Person person;
+	int ordinal_number_of_person;
+	
+	printf("opening binary file for reading... \n");
+	file = fopen("my_file.bin", "r");
+	
+	if(file == NULL)
+	{
+		printf("file not found \n");
+	}
+
+	printf("enter the ordinal number of person you want to display? ");
+	
+	scanf("%d", &ordinal_number_of_person);
+	
+	
+	printf("move the pointer %d bytes from beginning in file \n", ordinal_number_of_person * sizeof(person));
+	
+	fseek(file, ordinal_number_of_person * sizeof(person), SEEK_SET);
+	
+	
+	printf("reading a file... \n");
+	
+	fread(&person, sizeof(person), 1, file);
+	
+	
+	printf("Name %s \n", person.name);
+	printf("Age %d \n", person.age);
+	
+		
+	printf("close the file. \n");
+	fclose(file);
+	
+	return 0;
+}
+output:
+opening binary file for reading...
+enter the ordinal number of person you want to display? 1
+move the pointer 16 bytes from beginning in file
+reading a file...
+Name Second
+Age 22
+close the file.
+
+task:
 code:
 
 
