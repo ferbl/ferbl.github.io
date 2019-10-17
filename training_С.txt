@@ -6369,6 +6369,55 @@ Age 22
 close the file.
 
 task:
+find the file size
+fseek(pointer to file, moving pointer to N bytes, from what place in the file)
+SEEK_SET - moves pointer from begin of file
+SEEK_END - moves pointer from end of file
+SEEK_CUR - moves pointer from current location
+ftell(pointer to file)
+return number current position from begin of file
+code:
+#include <stdio.h>
+
+struct Person
+{
+	char name[10];
+	int age;
+};
+
+int main()
+{	
+	FILE *file;
+	struct Person person;
+	
+	printf("opening binary file for reading... \n");
+	file = fopen("my_file.bin", "r");
+	
+	if(file == NULL)
+	{
+		printf("file not found... \n");
+	}
+	
+	printf("moving pointer from begin to end of file... \n");
+	
+	fseek(file, SEEK_SET, SEEK_END);
+	
+	
+	printf("file size = %d bytes \n", ftell(file));
+	
+	
+	printf("close the file \n");
+	fclose(file);
+	
+	return 0;
+}
+output:
+opening binary file for reading...
+moving pointer from begin to end of file...
+file size = 32 bytes
+close the file
+
+task:
 code:
 
 
