@@ -6419,6 +6419,32 @@ close the file
 
 task:
 code:
+#include <stdio.h>
+
+int main()
+{		
+	FILE *file;
+	char character;
+	
+	printf("opening a file for reading and writing... \n");
+	file = fopen("my_file.txt", "r+");
+	
+	if(file == NULL)
+	{
+		printf("file not found \n");
+	}
+
+	
+	while(character != EOF)
+	{
+		character = fgetc(file);
+		
+		printf("%c", character);
+	}
+	
+	
+	return 0;
+}
 
 
 ---
