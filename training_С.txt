@@ -6425,6 +6425,8 @@ int main()
 {		
 	FILE *file;
 	char character;
+	char array[100];
+	int i = 0;
 	
 	printf("opening a file for reading and writing... \n");
 	file = fopen("my_file.txt", "r+");
@@ -6439,9 +6441,12 @@ int main()
 	{
 		character = fgetc(file);
 		
-		printf("%c", character);
+		array[i] = character;
+		
+		i++;
 	}
 	
+	printf("%s", array);
 	
 	return 0;
 }
