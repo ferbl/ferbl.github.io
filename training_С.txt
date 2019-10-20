@@ -6418,8 +6418,11 @@ file size = 32 bytes
 close the file
 
 task:
+reverse the text in file
+EOF fgetc
 code:
 #include <stdio.h>
+#include <string.h>
 
 int main()
 {		
@@ -6435,21 +6438,55 @@ int main()
 	{
 		printf("file not found \n");
 	}
-
+		
+	printf("saving characters of file to array... \n");
 	
-	while(character != EOF)
-	{
-		character = fgetc(file);
+	while( ( character = fgetc(file) ) != EOF )
+	{		
+		printf("%c = %d \n", character, character);
 		
 		array[i] = character;
 		
 		i++;
 	}
 	
-	printf("%s", array);
+	printf("array = %s \n", array);
+	
+	printf("reverse array... \n");
+	strrev(array);
+	
+	
+	printf("moving pointer to 0 byte from begin of file... \n");
+	
+	fseek(file, 0, SEEK_SET);
+	
+	
+	printf("overwriting info in file... \n");
+	
+	fprintf(file, "%s", array);
+	
+	
+	printf("close file... \n");
+	fclose(file);
 	
 	return 0;
 }
+output:
+opening a file for reading and writing...
+saving characters of file to array...
+A = 65
+B = 66
+C = 67
+array = ABC
+reverse array...
+moving pointer to 0 byte from begin of file...
+overwriting info in file...
+close file...
+my_file.txt:
+CBA
+
+task:
+code:
 
 
 ---
