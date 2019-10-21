@@ -6418,8 +6418,59 @@ file size = 32 bytes
 close the file
 
 task:
+read the file character by character
+fgetc(FILE *stream) - gets character from the file and
+moves pointer to next character
+EOF - End Of File is -1
+code:
+#include <stdio.h>
+
+int main()
+{		
+	FILE *file;
+	char character;
+
+	printf("opening a file for reading... \n");
+	file = fopen("my_file.txt", "r");
+	
+	if(file == NULL)
+	{
+		printf("file not found \n");
+	}
+	
+	printf("reading file... \n");
+	
+	printf("End Of File = %d \n", EOF);
+		
+	while(1)
+	{
+		character = fgetc(file);
+		
+		printf("%c = %d \n", character, character);
+		
+		if(character == EOF)
+		{
+			break;
+		}
+	}
+	
+	printf("closing file...");
+	fclose(file);
+	
+	return 0;
+}
+output:
+opening a file for reading...
+reading file...
+End Of File = -1
+A = 65
+B = 66
+C = 67
+  = -1
+closing file...
+
+task:
 reverse the text in file
-EOF fgetc
 code:
 #include <stdio.h>
 #include <string.h>
