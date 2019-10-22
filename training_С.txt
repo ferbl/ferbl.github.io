@@ -6537,6 +6537,109 @@ my_file.txt:
 CBA
 
 task:
+my_file.txt contains ABC display CBA
+code:
+#include <stdio.h>
+
+int main()
+{		
+	FILE *file;
+	char character;
+
+	printf("opening a file for reading... \n");
+	file = fopen("my_file.txt", "r");
+	
+	if(file == NULL)
+	{
+		printf("file not found \n");
+	}
+	
+	printf("moving pointer to 0 byte from end of file... \n");
+	fseek(file, 0, SEEK_END);
+	character = fgetc(file);
+	printf("%c = %d \n", character, character);
+	
+	printf("moving pointer to 1 byte from end of file... \n");
+	fseek(file, -1, SEEK_END);
+	character = fgetc(file);
+	printf("%c = %d \n", character, character);
+	
+	printf("moving pointer to 2 byte from end of file... \n");
+	fseek(file, -2, SEEK_END);
+	character = fgetc(file);
+	printf("%c = %d \n", character, character);
+	
+	printf("moving pointer to 3 byte from end of file... \n");
+	fseek(file, -3, SEEK_END);
+	character = fgetc(file);
+	printf("%c = %d \n", character, character);
+	
+	
+	printf("closing files...");
+	fclose(file);
+	
+	return 0;
+}
+output:
+opening a file for reading...
+moving pointer to 0 byte from end of file...
+  = -1
+moving pointer to 1 byte from end of file...
+C = 67
+moving pointer to 2 byte from end of file...
+B = 66
+moving pointer to 3 byte from end of file...
+A = 65
+closing files...
+
+task:
+code:
+#include <stdio.h>
+
+int main()
+{		
+	FILE *file;
+	FILE *reverse_file;
+	int length;
+	int i = 0;
+
+	printf("opening a file for reading... \n");
+	file = fopen("my_file.txt", "r");
+	
+	if(file == NULL)
+	{
+		printf("file not found \n");
+	}
+	
+	printf("creating a file for writing reverse text... \n");
+	reverse_file = fopen("reverse_my_file.txt", "w");
+	
+	printf("moving pointer to 0 byte from end of file... \n");
+	fseek(file, 0, SEEK_END);
+	
+	printf("get number position of pointer from begin of file... \n");
+	length = ftell(file);
+	
+	while(length > i)
+	{		
+		i++;
+		
+		fseek(file, -i, SEEK_END);
+		
+		fputc(fgetc(file), reverse_file);
+	}
+	
+	
+	printf("closing files...");
+	fclose(file);
+	fclose(reverse_file);
+	
+	return 0;
+}
+output:
+
+
+task:
 code:
 
 
