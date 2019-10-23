@@ -6580,6 +6580,8 @@ int main()
 	
 	return 0;
 }
+my_file.txt:
+ABC
 output:
 opening a file for reading...
 moving pointer to 0 byte from end of file...
@@ -6593,6 +6595,8 @@ A = 65
 closing files...
 
 task:
+save reverse text to another file
+fput(character, file) - writes a character to file
 code:
 #include <stdio.h>
 
@@ -6600,6 +6604,7 @@ int main()
 {		
 	FILE *file;
 	FILE *reverse_file;
+	char character;
 	int length;
 	int i = 0;
 
@@ -6614,19 +6619,36 @@ int main()
 	printf("creating a file for writing reverse text... \n");
 	reverse_file = fopen("reverse_my_file.txt", "w");
 	
+	
 	printf("moving pointer to 0 byte from end of file... \n");
 	fseek(file, 0, SEEK_END);
 	
 	printf("get number position of pointer from begin of file... \n");
 	length = ftell(file);
 	
+	
+	printf("file length = %d \n", length);
+	
 	while(length > i)
 	{		
 		i++;
 		
+		
+		printf("moving pointer to %d byte from end of file \n", i);
+		
 		fseek(file, -i, SEEK_END);
 		
-		fputc(fgetc(file), reverse_file);
+		
+		printf("get character = ");
+		
+		character = fgetc(file);
+		
+		printf("%c \n", character);
+		
+		
+		printf("writing a character to reverse file \n");
+		
+		fputc(character, reverse_file);
 	}
 	
 	
@@ -6636,8 +6658,26 @@ int main()
 	
 	return 0;
 }
+my_file.txt:
+ABC
 output:
-
+opening a file for reading...
+creating a file for writing reverse text...
+moving pointer to 0 byte from end of file...
+get number position of pointer from begin of file...
+file length = 3
+moving pointer to 1 byte from end of file
+get character = C
+writing a character to reverse file
+moving pointer to 2 byte from end of file
+get character = B
+writing a character to reverse file
+moving pointer to 3 byte from end of file
+get character = A
+writing a character to reverse file
+closing files...
+reverse_my_file.txt:
+CBA
 
 task:
 code:
