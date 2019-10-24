@@ -6680,6 +6680,91 @@ reverse_my_file.txt:
 CBA
 
 task:
+copy text of file to another file
+code:
+#include <stdio.h>
+
+int get_file_length(FILE *file)
+{
+	int length;
+	
+	printf(" move pointer to end of file \n");
+	fseek(file, 0, SEEK_END);
+	
+	printf(" get number current position of pointer (counts from begin of file) \n");
+	length = ftell(file); 
+	
+	printf(" length = %d \n", length);
+	
+	printf(" move pointer to begin of file \n");
+	fseek(file, 0, SEEK_SET);
+	
+	return length;
+}
+
+int main()
+{		
+	FILE *file;
+	FILE *copy_file;
+	char character;
+	int length;
+	
+	printf("open file for reading... \n");
+	file = fopen("my_file.txt", "r");
+	
+	if(file == NULL)
+	{
+		printf("file not found \n");
+	}
+	
+	printf("create a file for writing... \n");
+	copy_file = fopen("copy_file.txt", "w");
+	
+	
+	printf("get file length... \n");
+	length = get_file_length(file);
+	
+	while(length)
+	{
+		printf("get character = ");
+		
+		character = fgetc(file);
+		
+		printf("%c \n", character);
+		
+		
+		printf("writing character to copy of file... \n");
+		
+		fputc(character, copy_file);
+		
+		
+		length--;
+	}
+	
+	
+	printf("closing files... \n");
+	fclose(file);
+	fclose(copy_file);
+	
+	return 0;
+}
+output:
+open file for reading...
+create a file for writing...
+get file length...
+ move pointer to end of file
+ get number current position of pointer (counts from begin of file)
+ length = 3
+ move pointer to begin of file
+get character = A
+writing character to copy of file...
+get character = B
+writing character to copy of file...
+get character = C
+writing character to copy of file...
+closing files...
+
+task:
 code:
 
 
