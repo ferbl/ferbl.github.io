@@ -22,26 +22,62 @@ enter the string > ABC abc 123
 output > ABC abc 123
 
 task:
+print the version of program using a preprocessor
+code:
+#include <stdio.h>
+
+#define VERSION printf("version 3.56.4 \n");
+
+int main()
+{		
+	VERSION;
+	
+	return 0;
+}
+output:
+version 3.56.4
+
+task:
+finish the program ahead of schedule
+exit(EXIT_SUCCESS) - uses stdlib.h
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{		
+	printf("program shutdown...");
+	
+	exit(EXIT_SUCCESS);
+
+	
+	printf("text...");
+	
+	return EXIT_SUCCESS;
+}
+output:
+program shutdown...
+
+task:
 exit the program using the "exit" command
 fgets - saves a string with a character '\n'
-exit(EXIT_SUCCESS) - uses stdlib.h
 code:
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define hint printf("db > ");
+#define PROMPT printf("db > ");
 char command[100];
 
 int main()
 {		
-	hint;
+	PROMPT;
 	
 	fgets(command, sizeof(command), stdin);
 	
 	if( strcmp(command, "exit\n") == 0 )
 	{
-		printf("exit... \n");
+		printf("program shutdown... \n");
 		exit(EXIT_SUCCESS);
 	}
 	else
@@ -49,11 +85,11 @@ int main()
 		printf("command unknown \n");
 	}
 	
-	return 0;
+	return EXIT_SUCCESS;
 }
 output:
 db > exit
-exit...
+program shutdown...
 
 task:
 code:
