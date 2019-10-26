@@ -1,8 +1,160 @@
+task:
+enter and output a string
+code:
 #include <stdio.h>
-
 int main()
 {		
+	char string[100];
 	
+	printf("enter the string > ");
+	
+	fgets(string, sizeof(string), stdin);
+	
+	
+	printf("output > ");
+	
+	printf("%s", string);
 	
 	return 0;
 }
+output:
+enter the string > ABC abc 123
+output > ABC abc 123
+
+task:
+exit the program using the "exit" command
+fgets - saves a string with a character '\n'
+exit(EXIT_SUCCESS) - uses stdlib.h
+code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define hint printf("db > ");
+char command[100];
+
+int main()
+{		
+	hint;
+	
+	fgets(command, sizeof(command), stdin);
+	
+	if( strcmp(command, "exit\n") == 0 )
+	{
+		printf("exit... \n");
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		printf("command unknown \n");
+	}
+	
+	return 0;
+}
+output:
+db > exit
+exit...
+
+task:
+code:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
