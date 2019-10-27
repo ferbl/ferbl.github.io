@@ -205,6 +205,93 @@ task:
 code:
 
 
+task:
+use the "insert" command to save data
+use the "select" command to print all users
+code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define PROMPT printf("db > ");
+char command[100];
+
+typedef struct
+{
+	int id;
+	char name[32];
+	char email[255];
+} User;
+
+User user[100];
+int user_num = 0;
+
+void add_user()
+{	
+	sscanf(command, "insert %d %s %s \n", &user[user_num].id, user[user_num].name, user[user_num].email);
+	
+	user_num++;
+}
+
+void print_all_users()
+{
+	int i;
+	
+	for(i = 0; user_num > i; i++)
+	{
+		printf("%d, %s, %s \n", user[i].id, user[i].name, user[i].email);
+	}
+}
+
+int main()
+{		
+	while(true)
+	{
+		PROMPT;
+	
+		fgets(command, sizeof(command), stdin);
+	
+	
+		if( strncmp(command, "select", 6) == 0 )
+		{
+			print_all_users();
+			printf("data selection completed... \n");
+		}
+		else if( strncmp(command, "insert", 6) == 0 )
+		{
+			add_user();
+			printf("data insertion completed... \n");
+		}
+		else if( strcmp(command, "exit\n") == 0 )
+		{
+			printf("program shutdown... \n");
+			exit(EXIT_SUCCESS);
+		}
+		else
+		{
+			printf("command unknown \n");
+		}
+	}
+	
+	return EXIT_SUCCESS;
+}
+output:
+db > insert 1 Aaaa aaa@aa.aa
+data insertion completed...
+db > insert 2 Bbbb bbb@bb.bb
+data insertion completed...
+db > select
+1, Aaaa, aaa@aa.aa
+2, Bbbb, bbb@bb.bb
+data selection completed...
+db > exit
+program shutdown...
+
+task:
+code:
+
+
 
 
 
