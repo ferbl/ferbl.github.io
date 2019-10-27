@@ -61,6 +61,7 @@ program shutdown...
 task:
 exit the program using the "exit" command
 fgets - saves a string with a character '\n'
+strcmp - compares strings
 code:
 #include <stdio.h>
 #include <stdlib.h>
@@ -88,6 +89,115 @@ int main()
 	return EXIT_SUCCESS;
 }
 output:
+db > exit
+program shutdown...
+
+task:
+use true and false. instead of 1 and 0
+code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+int main()
+{		
+	if(true)
+	{
+		printf("true");
+	}
+	
+	if(false)
+	{
+		printf("false");
+	}
+	
+	return EXIT_SUCCESS;
+}
+output:
+true
+
+task:
+compare the first characters of two strings
+code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{		
+	char one[9] = "123456789";
+	char two[9] = "123455555";
+	
+	if( strncmp(one, two, 5) == 0 )
+	{
+		printf("first 5 characters are equal \n");
+	}
+	
+	if( strncmp(one, two, 6) == 0 )
+	{
+		printf("first 6 characters are equal \n");
+	}
+	else
+	{
+		printf("first 6 characters are not equal \n");
+	}
+	
+	return EXIT_SUCCESS;
+}
+output:
+first 5 characters are equal
+first 6 characters are not equal
+
+task:
+endless loop of command input
+add select and insert commands
+end the program only after entering the "exit" command 
+code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define PROMPT printf("db > ");
+char command[100];
+
+int main()
+{		
+	while(true)
+	{
+		PROMPT;
+	
+		fgets(command, sizeof(command), stdin);
+	
+	
+		if( strncmp(command, "select", 6) == 0 )
+		{
+			printf("data selection... \n");
+		}
+		else if( strncmp(command, "insert", 6) == 0 )
+		{
+			printf("data insertion... \n");
+		}
+		else if( strcmp(command, "exit\n") == 0 )
+		{
+			printf("program shutdown... \n");
+			exit(EXIT_SUCCESS);
+		}
+		else
+		{
+			printf("command unknown \n");
+		}
+	}
+	
+	return EXIT_SUCCESS;
+}
+output:
+db > insert ABC
+data insertion...
+db > select 123
+data selection...
+db > help
+command unknown
 db > exit
 program shutdown...
 
