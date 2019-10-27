@@ -202,8 +202,28 @@ db > exit
 program shutdown...
 
 task:
+read the necessary parts of string
 code:
+#include <stdio.h>
+#include <stdlib.h>
 
+int main()
+{		
+	int number;
+	char str_one[10];
+	char str_two[10];
+	
+	char string[] = "text 15 Aaa Bbb ZZZ";
+	
+	sscanf(string, "text %d %s %s ZZZ", &number, str_one, str_two);
+	
+	
+	printf("%d, %s, %s \n", number, str_one, str_two);
+	
+	return EXIT_SUCCESS;
+}
+output:
+15, Aaa, Bbb
 
 task:
 use the "insert" command to save data
