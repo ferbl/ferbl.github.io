@@ -340,6 +340,122 @@ DDD
 
 task:
 code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define PROMPT printf("db > ");
+#define NAME_SIZE 32
+#define EMAIL_SIZE 255
+char command[100];
+
+typedef struct
+{
+	int id;
+	char name[NAME_SIZE];
+	char email[EMAIL_SIZE];
+} User;
+
+User user[100];
+int user_num = 0;
+
+void add_user()
+{	
+	char *keyword = strtok(command, " ");
+	char *id = strtok(NULL, " ");
+	char *name = strtok(NULL, " ");
+	char *email = strtok(NULL, " ");
+	
+	if(id == NULL || name == NULL || email == NULL)
+	{
+		printf("syntax error \n");
+	}
+	else
+	{
+		if( strlen(name) > NAME_SIZE )
+		{
+			printf("name is more than 32 bytes \n");
+		}
+		else if( strlen(email) > EMAIL_SIZE )
+		{
+			printf("email is more than 255 bytes \n");
+		}
+		else
+		{
+			user[user_num].id = atoi(id);
+			strcpy(user[user_num].name, name);
+			strcpy(user[user_num].email, email);
+			
+			user_num++;
+			
+			printf("data insertion completed... \n");
+		}
+	}
+	
+}
+
+void print_all_users()
+{
+	int i;
+	
+	for(i = 0; user_num > i; i++)
+	{
+		printf("%d, %s, %s \n", user[i].id, user[i].name, user[i].email);
+	}
+}
+
+int main()
+{		
+	while(true)
+	{
+		PROMPT;
+	
+		fgets(command, sizeof(command), stdin);
+		/* remove '\n' from input fgets() */
+		command[strcspn(command, "\n")] = 0;
+	
+		if( strncmp(command, "select", 6) == 0 )
+		{
+			print_all_users();
+			printf("data selection completed... \n");
+		}
+		else if( strncmp(command, "insert", 6) == 0 )
+		{
+			add_user();
+		}
+		else if( strcmp(command, "exit") == 0 )
+		{
+			printf("program shutdown... \n");
+			exit(EXIT_SUCCESS);
+		}
+		else
+		{
+			printf("command unknown \n");
+		}
+	}
+	
+	return EXIT_SUCCESS;
+}
+output:
+db > insert 1 Aaa aaa@aa.aa
+data insertion completed...
+db > insert 2 Bbb
+syntax error
+db > insert 2 Bbb bbb@bb.bb
+data insertion completed...
+db > insert 3 Ccc ccc@cc.cc cccccc
+data insertion completed...
+db > select
+1, Aaa, aaa@aa.aa
+2, Bbb, bbb@bb.bb
+3, Ccc, ccc@cc.cc
+data selection completed...
+db > exit
+program shutdown...
+
+task:
+code:
 
 
 
