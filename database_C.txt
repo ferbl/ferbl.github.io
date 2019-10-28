@@ -309,6 +309,36 @@ db > exit
 program shutdown...
 
 task:
+break a string into words
+code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{		
+	char string[] = "AAA  BBB,CCC.DDD";
+	char delimiters[] = " ,.";
+	char *pointer;
+	
+	pointer = strtok(string, delimiters);
+	
+	while(pointer != NULL)
+	{
+		printf("%s \n", pointer);
+		
+		pointer = strtok(NULL, delimiters);
+	}
+	
+	return EXIT_SUCCESS;
+}
+output:
+AAA
+BBB
+CCC
+DDD
+
+task:
 code:
 
 
