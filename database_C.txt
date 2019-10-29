@@ -339,6 +339,59 @@ CCC
 DDD
 
 task:
+convert string to number
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{		
+	char one[] = "50";
+	char two[] = "4";
+	int num;
+	
+	num = atoi(one) + atoi(two);
+	
+	printf("num = %d", num);
+	
+	return EXIT_SUCCESS;
+}
+output:
+num = 54
+
+task:
+replace character in string
+strcspn() - returns string length from begin to first character found
+code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{		
+	char string[] = "AAABAAA";
+	char symbol[] = "B";
+	int num;
+	
+	num = strcspn(string, symbol);
+	
+	printf("string length to character 'B' = %d \n", num);
+	
+	
+	string[num] = 'A';
+	
+	printf("%s \n", string);
+	
+	
+	return EXIT_SUCCESS;
+}
+output:
+length to character 'B' = 3
+AAAAAAA
+
+task:
+add user only if the entered arguments 
+"insert" command are not empty and have a valid length
 code:
 #include <stdio.h>
 #include <stdlib.h>
@@ -412,7 +465,7 @@ int main()
 		PROMPT;
 	
 		fgets(command, sizeof(command), stdin);
-		/* remove '\n' from input fgets() */
+		/* remove '\n' from input data fgets() */
 		command[strcspn(command, "\n")] = 0;
 	
 		if( strncmp(command, "select", 6) == 0 )
