@@ -508,7 +508,30 @@ db > exit
 program shutdown...
 
 task:
+open the file if it exists
+if it does not exist create
 code:
+#include <stdio.h>
+#include <stdlib.h>
+
+FILE *file;
+
+int main()
+{		
+	printf("open file for reading or overwriting... \n");
+	file = fopen("file.txt", "r+");
+	
+	if(file == NULL)
+	{		
+		printf("create file for writing... \n");
+		file = fopen("file.txt", "w");
+	}
+	
+	return EXIT_SUCCESS;
+}
+output:
+open file for reading or overwriting...
+create file for writing...
 
 
 
