@@ -533,6 +533,41 @@ output:
 open file for reading or overwriting...
 create file for writing...
 
+task:
+write data to file immediately without closing the program
+fprintf() - writes data to buffer
+fclose() - closes stream and flushes buffer data to file
+fflush() - not closes stream and flushes buffer data to file
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+FILE *file;
+
+int main()
+{		
+	printf("opening a file for writing... \n");
+	file = fopen("file.txt", "w");
+	
+	printf("writing date to buffer... \n");
+	fprintf(file, "%s", "ABC");
+	
+	printf("flushing data from buffer to file... \n");
+	fflush(file);
+	
+	return EXIT_SUCCESS;
+}
+output:
+opening a file for writing...
+writing date to buffer...
+flushing data from buffer to file ...
+file.txt:
+ABC
+
+task:
+code:
+
+
 
 
 
