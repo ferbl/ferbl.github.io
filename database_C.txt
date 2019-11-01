@@ -566,7 +566,147 @@ ABC
 
 task:
 code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
 
+FILE *file;
+void write_user_to_file();
+
+#define PROMPT printf("db > ");
+#define NAME_SIZE 32
+#define EMAIL_SIZE 255
+char command[100];
+
+typedef struct
+{
+	int id;
+	char name[NAME_SIZE];
+	char email[EMAIL_SIZE];
+} User;
+
+User user[100];
+int user_num = 0;
+int user_size = sizeof( user[user_num] );
+
+void add_user()
+{	
+	char *keyword = strtok(command, " ");
+	char *id = strtok(NULL, " ");
+	char *name = strtok(NULL, " ");
+	char *email = strtok(NULL, " ");
+	
+	if(id == NULL || name == NULL || email == NULL)
+	{
+		printf("syntax error \n");
+	}
+	else
+	{
+		if( strlen(name) > NAME_SIZE )
+		{
+			printf("name is more than 32 bytes \n");
+		}
+		else if( strlen(email) > EMAIL_SIZE )
+		{
+			printf("email is more than 255 bytes \n");
+		}
+		else
+		{			
+			user_num = atoi(id);
+	
+			user[user_num].id = atoi(id);
+			strcpy(user[user_num].name, name);
+			strcpy(user[user_num].email, email);
+			
+			write_user_to_file();
+			
+			printf("data insertion completed... \n");
+		}
+	}
+}
+
+void write_user_to_file()
+{
+	fseek(file, user_num * user_size, SEEK_SET);
+	
+	fwrite(&user[user_num], user_size, 1, file);
+	
+	fflush(file);
+}
+
+void print_all_users()
+{
+	user_num = 0;
+	
+	rewind(file);
+	
+	while( fread(&user[user_num], user_size, 1, file) == 1 )
+	{
+		printf("%d, %s, %s \n", user[user_num].id, user[user_num].name, user[user_num].email);
+		
+		user_num++;
+	}
+}
+
+void open_file()
+{
+	file = fopen("file.db", "r+");
+	
+	if(file == NULL)
+	{
+		file = fopen("file.db", "w");
+	}
+}
+
+int main()
+{		
+	open_file();
+
+	while(true)
+	{
+		PROMPT;
+	
+		fgets(command, sizeof(command), stdin);
+		/* remove '\n' from input data fgets() */
+		command[strcspn(command, "\n")] = 0;
+	
+		if( strncmp(command, "select", 6) == 0 )
+		{
+			print_all_users();
+			printf("data selection completed... \n");
+		}
+		else if( strncmp(command, "insert", 6) == 0 )
+		{
+			add_user();
+		}
+		else if( strcmp(command, "exit") == 0 )
+		{
+			fclose(file);
+			printf("program shutdown... \n");
+			exit(EXIT_SUCCESS);
+		}
+		else
+		{
+			printf("command unknown \n");
+		}
+	}
+	
+	return EXIT_SUCCESS;
+}
+output:
+db > insert 0 aaa aaa@aaa.aa
+data insertion completed...
+db > insert 1 bbb bbb@bbb.bb
+data insertion completed...
+db > insert 2 ccc ccc@ccc.cc
+data insertion completed...
+output:
+db > select
+0, aaa, aaa@aaa.aa
+1, bbb, bbb@bbb.bb
+2, ccc, ccc@ccc.cc
+data selection completed...
 
 
 
