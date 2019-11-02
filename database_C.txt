@@ -565,6 +565,9 @@ file.txt:
 ABC
 
 task:
+write user data to file
+display all users saved to file
+overwrite user data in file
 code:
 #include <stdio.h>
 #include <stdlib.h>
@@ -636,16 +639,12 @@ void write_user_to_file()
 }
 
 void print_all_users()
-{
-	user_num = 0;
-	
+{	
 	rewind(file);
 	
 	while( fread(&user[user_num], user_size, 1, file) == 1 )
 	{
 		printf("%d, %s, %s \n", user[user_num].id, user[user_num].name, user[user_num].email);
-		
-		user_num++;
 	}
 }
 
@@ -707,7 +706,17 @@ db > select
 1, bbb, bbb@bbb.bb
 2, ccc, ccc@ccc.cc
 data selection completed...
+output:
+db > insert 0 AAA AAA@AAA.AA
+data insertion completed...
+db > select
+0, AAA, AAA@AAA.AA
+1, bbb, bbb@bbb.bb
+2, ccc, ccc@ccc.cc
+data selection completed...
 
+task:
+code:
 
 
 
