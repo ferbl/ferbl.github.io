@@ -717,7 +717,25 @@ data selection completed...
 
 task:
 code:
+#include <stdio.h>
+#include <stdlib.h>
 
+typedef struct Btree
+{
+
+} Btree;
+
+void insert_in_btree(int input_value)
+{
+	
+}
+
+int main()
+{	
+	insert_in_btree(55);
+	
+	return EXIT_SUCCESS;
+}
 
 
 
