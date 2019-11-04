@@ -716,6 +716,96 @@ db > select
 data selection completed...
 
 task:
+create binary tree
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+	int key;
+	struct node *left;
+	struct node *rigth;
+} Node;
+
+Node *new_node(int input_key)
+{
+	/* memory allocation */
+	Node *new = malloc( sizeof(Node) );
+	
+	new->key = input_key;
+	new->left = NULL;
+	new->rigth = NULL;
+	
+	return new;
+}
+
+/* declaration */
+void print_tree(Node *root);
+
+int main()
+{		
+	Node *root = new_node(1);
+	/*
+		     1
+	            / \
+	         NULL  NULL
+	*/
+	
+	root->left = new_node(2);
+	root->rigth = new_node(3);
+	/*
+		     1
+	           /   \
+	          2      3
+	       /   \    /   \
+            NULL NULL  NULL NULL
+	*/
+	
+	root->left->left = new_node(4);
+	root->rigth->rigth = new_node(5);
+	/*
+		     1
+	           /   \
+	          2      3
+	       /   \    /   \
+              4   NULL NULL  5
+	    /  \	    /  \
+          NULL  NULL      NULL  NULL
+	*/
+	
+	print_tree(root);
+	
+	return EXIT_SUCCESS;
+}
+
+void print_tree(Node *root)
+{
+	int _root = root->key;
+	
+	int left = root->left->key;
+	int rigth = root->rigth->key;
+	
+	int left_left = root->left->left->key;
+	int rigth_rigth = root->rigth->rigth->key;
+	
+	printf("       %d	    \n", _root);
+	printf("    %d    %d	    \n", left, rigth);
+	printf("  %d  N  N  %d	    \n", left_left, rigth_rigth);
+	printf(" N  N 	   N  N     \n");
+}
+output:
+       1
+    2    3
+  4  N  N  5
+N  N      N  N
+
+task:
+code:
+
+
+---
+task:
 code:
 #include <stdio.h>
 #include <stdlib.h>
