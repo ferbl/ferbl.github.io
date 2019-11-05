@@ -802,6 +802,125 @@ N  N      N  N
 
 task:
 code:
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+	int key;
+	struct node *left;
+	struct node *rigth;
+} Node;
+
+/* declaration */
+void print_node(Node *root);
+
+Node *new_node(int value)
+{
+	Node *new = malloc( sizeof(Node) );
+	
+	new->key = value;
+	new->left = NULL;
+	new->rigth = NULL;
+	
+	return new;
+}
+
+Node *insert(Node *root, int value)
+{
+	if(root == NULL)
+	{
+		printf("new node key = %d \n", value);
+		return new_node(value);
+	}
+	
+	printf("value = %d, root->key = %d \n", value, root->key);
+	
+	if(value  <  root->key)
+	{
+		printf("\t\t\t left \n");
+		
+		root->left = insert(root->left, value);
+	}
+	else if(value  >  root->key)
+	{	
+		printf("\t\t\t rigth \n");
+		
+		root->rigth = insert(root->rigth, value);
+	}
+	
+	return root;
+}
+
+int main()
+{		
+	Node *root = NULL;
+	
+	root = insert(root, 2);
+	insert(root, 1);
+	insert(root, 3);
+	
+	/*
+	               2
+	            /     \
+	           1       3
+	         /  \     /  \
+		N    N   N    N
+	*/
+	
+	print_node(root);
+	
+	return EXIT_SUCCESS;
+}
+
+void print_node(Node *root)
+{
+	if(root == NULL)
+	{
+		printf("NULL \n");
+		return;
+	}
+	
+	printf("root->left \n");
+	print_node(root->left);
+	printf("---- \n");
+	
+	printf("%d \n", root->key);	
+	
+	printf("root->rigth \n");
+	print_node(root->rigth);
+	printf("#### \n");
+}
+output:
+new node key = 2
+value = 1, root->key = 2
+                         left
+new node key = 1
+value = 3, root->key = 2
+                         rigth
+new node key = 3
+root->left
+root->left
+NULL
+----
+1
+root->rigth
+NULL
+####
+----
+2
+root->rigth
+root->left
+NULL
+----
+3
+root->rigth
+NULL
+####
+####
+
+task:
+code:
 
 
 ---
