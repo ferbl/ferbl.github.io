@@ -963,6 +963,86 @@ rigth left return
 rigth return
 
 task:
+search for element in sorted binary tree
+code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+typedef struct node
+{
+	int key;
+	struct node *left;
+	struct node *rigth;
+} Node;
+
+Node *new_node(int value)
+{
+	Node *new = malloc( sizeof(Node) );
+	
+	new->key = value;
+	new->left = NULL;
+	new->rigth = NULL;
+	
+	return new;
+}
+
+/* declaration */
+bool search_node(Node *root, int key);
+
+int main()
+{		
+	Node *root = new_node(20);
+	root->left = new_node(30);
+	root->left->left = new_node(40);
+	root->left->rigth = new_node(25);
+	root->rigth = new_node(10);
+/*	            20
+	         /      \
+	        30       10
+	      /   \     /   \
+	    40     25  N     N	          */ 
+		
+	if(search_node(root, 25))
+	{
+		printf("\nkey found \n");
+	}
+	
+	return EXIT_SUCCESS;
+}
+
+bool search_node(Node *root, int key)
+{	
+	if(root == NULL)
+	{	
+		printf("return \n");
+		return false;
+	}
+	else
+	{
+		printf("%d ", root->key);
+		
+		if(key == root->key)
+		{
+			return true;
+		}
+		else if(key > root->key)
+		{
+			printf("left ");
+			search_node(root->left, key);
+		}
+		else
+		{
+			printf("rigth ");
+			search_node(root->rigth, key);
+		}
+	}
+}
+output:
+20 left 30 rigth 25
+key found
+
+task:
 code:
 
 
