@@ -1044,7 +1044,91 @@ key found
 
 task:
 code:
+#include <stdio.h>
+#include <stdlib.h>
 
+typedef struct node
+{
+	int key;
+	struct node *left;
+	struct node *rigth;
+} Node;
+
+Node *new_node(int value)
+{
+	Node *new = malloc( sizeof(Node) );
+	
+	new->key = value;
+	new->left = NULL;
+	new->rigth = NULL;
+	
+	return new;
+}
+
+/* declaration */
+Node *delete_node(Node *root, int value);
+
+int main()
+{		
+	Node *root = new_node(20);
+	root->left = new_node(30);
+	root->left->left = new_node(40);
+	root->left->rigth = new_node(25);
+	root->left->rigth->left = new_node(28);
+	root->left->rigth->rigth = new_node(23);
+	root->rigth = new_node(10);
+	root->rigth->rigth = new_node(8);
+/*	                20   
+                  _____/  \_____   
+	         /              \
+	        30              10
+	      /   \            /   \
+	    40     25         N     8	        
+	  	 /   \                   
+               28    23                          */ 
+	root = delete_node(root, 40);
+	
+	return EXIT_SUCCESS;
+}
+
+Node *delete_node(Node *root, int key)
+{
+	if(root == NULL)
+	{	
+		printf("return \n");
+		return root;
+	}
+	else
+	{
+		printf("%d ", root->key);
+		
+		if(key > root->key)
+		{
+			printf("left ");
+			root->left = delete_node(root->left, key);
+		}
+		else if(key < root->key)
+		{
+			printf("rigth ");
+			root->rigth = delete_node(root->rigth, key);
+		}
+		else
+		{
+			if(root->left == NULL)
+			{
+				return root->rigth;
+			}
+			else if(root->rigth == NULL)
+			{
+				return root->left;
+			}
+			else
+			{
+				
+			}
+		}
+	}
+}
 
 ---
 task:
