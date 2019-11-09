@@ -1043,6 +1043,7 @@ output:
 key found
 
 task:
+delete element in binary search tree
 code:
 #include <stdio.h>
 #include <stdlib.h>
@@ -1051,7 +1052,7 @@ typedef struct node
 {
 	int key;
 	struct node *left;
-	struct node *rigth;
+	struct node *right;
 } Node;
 
 Node *new_node(int value)
@@ -1060,7 +1061,7 @@ Node *new_node(int value)
 	
 	new->key = value;
 	new->left = NULL;
-	new->rigth = NULL;
+	new->right = NULL;
 	
 	return new;
 }
@@ -1073,20 +1074,38 @@ int main()
 	Node *root = new_node(20);
 	root->left = new_node(30);
 	root->left->left = new_node(40);
-	root->left->rigth = new_node(25);
-	root->left->rigth->left = new_node(28);
-	root->left->rigth->rigth = new_node(23);
-	root->rigth = new_node(10);
-	root->rigth->rigth = new_node(8);
-/*	                20   
-                  _____/  \_____   
-	         /              \
-	        30              10
-	      /   \            /   \
-	    40     25         N     8	        
-	  	 /   \                   
-               28    23                          */ 
-	root = delete_node(root, 40);
+	root->left->right = new_node(23);
+	root->left->right->left = new_node(28);
+	root->left->right->right = new_node(21);
+	root->right = new_node(10);
+	root->right->left = new_node(12);
+	root->right->left->left = new_node(17);
+	root->right->left->right = new_node(11);
+	root->right->right = new_node(8);
+/*	                  20   
+                  _______/  \_______  
+	         /                  \
+	     ___30___             ___10___
+	    /        \           /        \
+	   40        23         12         8
+	  	    /  \       /  \
+	          28   21     17  11   
+			  
+40 30 28 23 21 20 17 12 11 10 8                        */
+			
+			
+	root = delete_node(root, 20);
+	printf("root = %d", root->key);
+/*	                  21   
+                  _______/| \_______  
+	         /   left_|         \
+	     ___30___   |right   ___10___
+	    /        \  |right  /        \
+	   40        23 |right 12         8
+	  	    /  \|right/  \
+		  28    X    17  11            
+			  
+40 30 28 23 21 17 12 11 10 8                           */
 	
 	return EXIT_SUCCESS;
 }
@@ -1100,35 +1119,69 @@ Node *delete_node(Node *root, int key)
 	}
 	else
 	{
-		printf("%d ", root->key);
+		printf("%d \n", root->key);
 		
+		/* search for element */
 		if(key > root->key)
 		{
-			printf("left ");
+			printf("search on left - ");
 			root->left = delete_node(root->left, key);
 		}
 		else if(key < root->key)
 		{
-			printf("rigth ");
-			root->rigth = delete_node(root->rigth, key);
+			printf("search on right - ");
+			root->right = delete_node(root->right, key);
 		}
+		/* element is found */
 		else
 		{
+			/* if one child */
 			if(root->left == NULL)
 			{
-				return root->rigth;
+				return root->right;
 			}
-			else if(root->rigth == NULL)
+			else if(root->right == NULL)
 			{
 				return root->left;
 			}
+			/* if two child */
 			else
 			{
+				Node *temp = root->left;
+				printf("left = %d \n", temp->key);
 				
+				while(temp->right != NULL)
+				{
+					printf("right = %d \n", temp->right->key);
+					temp = temp->right;
+				}
+				
+				printf("%d -> %d \n", root->key, temp->key);
+				root->key = temp->key;
+				
+				printf("delete duplicate \n");
+				root->left = delete_node(root->left, temp->key);
+				
+				return root;
 			}
 		}
 	}
 }
+output:
+20
+left = 30
+right = 23
+right = 21
+20 -> 21
+delete duplicate
+30
+search on right - 23
+search on right - 21
+root = 21
+
+task:
+code:
+
 
 ---
 task:
