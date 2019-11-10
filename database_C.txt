@@ -1180,6 +1180,72 @@ search on right - 21
 root = 21
 
 task:
+convert string to hash   using hash function
+a = 97 b = 98 c = 99 A = 65 ascii
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+int string_to_hash(char *str)
+{
+	int hash = 10;
+	int i = 0;
+	
+	while(*str)
+	{
+		printf("%d + %d = %d \n", hash, hash, hash + hash);
+		hash = hash + hash;
+		
+		printf("%d + %d = %d \n", hash, *str, hash + *str);
+		hash = hash + *str;
+		
+		str++;
+		i++;
+	}
+	
+	return hash;
+}
+
+int main()
+{		
+	printf("hash abc = %d \n", string_to_hash("abc"));
+	
+	printf("\n");
+	
+	printf("hash bac = %d \n", string_to_hash("bac"));
+	
+	printf("\n");
+	
+	printf("hash Acb = %d \n", string_to_hash("Abc"));
+	
+	return EXIT_SUCCESS;
+}
+output:
+10 + 10 = 20
+20 + 97 = 117
+117 + 117 = 234
+234 + 98 = 332
+332 + 332 = 664
+664 + 99 = 763
+hash abc = 763
+
+10 + 10 = 20
+20 + 98 = 118
+118 + 118 = 236
+236 + 97 = 333
+333 + 333 = 666
+666 + 99 = 765
+hash bac = 765
+
+10 + 10 = 20
+20 + 65 = 85
+85 + 85 = 170
+170 + 98 = 268
+268 + 268 = 536
+536 + 99 = 635
+hash Acb = 635
+
+task:
 code:
 
 
