@@ -1247,6 +1247,97 @@ hash Acb = 635
 
 task:
 code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+FILE *file;
+void open_file()
+{
+	file = fopen("my_file.txt", "r+");
+	
+	if(file == NULL)
+	{
+		exit(EXIT_FAILURE);
+	}
+}
+
+int string_to_hash(char *str)
+{
+	int hash = 10;
+	int i = 0;
+	
+	while(*str)
+	{
+		hash = hash + hash;
+		hash = hash + *str;
+		str++;
+		i++;
+	}
+	
+	return hash;
+}
+
+int MAX_SIZE = 10;
+int hash_key;
+
+void search_in_hash_table(char key[])
+{
+	char output[MAX_SIZE];
+	
+	hash_key = string_to_hash(key);
+	
+	
+	fseek(file, hash_key * MAX_SIZE, SEEK_SET);
+	
+	fread(output, MAX_SIZE, 1, file);
+	
+	
+	printf("hash %d = %s \n", hash_key, output);
+}
+
+void insert_in_hash_table(char key[], char data[])
+{	
+	hash_key = string_to_hash(key);
+	
+	
+	printf("hash_key = %d \n", hash_key);
+	
+	printf("offset = %d \n", hash_key * MAX_SIZE);
+	
+	
+	fseek(file, hash_key * MAX_SIZE, SEEK_SET);
+	
+	fwrite(data, strlen(data), 1, file);
+}
+
+int main()
+{		
+	char name[MAX_SIZE];
+	char surname[MAX_SIZE];
+
+	open_file();
+
+	insert_in_hash_table("a", "one");
+	insert_in_hash_table("b", "two");
+	
+	search_in_hash_table("a");
+	search_in_hash_table("b");
+	
+	fclose(file);
+	
+	return EXIT_SUCCESS;
+}
+output:
+hash_key = 117
+offset = 1170
+hash_key = 118
+offset = 1180
+hash 117 = one
+hash 118 = two
+
+task:
+code:
 
 
 ---
