@@ -1246,10 +1246,11 @@ hash bac = 765
 hash Acb = 635
 
 task:
+insert and search for element in hash table
+with direct indexing
 code:
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 FILE *file;
 void open_file()
@@ -1270,7 +1271,9 @@ int string_to_hash(char *str)
 	while(*str)
 	{
 		hash = hash + hash;
+		
 		hash = hash + *str;
+		
 		str++;
 		i++;
 	}
@@ -1283,32 +1286,36 @@ int hash_key;
 
 void search_in_hash_table(char key[])
 {
-	char output[MAX_SIZE];
+	printf("\t       search \n");
+	
+	char result[MAX_SIZE];
 	
 	hash_key = string_to_hash(key);
 	
 	
 	fseek(file, hash_key * MAX_SIZE, SEEK_SET);
 	
-	fread(output, MAX_SIZE, 1, file);
+	fread(result, MAX_SIZE, 1, file);
 	
-	
-	printf("hash %d = %s \n", hash_key, output);
+
+	printf("hash %d = %s \n", hash_key, result);
 }
 
 void insert_in_hash_table(char key[], char data[])
 {	
+	printf("\t       insert \n");
+	
 	hash_key = string_to_hash(key);
 	
 	
 	printf("hash_key = %d \n", hash_key);
 	
-	printf("offset = %d \n", hash_key * MAX_SIZE);
+	printf("position = %d \n", hash_key * MAX_SIZE);
 	
-	
+
 	fseek(file, hash_key * MAX_SIZE, SEEK_SET);
 	
-	fwrite(data, strlen(data), 1, file);
+	fwrite(data, MAX_SIZE, 1, file);
 }
 
 int main()
@@ -1329,11 +1336,15 @@ int main()
 	return EXIT_SUCCESS;
 }
 output:
+               insert
 hash_key = 117
-offset = 1170
+position = 1170
+               insert
 hash_key = 118
-offset = 1180
+position = 1180
+               search
 hash 117 = one
+               search
 hash 118 = two
 
 task:
