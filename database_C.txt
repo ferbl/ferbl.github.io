@@ -1357,15 +1357,71 @@ typedef struct Node
 	int key;
 	struct Node *left;
 	struct Node *right;
-	int height;
 } Node;
+
+Node *new_node(int key)
+{
+	Node *node = malloc( sizeof(Node) );
+	
+	node->key = key;
+	node->left = NULL;
+	node->right = NULL;
+	
+	return node;
+}
+
+Node *left_rotation(Node *node)
+{
+	Node *one = node->right;
+	Node *two = node->right->left;
+	
+	one->left = node;
+/*    -10
+     -/ -\
+    -5   20one                         
+	/  \                        
+(two15)10  30                             
+      /    | \          
+     5     25 40        */
+	one->left->right = two;
+/*    -10
+     -/ -\
+    -5   20one                         
+	/  \                        
+       10  30                             
+      / |  | \          
+     5  15 25 40        */
+	return one;
+}
 
 int main()
 {		
+	Node *root = NULL;
+/*     10
+      /  \
+     5   20                         
+        /  \                        
+       15  30                             
+	   | \          
+	   25 40            */
+	root = new_node(10);
+	root->left = new_node(5);
+	root->right = new_node(20);
+	root->right->left = new_node(15);
+	root->right->right = new_node(30);
+	root->right->right->left = new_node(25);
+	root->right->right->right = new_node(40);
+
+	root = left_rotation(root);
 	
-	
+	printf("%d ", root->key);
+	printf("%d ", root->left->key);
+	printf("%d ", root->left->right->key);
+
 	return EXIT_SUCCESS;
 }
+output:
+20 10 15
 
 ---
 task:
