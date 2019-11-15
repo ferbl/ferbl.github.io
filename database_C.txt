@@ -1348,6 +1348,7 @@ hash 117 = one
 hash 118 = two
 
 task:
+binary search tree balancing / left rotation
 code:
 #include <stdio.h>
 #include <stdlib.h>
@@ -1370,40 +1371,56 @@ Node *new_node(int key)
 	return node;
 }
 
-Node *left_rotation(Node *node)
+Node *left_rotation(Node *ORIGINAL)
 {
-	Node *one = node->right;
-	Node *two = node->right->left;
-	
-	one->left = node;
-/*    -10
-     -/ -\
-    -5   20one                         
-	/  \                        
-(two15)10  30                             
-      /    | \          
-     5     25 40        */
-	one->left->right = two;
-/*    -10
-     -/ -\
-    -5   20one                         
-	/  \                        
-       10  30                             
-      / |  | \          
-     5  15 25 40        */
-	return one;
+////////////////////////////////////////////////
+/*                  10             ORIGINAL TREE
+	           /  \
+	          5   20      
+	             /  \       
+	            15  30               
+		        | \
+	                25 40                  */
+////////////////////////////////////////////////					  
+	Node *ONE = ORIGINAL->right;
+/*                    20                ONE TREE
+	             /  \ 
+                    15  30   
+	                | \
+	                25 40                  */
+////////////////////////////////////////////////
+	Node *TWO = ORIGINAL->right->left;
+/*                  15                  TWO TREE
+                   /  \
+	          N    N                       */
+////////////////////////////////////////////////	
+	ONE->left = ORIGINAL;
+/*                    20                ONE TREE
+	             /  \ 
+     ORIGINAL TREE->10  30   
+	           / \   | \
+	          5  20  25 40
+		     / \
+		    15 30
+		       / \
+		      25 40                    */
+////////////////////////////////////////////////		      
+	ONE->left->right = TWO;
+/*                    20                ONE TREE
+	             /  \ 
+     ORIGINAL TREE->10  30   
+	           / \   | \
+	          5  15< 25 40
+		     /\<-TWO TREE
+		    N  N                       */
+////////////////////////////////////////////////
+	return ONE;
 }
 
 int main()
 {		
 	Node *root = NULL;
-/*     10
-      /  \
-     5   20                         
-        /  \                        
-       15  30                             
-	   | \          
-	   25 40            */
+
 	root = new_node(10);
 	root->left = new_node(5);
 	root->right = new_node(20);
@@ -1411,7 +1428,13 @@ int main()
 	root->right->right = new_node(30);
 	root->right->right->left = new_node(25);
 	root->right->right->right = new_node(40);
-
+/*                    10
+	             /  \
+	            5   20      
+	               /  \       
+	              15  30               
+		          | \
+	                  25 40                */
 	root = left_rotation(root);
 	
 	printf("%d ", root->key);
