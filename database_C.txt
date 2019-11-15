@@ -1446,6 +1446,106 @@ int main()
 output:
 20 10 15
 
+task:
+binary search tree balancing / right rotation
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node
+{
+	int key;
+	struct Node *left;
+	struct Node *right;
+} Node;
+
+Node *new_node(int key)
+{
+	Node *node = malloc( sizeof(Node) );
+	
+	node->key = key;
+	node->left = NULL;
+	node->right = NULL;
+	
+	return node;
+}
+
+Node *right_rotation(Node *ORIGINAL)
+{
+////////////////////////////////////////////////
+/*                   30           ORIGINAL TREE
+		    /  \
+		   20   40
+		  /  \
+		 10   25
+		/ \
+	       5   15                          */
+////////////////////////////////////////////////
+	Node *ONE = ORIGINAL->left;
+/*                 20                  ONE TREE
+		  /  \
+		 10   25
+		/ \
+	       5  15                           */
+////////////////////////////////////////////////
+	Node *TWO = ORIGINAL->left->right;
+/*                    25               TWO TREE
+                     /  \
+		    N    N                     */
+////////////////////////////////////////////////
+	ONE->right = ORIGINAL;
+/*                 20                  ONE TREE
+		  /  \
+		10    30<-ORIGINAL TREE
+	       / \    / \
+	      5  15  20  40
+	            / \
+                   10  15
+		  / \
+		 5  15                         */
+////////////////////////////////////////////////
+	ONE->right->left = TWO;
+/*                 20                  ONE TREE
+		  /  \
+		10    30<-ORIGINAL TREE
+	       / \    / \
+	      5  15  25< 40
+		    / \<-TWO TREE 
+                   N   N                       */
+////////////////////////////////////////////////
+	return ONE;
+}
+
+int main()
+{		
+	Node *root = NULL;
+
+	root = new_node(30);
+	root->right = new_node(40);
+	root->left = new_node(20);
+	root->left->right = new_node(25);
+	root->left->left = new_node(10);
+	root->left->left->right = new_node(15);
+	root->left->left->left = new_node(5);
+/*                   30
+		    /  \
+		   20   40
+		  /  \
+		 10   25
+		/ \
+	       5   15                      */
+	
+	root = right_rotation(root);
+	
+	printf("%d ", root->key);
+	printf("%d ", root->right->key);
+	printf("%d ", root->right->left->key);
+
+	return EXIT_SUCCESS;
+}
+output:
+20 30 25
+
 ---
 task:
 code:
