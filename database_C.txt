@@ -1702,6 +1702,164 @@ int main()
 output:
 30 50 40
 
+task:
+binary search tree balancing / right + left rotation
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node
+{
+	int key;
+	struct Node *left;
+	struct Node *right;
+} Node;
+
+Node *new_node(int key)
+{
+	Node *node = malloc( sizeof(Node) );
+	
+	node->key = key;
+	node->left = NULL;
+	node->right = NULL;
+	
+	return node;
+}
+
+Node *left_rotation(Node *ORIGINAL)
+{
+////////////////////////////////////////////////
+/*		      10           ORIGINAL TREE
+		     /  \
+		    5    30
+		        /  \
+		       20  40 
+                          /  \
+			 35  50                */
+////////////////////////////////////////////////
+	Node *ONE = ORIGINAL->right;
+/*	                 30             ONE TREE
+			/  \
+		       20  40 
+                          /  \
+		         35  50                */
+////////////////////////////////////////////////
+	Node *TWO = ORIGINAL->right->left;
+/*                     20               TWO TREE
+                      /  \
+		     N    N                    */
+////////////////////////////////////////////////
+	ONE->left = ORIGINAL;
+/*	                 30             ONE TREE
+			/  \
+       ORIGINAL TREE->10    40 
+                     / \    / \
+	            5  30  35 50
+		      /  \
+		     20  40
+		        /  \
+		       35  50                  */
+////////////////////////////////////////////////
+	ONE->left->right = TWO;
+/*	                 30             ONE TREE
+			/  \
+       ORIGINAL TREE->10    40 
+                     / \    / \
+		    5  20< 35 50
+		       /\<-TWO TREE
+	              N  N                     */
+////////////////////////////////////////////////
+	return ONE;
+}
+
+Node *right_rotation(Node *ORIGINAL)
+{
+////////////////////////////////////////////////
+/*                       40        ORIGINAL TREE
+			/  \
+		       30  50 
+                      /  \
+		     20  35                    */
+////////////////////////////////////////////////
+	Node *ONE = ORIGINAL->left;
+/*                     30               ONE TREE
+                      /  \
+		     20  35                    */
+////////////////////////////////////////////////
+	Node *TWO = ORIGINAL->left->right;
+/*                       35             TWO TREE
+                        /  \
+		       N    N                  */
+////////////////////////////////////////////////
+	ONE->right = ORIGINAL;
+/*                     30               ONE TREE
+                      /  \
+		     20  40<-ORIGINAL TREE
+		        /  \
+		       30  50
+		      /  \
+		     20  35                    */
+////////////////////////////////////////////////
+	ONE->right->left = TWO;
+/*                     30               ONE TREE
+                      /  \
+                     20  40<-ORIGINAL TREE
+                        /  \
+                       35< 50   
+                      / \<-TWO TREE	
+                     N   N                     */
+////////////////////////////////////////////////
+	return ONE;
+}
+
+int main()
+{		
+	Node *root = NULL;
+	
+	root = new_node(10);
+	root->left = new_node(5);
+	root->right = new_node(40);
+	root->right->left = new_node(30);
+	root->right->right = new_node(50);
+	root->right->left->right = new_node(35);
+	root->right->left->left = new_node(20);
+/*		      10
+		     /  \
+		    5    40
+		        /  \
+		       30  50 
+                      /  \
+		     20  35                    */
+////////////////////////////////////////////////
+	root->right = right_rotation(root->right);
+/*		      10
+	   	     /  \
+		    5    30
+		        /  \
+		       20  40 
+                          /  \
+			 35  50                */
+////////////////////////////////////////////////
+	root = left_rotation(root);
+/*		         30
+			/  \
+		      10    40 
+                     / \    / \
+		    5  20  35  50              */
+////////////////////////////////////////////////
+				
+	printf("%d ", root->key);
+	printf("%d ", root->right->key);
+	printf("%d ", root->right->left->key);
+
+	return EXIT_SUCCESS;
+}
+output:
+30 40 35
+
+task:
+code:
+
 ---
 task:
 code:
