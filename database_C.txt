@@ -1546,6 +1546,162 @@ int main()
 output:
 20 30 25
 
+task:
+binary search tree balancing / left + right rotation
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node
+{
+	int key;
+	struct Node *left;
+	struct Node *right;
+} Node;
+
+Node *new_node(int key)
+{
+	Node *node = malloc( sizeof(Node) );
+	
+	node->key = key;
+	node->left = NULL;
+	node->right = NULL;
+	
+	return node;
+}
+
+Node *right_rotation(Node *ORIGINAL)
+{
+////////////////////////////////////////////////
+/*                        50       ORIGINAL TREE
+			 /  \
+		        30  60
+		       /  \
+		      10  40
+		     / \
+		    5  20                      */
+////////////////////////////////////////////////			
+	Node *ONE = ORIGINAL->left;
+/*                      30              ONE TREE
+		       /  \
+		      10  40
+		     / \
+	            5  20                      */
+////////////////////////////////////////////////
+	Node *TWO = ORIGINAL->left->right;
+/*                        40            TWO TREE
+                         /  \ 
+			N    N                 */
+////////////////////////////////////////////////
+	ONE->right = ORIGINAL;
+/*                      30              ONE TREE
+		       /  \
+		     10    50<-ORIGINAL TREE
+	            / \    / \
+		   5  20  30  60
+		         / \
+			10  40
+		       / \
+		      5  20                    */
+////////////////////////////////////////////////
+    ONE->right->left = TWO;
+/*                      30              ONE TREE
+		       /  \
+		     10    50<-ORIGINAL TREE
+		    / \    / \
+		   5  20  40< 60
+                          /\<-TWO TREE
+			 N  N                  */
+////////////////////////////////////////////////
+	return ONE;
+}
+
+
+Node *left_rotation(Node *ORIGINAL)
+{
+////////////////////////////////////////////////
+/*                  10             ORIGINAL TREE   
+	           /  \
+		  5    30
+		      /  \
+		     20  40                    */
+////////////////////////////////////////////////
+	Node *ONE = ORIGINAL->right;
+/*                     30               ONE TREE
+		      /  \
+		     20  40                    */
+////////////////////////////////////////////////
+	Node *TWO = ORIGINAL->right->left;
+/*                   20                 TWO TREE    
+                    /  \
+	           N    N                      */
+////////////////////////////////////////////////
+	ONE->left = ORIGINAL;
+/*                      30              ONE TREE
+	               /  \
+       ORIGINAL TREE->10  40
+		     / \
+		    5  30
+		       / \
+		     20  40                    */
+////////////////////////////////////////////////
+	ONE->left->right = TWO;
+/*                     30               ONE TREE
+		      /  \
+      ORIGINAL TREE->10  40
+		    / \
+		   5  20<-TWO TREE
+		      / \
+		     N   N                     */
+////////////////////////////////////////////////
+	return ONE;
+}
+
+int main()
+{		
+	Node *root = NULL;
+	
+	root = new_node(50);
+	root->right = new_node(60);
+	root->left = new_node(10);
+	root->left->right = new_node(30);
+	root->left->left = new_node(5);
+	root->left->right->left = new_node(20);
+	root->left->right->right = new_node(40);
+/*                        50
+		         /  \
+			10  60
+		       /  \
+		      5    30
+			  /  \
+		         20  40                */
+////////////////////////////////////////////////
+	root->left = left_rotation(root->left);
+/*                        50  
+		         /  \
+			30  60
+		       /  \
+		      10  40
+		     / \
+	            5  20                      */
+////////////////////////////////////////////////
+	root = right_rotation(root);
+/*			30  
+		       /  \
+		     10    50
+		    / \    / \
+	           5  20  40  60               */
+////////////////////////////////////////////////
+			   
+	printf("%d ", root->key);
+	printf("%d ", root->right->key);
+	printf("%d ", root->right->left->key);
+
+	return EXIT_SUCCESS;
+}
+output:
+30 50 40
+
 ---
 task:
 code:
