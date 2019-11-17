@@ -1859,6 +1859,114 @@ output:
 
 task:
 code:
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node
+{
+	int key;
+	int height;
+	struct Node *left;
+	struct Node *right;
+} Node;
+
+Node *new_node(int key)
+{
+	Node *node = malloc( sizeof(Node) );
+	
+	node->key = key;
+	node->left = NULL;
+	node->right = NULL;
+	
+	return node;
+}
+
+int height(Node *node)
+{
+	if(node == NULL)
+	{
+		return 0;
+	}
+	else
+	{
+		return node->height;
+	}
+}
+
+int max(int one, int two)
+{
+	if(one > two)
+	{
+		return one;
+	}
+	else
+	{
+		return two;
+	}
+}
+
+Node *insert(Node *node, int key)
+{
+	if(node == NULL)
+	{
+		printf("key = %d, new node \n", key);
+		
+		return new_node(key);
+	}
+	
+	
+	printf("key = %d, node->key = %d \n", key, node->key);
+	
+	if(key  >  node->key)
+	{
+		node->right = insert(node->right, key);
+	}
+	else if(key  < node->key)
+	{
+		node->left = insert(node->left, key);
+	}
+	
+	
+	node->height = 1 + max(height(node->left), height(node->right));
+	
+	printf("height = %d \n", node->height);
+	
+	return node;
+}
+
+int main()
+{	
+	Node *root = NULL;
+////////////////////////////////////////////////
+	root = insert(root, 30);
+/*      height = 0       30
+			/  \
+                       N    N                  */
+////////////////////////////////////////////////
+	root = insert(root, 20);
+/*      height = 1       30
+			/  \
+	height = 0     20   N                  */
+////////////////////////////////////////////////
+	root = insert(root, 10);
+/*      height = 2       30
+			/  \
+	height = 1     20   N
+		      /
+	height = 0   10                        */
+////////////////////////////////////////////////	
+	return EXIT_SUCCESS;
+}
+output:
+key = 30, new node
+key = 20, node->key = 30
+key = 20, new node
+height = 1
+key = 10, node->key = 30
+key = 10, node->key = 20
+key = 10, new node
+height = 1
+height = 2
 
 ---
 task:
