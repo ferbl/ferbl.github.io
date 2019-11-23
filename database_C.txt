@@ -2036,6 +2036,124 @@ rotation
 30 20 10 40
 
 task:
+code:
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node
+{
+    int key;
+    int height;
+    struct Node *left;
+    struct Node *right;
+} Node;
+
+Node *new_node(int key)
+{
+    Node *node = malloc( sizeof(Node) );
+    
+    node->key = key;
+    node->left = NULL;
+    node->right = NULL;
+    
+    return node;
+}
+
+/* declaration */
+int max(int one, int two);
+int height(Node *node);
+
+Node *right_rotation(Node *ORIGINAL)
+{
+    Node *ONE = ORIGINAL->left;
+    Node *TWO = ORIGINAL->left->right;
+
+    ONE->right = ORIGINAL;
+    ONE->right->left = TWO;
+	
+    /**/
+
+    return ONE;
+}
+
+int max(int one, int two)
+{
+    if(one > two)
+    {
+        return one;
+    }
+    return two;
+}
+
+int height(Node *node)
+{
+    if(node == NULL)
+    {
+        return 0;
+    }
+    return node->height;
+}
+
+int get_balance(Node *node)
+{
+    if(node == NULL)
+    {
+        return 0;
+    }
+    return height(node->left) - height(node->right);
+}
+
+Node *insert(Node *node, int key)
+{
+    if(node == NULL)
+    {
+        printf("key = %d, new node \n", key);
+        return new_node(key);
+    }
+    
+    printf("key = %d, node->key = %d \n", key, node->key);
+    
+    if(key  >  node->key)
+    {
+        printf("right ");
+        node->right = insert(node->right, key);
+    }
+    else if(key  <  node->key)
+    {
+        printf("left ");
+        node->left = insert(node->left, key);
+    }
+    
+    
+    node->height = 1 + max( height(node->left), height(node->right) );
+    
+    printf("h%d nodekey%d \n", node->height, node->key);
+    
+    
+    int balance = get_balance(node);
+    
+    printf("balance %d \n", balance);
+	
+	
+    if(balance > 1)
+    {
+        printf("rotation right \n");
+        return right_rotation(node);
+    }
+    
+    return node;
+}
+
+int main()
+{    
+    Node *root = NULL;
+	
+    return EXIT_SUCCESS;
+}
+output:
+
+
+task:
 binary search tree / auto balancing / insert / left rotation
 code:
 #include <stdio.h>
