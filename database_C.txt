@@ -2537,27 +2537,190 @@ Node *new_node(int key)
     node->left = NULL;
     node->right = NULL;
     
+    node->height = 1;
+    
     return node;
 }
 
+int _print_t(Node *tree, int is_left, int offset, int depth, char s[20][255])
+{
+    char b[20];
+    int width = 6;
+
+    if (!tree) return 0;
+
+    sprintf(b, "%3d h%d", tree->key, tree->height);
+
+    int left  = _print_t(tree->left,  1, offset,                depth + 1, s);
+    int right = _print_t(tree->right, 0, offset + left + width, depth + 1, s);
+
+#ifdef COMPACT
+    for (int i = 0; i < width; i++)
+        s[depth][offset + left + i] = b[i];
+
+    if (depth && is_left) {
+
+        for (int i = 0; i < width + right; i++)
+            s[depth - 1][offset + left + width/2 + i] = '-';
+
+        s[depth - 1][offset + left + width/2] = '.';
+
+    } else if (depth && !is_left) {
+
+        for (int i = 0; i < left + width; i++)
+            s[depth - 1][offset - width/2 + i] = '-';
+
+        s[depth - 1][offset + left + width/2] = '.';
+    }
+#else
+    for (int i = 0; i < width; i++)
+        s[2 * depth][offset + left + i] = b[i];
+
+    if (depth && is_left) {
+
+        for (int i = 0; i < width + right; i++)
+            s[2 * depth - 1][offset + left + width/2 + i] = '-';
+
+        s[2 * depth - 1][offset + left + width/2] = '+';
+        s[2 * depth - 1][offset + left + width + right + width/2] = '+';
+
+    } else if (depth && !is_left) {
+
+        for (int i = 0; i < left + width; i++)
+            s[2 * depth - 1][offset - width/2 + i] = '-';
+
+        s[2 * depth - 1][offset + left + width/2] = '+';
+        s[2 * depth - 1][offset - width/2 - 1] = '+';
+    }
+#endif
+
+    return left + width + right;
+}
+
+void display_tree(Node *tree)
+{
+    char s[20][255];
+    for (int i = 0; i < 20; i++)
+        sprintf(s[i], "%80s", " ");
+
+    _print_t(tree, 0, 0, 0, s);
+
+    for (int i = 0; i < 7; i++)
+        printf("%s\n", s[i]);
+}
+
+/* declaration */
+int max(int one, int two);
+int height(Node *node);
+
 Node *left_rotation(Node *ORIGINAL)
 {
+/*                              ORIGINAL TREE
+                   10 h3      
+                  /  \
+                 N    15 h2
+                        \
+                         20 h1
+*/
     Node *ONE = ORIGINAL->right;
+/*                                   ONE TREE
+                      15 h2
+                        \
+                         20 h1
+*/
     Node *TWO = ORIGINAL->right->left;
+/*                                   TWO TREE
+                    N
+*/
     
     ONE->left = ORIGINAL;
+/*                                   ONE TREE
+                      15 h2
+                     /  \
+ORIGINAL TREE-> h3 10    20 h1
+                  /  \
+                 N    15 h2
+                        \
+                         20 h1
+*/
     ONE->left->right = TWO;
+/*                                   ONE TREE
+                      15 h2
+                     /  \
+ORIGINAL TREE-> h3 10    20 h1
+                  /  \
+                 N    N <-TWO TREE
+*/
+    
+    ONE->left->height = 1 + max(height(ONE->left->left), height(ONE->left->right));
+/*                                   ONE TREE
+                      15 h2
+                     /  \
+(1 + max h0 h0) h1 10    20 h1
+                  /  \
+                 N    N
+*/
+    ONE->height = 1 + max(height(ONE->left), height(ONE->right));
+/*                                   ONE TREE
+                      15 h2  (1 + max h1 h1)
+                     /  \
+                h1 10    20 h1
+                  /  \
+                 N    N
+*/
 
     return ONE;
 }
 
 Node *right_rotation(Node *ORIGINAL)
 {
+/*                              ORIGINAL TREE
+                   20 h2
+                  /
+                15 h1
+*/
     Node *ONE = ORIGINAL->left;
+/*                                   ONE TREE
+                15 h1
+*/
     Node *TWO = ORIGINAL->left->right;
+/*                                   TWO TREE
+                    N
+*/
 
     ONE->right = ORIGINAL;
+/*                                   ONE TREE
+                15 h1
+                  \
+                   20 h2 <-ORIGINAL TREE
+                  /
+                 15 h1
+*/
     ONE->right->left = TWO;
+/*                                   ONE TREE
+                15 h1
+                  \
+                   20 h2 <-ORIGINAL TREE
+                  /
+                 N <-TWO TREE
+*/
+
+    ONE->right->height = 1 + max(height(ONE->right->left), height(ONE->right->right));
+/*                                   ONE TREE
+                15 h1
+                  \
+                   20 h1  (1 + max h0 h0) 
+                  /
+                 N 
+*/
+    ONE->height = 1 + max(height(ONE->left), height(ONE->right));
+/*                                   ONE TREE
+                15 h2  (1 + max h0 h1)
+                  \
+                   20 h1   
+                  /
+                 N 
+*/
 
     return ONE;
 }
@@ -2604,14 +2767,14 @@ Node *insert(Node *node, int key)
         printf("right ");
         node->right = insert(node->right, key);
     }
-    else if(key  < node->key)
+    else if(key  <  node->key)
     {
         printf("left ");
         node->left = insert(node->left, key);
     }
     
     
-    node->height = 1 + max( height(node->left), height(node->right) );
+    node->height = 1 + max(height(node->left), height(node->right));
     
     printf("h%d nodekey%d \n", node->height, node->key);
     
@@ -2624,7 +2787,7 @@ Node *insert(Node *node, int key)
     if(balance < -1 && key < node->right->key)
     {
         printf("key%d < nodeRight%d \n", key, node->right->key);
-        printf("big rotation \n");
+        printf("right + left rotation \n");
         
         node->right = right_rotation(node->right);
         
@@ -2640,93 +2803,44 @@ int main()
     
     root = insert(root, 10);
     root = insert(root, 20);
-    root = insert(root, 30);
-    printf("---------- \n");
+    root = insert(root, 15);
 /*
-                  10 h2       balance h0 - h1
-                 /  \
-             h0 N    20 h1
-                       \
-                        30 h0
+                   10 h3      balance h0 - h2
+                  /  \
+                 N    20 h2
+                     /
+                    15 h1
 */
-    root = insert(root, 17);
-/*
-                  10 h2       balance h0 - h1
-                 /  \
-             h0 N    20 h1
-                    /  \
-               h0 17    30 h0
+/*                          right rotation 20
+                   10 h3      
+                  /  \
+                 N    15 h2
+                        \
+                         20 h1
 */
-    root = insert(root, 13);
-/*
-                  10 h3       balance h0 - h2 (unbalanced)
-                 /  \
-             h0 N    20 h2
-                    /  \
-               h1 17    30 h0
-                 /
-            h0 13
+/*                           left rotation 10
+                      15 h2
+                     /  \
+                h1 10    20 h1
 */
-/*                            right rotation 20
-                  10           
-                 /  \
-                N    17 
-                    /  \
-                  13    20
-                          \
-                           30
 
-*/
-/*                            left rotation 10
-                     17           
-                    /  \
-                  10    20 
-                   \      \
-                   13     30
-
-*/
-    printf("%d ", root->key);
-    printf("%d ", root->left->key);
-    printf("%d ", root->right->key);
-    printf("%d ", root->right->right->key);
-    printf("%d ", root->left->right->key);
-    
     return EXIT_SUCCESS;
 }
 output:
 key = 10, new node
 key = 20, node->key = 10
 right key = 20, new node
-h1 nodekey10
-balance 0
-key = 30, node->key = 10
-right key = 30, node->key = 20
-right key = 30, new node
-h1 nodekey20
-balance 0
 h2 nodekey10
 balance -1
-----------
-key = 17, node->key = 10
-right key = 17, node->key = 20
-left key = 17, new node
-h1 nodekey20
-balance 0
-h2 nodekey10
-balance -1
-key = 13, node->key = 10
-right key = 13, node->key = 20
-left key = 13, node->key = 17
-left key = 13, new node
-h1 nodekey17
-balance 0
+key = 15, node->key = 10
+right key = 15, node->key = 20
+left key = 15, new node
 h2 nodekey20
 balance 1
 h3 nodekey10
 balance -2
-key13 < nodeRight20
-big rotation
-17 10 20 30 13
+key15 < nodeRight20
+right + left rotation
 
 task:
 code:
