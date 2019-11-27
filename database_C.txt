@@ -2796,64 +2796,70 @@ Node *new_node(int key)
     node->left = NULL;
     node->right = NULL;
     
-    node->height = 1;
-    
     return node;
 }
 
-int _print_n(Node *node, int offset, int depth, char string[20][30])
-{
-    /* element = 0,1,2,3,4,5; width = 6 */
-    char element[5];
-    int width = 6;
-	
-    printf("depth %d \n", depth);
-
+int _print_n(Node *node, 
+                    int offset, 
+                    int depth, 
+                    char string[3][15])
+{    
+    int width = 2;
+    char element[width];
+    
     if (node == NULL)
     {
         printf("return 0 \n");
         return 0;
     }    
 
-    sprintf(element, "%3d h%d", node->key, node->height);
-    printf("%s \n", element);
+    /* save node data to array */
+    sprintf(element, "%2d", node->key);
+    
+    
+    printf("->%s \n", element);
     
 
-    printf("LEFT \n");
-    int left = _print_n(node->left, offset, depth + 1, string);
-    printf("left = %d \n", left);
+    printf("%s LEFT o%d ", element,  offset);
+    int left = _print_n(node->left,
+                    offset, 
+                    depth + 1, 
+                    string);
     
-    printf("RIGHT \n");
-    int right = _print_n(node->right, offset + left + width, depth + 1, string);
-    printf("right = %d \n", right);
+    printf("%s RIGHT o%d l%d w%d ", element,  offset, left, width);
+    int right = _print_n(node->right,
+                    offset + left + width,
+                    depth + 1, 
+                    string);
 
     
-    /* add item to array */
+    /* add element to string */
     for (int i = 0; width > i; i++)
-    {    
-        printf("[%d][%d] = [%d] %s \n", depth, offset + left + i, i, element);
-        
-        string[depth][offset + left + i] = element[i];
+    {     
+        string[depth]
+        [offset + left + i] = element[i];
     }
+    printf("add %s (o%d l%d) ", element,  offset, left);
 
-    printf("return %d \n", left + width + right);
+    printf("return l%d  r%d  w%d \n", left, right, width);
     return left + right + width;
 }
 
 void display_tree(Node *node)
 {
-    char array[5][30];
+    char string[3][15];
     
-    for (int i = 0; 5 > i; i++)
+    for (int i = 0; 3 > i; i++)
     {
-        sprintf(array[i], "%29s", "#");
+        sprintf(string[i], "%14s", "#");
     }
 
-    _print_n(node, 0, 0, array);
+    /* send string */
+    _print_n(node, 0, 0, string);
 
-    for (int i = 0; 5 > i; i++)
+    for (int i = 0; 3 > i; i++)
     {
-        printf("%s \n", array[i]);
+        printf("%s \n", string[i]);
     }  
 }
 
@@ -2870,58 +2876,19 @@ int main()
     return EXIT_SUCCESS;
 }
 output:
-depth 0
- 30 h1
-LEFT
-depth 1
- 20 h1
-LEFT
-depth 2
-return 0
-left = 0
-RIGHT
-depth 2
-return 0
-right = 0
-[1][0] = [0]  20 h1
-[1][1] = [1]  20 h1
-[1][2] = [2]  20 h1
-[1][3] = [3]  20 h1
-[1][4] = [4]  20 h1
-[1][5] = [5]  20 h1
-return 6
-left = 6
-RIGHT
-depth 1
- 40 h1
-LEFT
-depth 2
-return 0
-left = 0
-RIGHT
-depth 2
-return 0
-right = 0
-[1][12] = [0]  40 h1
-[1][13] = [1]  40 h1
-[1][14] = [2]  40 h1
-[1][15] = [3]  40 h1
-[1][16] = [4]  40 h1
-[1][17] = [5]  40 h1
-return 6
-right = 6
-[0][6] = [0]  30 h1
-[0][7] = [1]  30 h1
-[0][8] = [2]  30 h1
-[0][9] = [3]  30 h1
-[0][10] = [4]  30 h1
-[0][11] = [5]  30 h1
-return 18
-       30 h1                #
- 20 h1       40 h1          #
-                            #
-                            #
-                            #
+->30
+30 LEFT o0 ->20
+20 LEFT o0 return 0
+20 RIGHT o0 l0 w2 return 0
+add 20 (o0 l0) return l0  r0  w2
+30 RIGHT o0 l2 w2 ->40
+40 LEFT o4 return 0
+40 RIGHT o4 l0 w2 return 0
+add 40 (o4 l0) return l0  r0  w2
+add 30 (o0 l2) return l2  r2  w2
+  30         #
+20  40       #
+             #
 
 ---
 task:
