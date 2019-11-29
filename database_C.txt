@@ -2775,36 +2775,11 @@ balance -2
 key15 < nodeRight20
 right + left rotation
 
----
 task:
 code:
-/*  
---------------14       
-      30         | 0
-  20      40     | 1
-10  25  35  50   | 2
 
-10	+0s
-25	+4s
-20	+2s
-	
-40	+10s
-35	+8s
-50	+12s
-	
-DEPTH is D
-SHIFT is S
-LEFT  is L
-RIGHT is R
-	
-LEFT -> SHIFT / +1DEPTH
-RIGHT-> LEFT + WIDTH + SHIFT / +1DEPTH
 
-RETURN  WIDTH + LEFT + RIGHT
-
-IF NEXT NODE == 0 >> RETURN 0
-*/
-
+---
 task:
 code:
 #include <stdio.h>
@@ -2848,7 +2823,7 @@ int _print_n(Node *node,
     
     
     printf("->%s \n", element);
-    
+
 
     printf("%s LEFT o%d ", element,  offset);
     int left = _print_n(node->left,
@@ -2919,7 +2894,6 @@ add 30 (o0 l2) return l2  r2  w2
   30         #
 20  40       #
              #
-
 ---
 task:
 code:
