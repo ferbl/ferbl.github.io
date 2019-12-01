@@ -1,1 +1,4 @@
+Install ffmpeg on Linux for development
+
+apt-get install libavcodec-dev
 
