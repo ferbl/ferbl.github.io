@@ -1,4 +1,18 @@
 Install ffmpeg on Linux for development
 
-apt-get install libavcodec-dev
+install ffmpeg-4.2.1.tar.bz2  https://www.ffmpeg.org/download.html
+
+in folder ffmpeg
+./configure
+make
+make install
+
+libraries are installed here  
+/usr/local/lib
+/usr/local/include
+
+build and run the program
+gcc test.c -o main -lavformat -lavcodec -lavutil -lm -lpthread -I'/usr/local/include' -lswresample
+
+
 
