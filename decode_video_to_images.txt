@@ -14,5 +14,9 @@ libraries are installed here
 build and run the program
 gcc test.c -o main -lavformat -lavcodec -lavutil -lm -lpthread -I'/usr/local/include' -lswresample
 
+Eclipse + CDT + project Properties -> C/C++ Build -> Settings -> GGC C Linker -> Libraries
+add avformat swscale avcodec avutil m pthread swresample
+
+examples in the documentation
 
 
