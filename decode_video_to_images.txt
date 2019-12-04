@@ -1,6 +1,8 @@
 Install ffmpeg on Linux for development
 
-install ffmpeg-4.2.1.tar.bz2  https://www.ffmpeg.org/download.html
+ffmpeg-4.2.1.tar.bz2  https://www.ffmpeg.org/download.html
+
+tar -xvjf ffmpeg-4.2.1.tar.bz2
 
 in folder ffmpeg
 ./configure
@@ -11,12 +13,231 @@ libraries are installed here
 /usr/local/lib
 /usr/local/include
 
-build and run the program
+build program in console
 gcc test.c -o main -lavformat -lavcodec -lavutil -lm -lpthread -I'/usr/local/include' -lswresample
 
-Eclipse + CDT + project Properties -> C/C++ Build -> Settings -> GGC C Linker -> Libraries
-add avformat swscale avcodec avutil m pthread swresample
+build in Eclipse + CDT + project Properties -> C/C++ Build -> Settings -> GGC C Linker -> Libraries
+add: avformat swscale avcodec avutil m pthread swresample
 
 examples in the documentation
+code:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+#include <libswscale/swscale.h>
+
+AVFormatContext *format = NULL;
+AVCodecContext *context = NULL;
+AVCodec *codec = NULL;
+AVFrame *YUV_frame = NULL;
+AVFrame *RBG_frame = NULL;
+int video_stream_id = -1;
+
+int buffer_size;
+uint8_t *buffer = NULL;
+
+struct SwsContext *frame_config = NULL;
+AVPacket packet;
+
+int frame_complete;
+
+char *input_file;
+char dir[500];
+int time_interval;
+
+void open_file()
+{
+	if(avformat_open_input(&format, input_file, NULL, NULL) != 0)
+	exit(1);
+}
+
+void get_streams_info()
+{
+	if(avformat_find_stream_info(format, NULL) < 0)
+	exit(1);
+}
+
+void find_video_stream()
+{
+	for(int i = 0; format->nb_streams > i; i++)
+	{
+		if(format->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO)
+		{
+			video_stream_id = i;
+			break;
+		}
+	}
+	if(video_stream_id == -1) exit(1);
+}
+
+void get_codec_info()
+{
+	context = format->streams[video_stream_id]->codec;
+}
+
+void set_video_decoder()
+{
+	codec = avcodec_find_decoder(context->codec_id);
+	if(codec == NULL) exit(1);
+}
+
+void open_video_decoder()
+{
+	if(avcodec_open2(context, codec, NULL) < 0)
+	exit(1);
+}
+
+void allocate_memory_for_YUV_frames()
+{
+	YUV_frame = av_frame_alloc();
+}
+
+void allocate_memory_for_RBG_frames()
+{
+	RBG_frame = av_frame_alloc();
+}
+
+void calculate_buffer_size()
+{
+	buffer_size = avpicture_get_size(AV_PIX_FMT_RGB24,
+			context->width, context->height);
+}
+
+void allocate_memory_for_buffer()
+{
+	buffer = av_malloc(buffer_size * sizeof(uint8_t));
+}
+
+void bind_RBG_frame_to_buffer()
+{
+	avpicture_fill(RBG_frame, buffer, AV_PIX_FMT_RGB24,
+			context->width, context->height);
+}
+
+void set_frame_config()
+{
+	frame_config = sws_getContext(context->width, context->height,
+			        context->pix_fmt, context->width, context->height,
+			        AV_PIX_FMT_RGB24, SWS_BILINEAR,
+			        NULL, NULL, NULL);
+}
+
+void free_all()
+{
+	av_free(buffer);
+	av_frame_free(&RBG_frame);
+	av_frame_free(&YUV_frame);
+	avcodec_close(context);
+	avformat_close_input(&format);
+}
+
+void setting_video_for_reading()
+{
+	open_file();
+
+	get_streams_info();
+	find_video_stream();
+
+	get_codec_info();
+
+	set_video_decoder();
+	open_video_decoder();
+
+	allocate_memory_for_YUV_frames();
+	allocate_memory_for_RBG_frames();
+
+	calculate_buffer_size();
+	allocate_memory_for_buffer();
+
+	bind_RBG_frame_to_buffer();
+	set_frame_config();
+}
+
+void save_frame(AVFrame *RBGframe, int width, int height, int number)
+{
+	FILE *file;
+	char name[600];
+
+	snprintf(name, sizeof(name), "%s%s%d", dir, "frame", number);
+	printf("%s saved \n", name);
+
+	file = fopen(name, "wb");
+	fprintf(file, "P6\n%d %d\n255\n", width, height);
+
+	for(int i = 0; height > i; i++)
+	{
+		fwrite(RBGframe->data[0] + i * RBGframe->linesize[0], 1,
+				width * 3, file);
+	}
+	fclose(file);
+}
+
+void decode_YUV_frame()
+{
+	/* frame_complete [in] [out] */
+	avcodec_decode_video2(context, YUV_frame, &frame_complete, &packet);
+}
+
+void conver_YUV_frame_to_RGB_frame()
+{
+	sws_scale(frame_config, YUV_frame->data, YUV_frame->linesize, 
+                          0, context->height,
+			                    RBG_frame->data, RBG_frame->linesize);  
+}
+
+bool is_frame_video()
+{
+	if(packet.stream_index == video_stream_id) return true;
+	return false;
+}
+
+int main(int argc, char*argv[])
+{
+	if(4 > argc)
+	{
+		printf("./decode <file or url> <dir> <time interval> \n");
+		exit(1);
+	}
+	input_file = argv[1];
+
+	snprintf(dir, sizeof(dir), "%s", argv[2]);
+
+	time_interval = atoi(argv[3]);
+	time_interval *= 30;
+
+
+	setting_video_for_reading();
+
+	int i = 0;
+
+	while(av_read_frame(format, &packet) >= 0)
+	{
+		if(is_frame_video())
+		{
+			decode_YUV_frame();
+
+			if(frame_complete)
+			{
+				conver_YUV_frame_to_RGB_frame();
+
+				i++;
+				if(i%time_interval == 0)
+				{
+					save_frame(RBG_frame, context->width,
+					    				  context->height,i);
+				}
+			}
+
+		}
+		av_free_packet(&packet);
+	}
+
+	free_all();
+
+	return 0;
+}
 
 
