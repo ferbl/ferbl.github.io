@@ -2777,7 +2777,41 @@ right + left rotation
 
 task:
 code:
+#include <stdio.h>
+#include <stdlib.h>
 
+typedef struct Node
+{
+    int key;
+    struct Node *left;
+    struct Node *right;
+    int height;
+} Node;
+
+Node *new_node(int key)
+{
+    Node *node = malloc( sizeof(Node) );
+    
+    node->key = key;
+    node->left = NULL;
+    node->right = NULL;
+    
+    node->height = 1;
+    
+    return node;
+}
+
+Node *delete(Node *node, int key)
+{
+	
+}
+
+int main()
+{    
+    
+    
+    return EXIT_SUCCESS;
+}
 
 ---
 task:
