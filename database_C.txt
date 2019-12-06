@@ -2785,8 +2785,11 @@ typedef struct Node
     int key;
     struct Node *left;
     struct Node *right;
+    
     int height;
 } Node;
+
+int get_min_value_node(Node *node);
 
 Node *new_node(int key)
 {
@@ -2803,13 +2806,79 @@ Node *new_node(int key)
 
 Node *delete(Node *node, int key)
 {
-	
+    if(node == NULL)
+    {
+        return node;
+    }
+    
+    /* node search */
+    if(key  >  node->key)
+    {
+        node->right = delete(node->right, key);
+    }
+    else if(key  <  node->key)
+    {
+        node->left = delete(node->left, key);
+    }
+    /* node found */
+    
+    /* no children */
+    else if(node->left == NULL &&
+            node->right == NULL)
+    {
+        node = NULL;
+    }
+    
+    /* one child the left */
+    else if(node->left != NULL && 
+            node->right == NULL)
+    {
+        node = node->left;
+    }
+    
+    /* one child the right */
+    else if(node->left == NULL && 
+            node->right != NULL)
+    {
+        node = node->right;
+    }
+    
+    /* two children */
+    else
+    {
+        int min_value = get_min_value_node(node->right);
+        
+        node->key = min_value;
+        
+        /* remove duplicate */
+        node->right = delete(node->right, min_value);
+    }
+}
+
+int get_min_value_node(Node *node)
+{
+    while(node->left != NULL)
+    {
+        node = node->left;
+    }
+    return node->key;
 }
 
 int main()
 {    
+    Node *root = NULL;
     
+    root = new_node(30);
+    root->left = new_node(20);
+    root->right = new_node(40);
+    root->right->left = new_node(35);    
     
+    display_tree(root);
+    
+    delete(root, 30);
+    
+    display_tree(root);
+        
     return EXIT_SUCCESS;
 }
 
