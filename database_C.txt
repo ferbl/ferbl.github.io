@@ -2789,7 +2789,11 @@ typedef struct Node
     int height;
 } Node;
 
+/* declaration */
 int get_min_value_node(Node *node);
+int get_balance(Node *node);
+int height(Node *node);
+int max(int one, int two);
 
 Node *new_node(int key)
 {
@@ -2810,6 +2814,8 @@ Node *delete(Node *node, int key)
     {
         return node;
     }
+    
+    printf("%d \n", node->key);
     
     /* node search */
     if(key  >  node->key)
@@ -2853,6 +2859,23 @@ Node *delete(Node *node, int key)
         /* remove duplicate */
         node->right = delete(node->right, min_value);
     }
+    
+    /* if last node */
+    if(node == NULL)
+    {
+        printf("return \n");
+        return node;
+    }
+    printf(" %d \n", node->key);
+    
+    /* update height */
+    node->height = 1 + max(height(node->left), height(node->right));
+    
+    /* tree stabilization */
+    int balance = get_balance(node);
+    printf("balance %d \n", balance);
+    
+    return node;
 }
 
 int get_min_value_node(Node *node)
@@ -2864,20 +2887,53 @@ int get_min_value_node(Node *node)
     return node->key;
 }
 
+int get_balance(Node *node)
+{
+    if(node == NULL)
+    {
+        return 0;
+    }
+    return height(node->left) - height(node->right);
+}
+
+int height(Node *node)
+{
+    if(node == NULL)
+    {
+        return 0;
+    }
+    return node->height;
+}
+
+int max(int one, int two)
+{
+    if(one > two)
+    {
+        return one;
+    }
+    return two;
+}
+
 int main()
 {    
     Node *root = NULL;
     
     root = new_node(30);
+    root->height = 3;
     root->left = new_node(20);
+    root->left->height = 1;
     root->right = new_node(40);
-    root->right->left = new_node(35);    
+    root->right->height = 2;
+    root->right->left = new_node(35); 
+    root->right->left->height = 1;    
     
     display_tree(root);
     
-    delete(root, 30);
+    delete(root, 20);
     
     display_tree(root);
+    
+    list(root);
         
     return EXIT_SUCCESS;
 }
