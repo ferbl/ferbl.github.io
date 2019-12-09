@@ -2854,6 +2854,7 @@ void list(Node *node)
     }
 }
 
+
 Node *left_rotation(Node *ORIGINAL)
 {
     Node *ONE = ORIGINAL->right;
@@ -2864,8 +2865,9 @@ Node *left_rotation(Node *ORIGINAL)
     
     ONE->left->height = 1 + max(height(ONE->left->left), 
                                 height(ONE->left->right));
-    ONE->height = 1 + max(height(ONE->left),
+    ONE->height = 1 + max(height(ONE->left), 
                           height(ONE->right));
+
     return ONE;
 }
 
@@ -2881,6 +2883,7 @@ Node *right_rotation(Node *ORIGINAL)
                                  height(ONE->right->right));
     ONE->height = 1 + max(height(ONE->left), 
                           height(ONE->right));
+
     return ONE;
 }
 
@@ -2964,10 +2967,27 @@ Node *delete(Node *node, int key)
     int balance = get_balance(node);
     printf("balance %d \n", balance);
     
-    if(balance < -1)
+    /* double rotation */
+    if(balance > 1 && key > node->right->key)
+    {
+        node->left = left_rotation(node->left);
+        
+        return right_rotation(node);
+    }
+    else if(balance < -1 && key < node->right->key)
     {
         node->right = right_rotation(node->right);
         
+        return left_rotation(node);
+    }
+    
+    /* single rotation */
+    if(balance > 1)
+    {
+        return right_rotation(node);
+    }
+    else if(balance < -1)
+    {
         return left_rotation(node);
     }
     
