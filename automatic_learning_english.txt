@@ -6,3 +6,5 @@
 3. text translation
 
 audio recognition library - cmusphinx
+
+javascript web speech api - provides google chrome browser
