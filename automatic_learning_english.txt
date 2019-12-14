@@ -9,3 +9,33 @@ audio recognition library - cmusphinx
 
 javascript web speech api - provides google chrome browser
 var recognition = new webkitSpeechRecognition();
+
+task:
+code:
+<!DOCTYPE html>
+<html>
+    
+<head>    
+</head>
+
+<body>
+
+    <p>ONE</p>
+
+    <script>
+        document.write("TWO");
+    </script>
+
+    <p>THREE</p>
+
+</body>
+
+</html>
+output:
+ONE
+TWO
+THREE
+
+task:
+code:
+
