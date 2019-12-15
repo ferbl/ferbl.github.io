@@ -10,32 +10,127 @@ audio recognition library - cmusphinx
 javascript web speech api - provides google chrome browser
 var recognition = new webkitSpeechRecognition();
 
-task:
-code:
+<!-- display the word when loading the page -->
 <!DOCTYPE html>
 <html>
     
-<head>    
-</head>
+    <head>    
+    </head>
 
-<body>
+    <body>
 
-    <p>ONE</p>
+        <p>ONE</p>
 
-    <script>
-        document.write("TWO");
-    </script>
+        <script>
+            document.write("TWO");
+        </script>
 
-    <p>THREE</p>
+        <p>THREE</p>
 
-</body>
+    </body>
 
 </html>
-output:
-ONE
-TWO
-THREE
 
-task:
-code:
+<!-- change the word when you click on it -->
+<!DOCTYPE html>
+<html>
+    
+    <head>   
+        <script>
+            function set_ZZZ()
+            {
+                document.getElementById("my_element").innerHTML = "ZZZ";
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <p id="my_element" onclick="set_ZZZ()">AAA</p>
+
+    </body>
+
+</html>
+
+<!-- output the entered data from field -->
+<!DOCTYPE html>
+<html>
+    
+    <head>   
+        <script>
+            function print(string)
+            {
+                document.getElementById("output").innerHTML = string;
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <form>
+            <input type="input" name="my_name">
+
+            <input type="button" 
+                   onclick="print(form.my_name.value)"
+                   value="print">
+        </form>
+
+        <p id="output">...</p>
+
+    </body>
+
+</html>
+
+<!-- change the value on mouseover -->
+<!DOCTYPE html>
+<html>
+    
+    <head>   
+        <script>
+            function print()
+            {
+                document.getElementById("output").innerHTML = "TEXT";
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <p id="output" onmouseover="print()">...</p>
+
+    </body>
+
+</html>
+
+<!-- text input by voice through google api -->
+<!DOCTYPE html>
+<html>
+    
+    <head>   
+        <script>
+            function start_recognition()
+            {
+                var rec = new webkitSpeechRecognition();
+            
+                rec.lang = "en-US";
+                rec.start();
+                
+                rec.onresult = function(e)
+                {
+                    document.write(e.results[0][0].transcript);
+                    rec.stop();
+                };
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <p id="output" onclick="start_recognition()">...</p>
+
+    </body>
+
+</html>
+
+
 
