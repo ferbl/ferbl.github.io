@@ -40,5 +40,10 @@ var recognition = new webkitSpeechRecognition();
 
 </html>
 
+text to image - Graphics 2D API
+text to speech - FreeTTS
+
+
+
 
 
