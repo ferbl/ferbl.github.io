@@ -50,10 +50,16 @@ public class Text_to_image
 {
     public static void main(String[] args) throws IOException
     {
-        String text = "John walked";
+        String text = "123456789";
         int text_size = 65;
-        int x = 500;
-        int y = 80;        
+        
+        /* 
+            9 * 65 = 585
+            9 letters fit well at x = 330
+            585 / 330 = 1.77272
+        */
+        int x = (int) (text.length() * text_size / 1.77272);
+        int y = 80;  
 
         BufferedImage img = new BufferedImage
         (x, y, BufferedImage.TYPE_INT_RGB);
@@ -73,11 +79,14 @@ public class Text_to_image
         g2d.drawString(text, 0, text_size);
         
         ImageIO.write(img, "png", new File("file.png"));
+        
+        System.out.println("Image done");
     }
 }
 
 ////////////////////////////////////////////////////////////
 text to speech - FreeTTS
+
 
 
 
