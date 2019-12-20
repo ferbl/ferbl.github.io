@@ -85,7 +85,9 @@ public class Text_to_image
 }
 
 ////////////////////////////////////////////////////////////
-text to speech - FreeTTS
+text to speech - FreeTTS / MaryTTS
+
+
 
 
 
