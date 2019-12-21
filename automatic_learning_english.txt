@@ -45,6 +45,7 @@ var recognition = new webkitSpeechRecognition();
 
 ////////////////////////////////////////////////////////////
 text to image - Graphics 2D API
+...........................................................
 
 public class Text_to_image
 {
@@ -87,7 +88,46 @@ public class Text_to_image
 ////////////////////////////////////////////////////////////
 text to speech - FreeTTS / MaryTTS
 
+add libraries:
+marytts-client-5.2-jar-with-dependencies.jar
+marytts-runtime-5.2-jar-with-dependencies.jar
+marytts-lang-en-5.2.jar
+voice-cmu-slt-hsmm-5.2.jar
+voice-cmu-bdl-hsmm-5.2.jar
+voice-cmu-rms-hsmm-5.2.jar
+...........................................................
 
+public class Text_to_image
+{
+    public static void main(String[] args) 
+            throws MaryConfigurationException, 
+            SynthesisException
+    {
+        String text = "John is walking.";
+        
+        MaryInterface mary = new LocalMaryInterface();
+        mary.setVoice("cmu-rms-hsmm");
+        
+        AudioInputStream audio = mary.generateAudio( text );
+        
+        new Play(audio);
+    }
+}
+
+final class Play
+{
+    Play(AudioInputStream audio)
+    {
+        play_audio(audio);
+    }
+    
+    void play_audio(AudioInputStream audio)
+    {
+        AudioPlayer tts = new AudioPlayer();
+        tts.setAudio(audio);
+        tts.start();
+    }
+}
 
 
 
