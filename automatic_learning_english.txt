@@ -49,38 +49,47 @@ text to image - Graphics 2D API
 
 public class Text_to_image
 {
-    public static void main(String[] args) throws IOException
+    void out(String text, String name_file, int text_size)
     {
-        String text = "123456789";
-        int text_size = 65;
-        
-        /* 
-            9 * 65 = 585
-            9 letters fit well at x = 330
-            585 / 330 = 1.77272
-        */
-        int x = (int) (text.length() * text_size / 1.77272);
-        int y = 80;  
-
         BufferedImage img = new BufferedImage
-        (x, y, BufferedImage.TYPE_INT_RGB);
-        
+        (1, 1, BufferedImage.TYPE_INT_RGB);
+
         Graphics2D g2d = img.createGraphics();
+        
+        Font font = new Font("Arial", Font.PLAIN, text_size);
+        g2d.setFont(font);        
+        
+        FontMetrics size = g2d.getFontMetrics();
+        int width = size.stringWidth(text);
+        int heigth = size.getHeight();
+        
+        
+        img = new BufferedImage
+        (width, heigth, BufferedImage.TYPE_INT_RGB);
+        
+        g2d = img.createGraphics();
         
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
                 RenderingHints.VALUE_ANTIALIAS_ON);
         
-        Font font = new Font("Arial", Font.PLAIN, text_size);
         g2d.setFont(font);
-        
+
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, x, y);
-        
+        g2d.fillRect(0, 0, width, heigth);
+
         g2d.setColor(Color.BLACK);
-        g2d.drawString(text, 0, text_size);
-        
-        ImageIO.write(img, "png", new File("file.png"));
-        
+        g2d.drawString(text, 0, size.getAscent());
+
+        try
+        {
+            ImageIO.write(img, "png", 
+                    new File(name_file + ".png"));
+        }
+        catch (IOException ex)
+        {
+            System.err.println("file not write");
+        }
+
         System.out.println("Image done");
     }
 }
