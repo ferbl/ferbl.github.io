@@ -334,5 +334,21 @@ public class ReadFile
     }
 }
 
+////////////////////////////////////////////////////////////
 
+<!DOCTYPE html>
+<!-- get string from file by index -->
+<html>
+    <head>      
+    </head>
+    
+    <body>
+        <?php
+            $file_names = "file_names.txt";
 
+            $string = file($file_names);
+            
+            echo $string[1];
+        ?>
+    </body>
+</html>
