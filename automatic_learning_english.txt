@@ -352,3 +352,41 @@ public class ReadFile
         ?>
     </body>
 </html>
+...........................................................
+<!DOCTYPE html>
+<!-- login.php -->
+<html>
+    <head>
+    </head>
+    
+    <body>
+        <form action="cabinet.php" method="post">
+            email
+            <input type="text" name="email"> 
+            <br>
+            
+            password
+            <input type="password" name="password">
+            <br>
+            
+            <input type="submit">
+        </form>
+    </body>
+</html>
+
+<!DOCTYPE html>
+<!-- cabinet.php -->
+<html>
+    <head>      
+    </head>
+    
+    <body>
+        <?php
+            echo $_POST["email"];
+            
+            echo '<br>';
+            
+            echo $_POST["password"];
+        ?>
+    </body>
+</html>
