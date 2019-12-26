@@ -354,13 +354,13 @@ public class ReadFile
 </html>
 ...........................................................
 <!DOCTYPE html>
-<!-- login.php -->
+<!-- sending data using the POST method -->
 <html>
     <head>
     </head>
     
     <body>
-        <form action="cabinet.php" method="post">
+        <form action="get_data.php" method="post">
             email
             <input type="text" name="email"> 
             <br>
@@ -375,7 +375,7 @@ public class ReadFile
 </html>
 
 <!DOCTYPE html>
-<!-- cabinet.php -->
+<!-- get_data.php -->
 <html>
     <head>      
     </head>
@@ -387,6 +387,44 @@ public class ReadFile
             echo '<br>';
             
             echo $_POST["password"];
+        ?>
+    </body>
+</html>
+...........................................................
+<!DOCTYPE html>
+<!-- connection with mysql / get data -->
+<html>
+    <head>      
+    </head>
+    
+    <body>
+        <?php
+            /*
+              1)create database my_db;
+              2)use my_db;
+              3)create table user(
+                id int not null PRIMARY KEY AUTO_INCREMENT,
+                email varchar(255) not null unique,
+                password varchar(64) not null);
+              4)insert into user value
+                (null, "test@test.com", "123");
+            */
+
+            $connection = mysqli_connect(
+                    "localhost",
+                    "root",
+                    "12345",
+                    "my_db");
+
+            $sql = "select * from user "
+                    . "where email='test@test.com'";
+
+            $result = mysqli_query($connection, $sql);
+
+            $array = mysqli_fetch_array($result);
+
+            echo $array[1];
+            /* output: test@test.com */
         ?>
     </body>
 </html>
