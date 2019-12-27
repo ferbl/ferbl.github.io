@@ -394,9 +394,7 @@ public class ReadFile
 <!DOCTYPE html>
 <!-- connection with mysql / get data -->
 <html>
-    <head>      
-    </head>
-    
+    <head></head>
     <body>
         <?php
             /*
@@ -426,5 +424,100 @@ public class ReadFile
             echo $array[1];
             /* output: test@test.com */
         ?>
+    </body>
+</html>
+...........................................................
+<!DOCTYPE html>
+<!-- logging in using mysql / creating and checking a session -->
+<!-- main.php -->
+<html>
+    <head></head>
+    <body>
+        <form action="user_login.php" method="post">
+            email
+            <input type="text" name="email"> 
+            <br>
+            
+            password
+            <input type="password" name="password">
+            <br>
+            
+            <input type="submit">
+        </form>
+    </body>
+</html>
+
+<!DOCTYPE html>
+<!-- user_login.php -->
+<?php 
+    session_start(); 
+?>
+<html>
+    <head></head>
+    <body>
+        <?php        
+            $email = filter_input(INPUT_POST, "email");
+            $password = filter_input(INPUT_POST, "password");
+
+            $connection = mysqli_connect(
+                    "localhost",
+                    "root",
+                    "12345",
+                    "my_db");
+
+            $sql = "select * from user "
+                    . "where email='$email'";
+
+            $result = mysqli_query($connection, $sql);
+
+            $array = mysqli_fetch_array($result);
+
+
+            if($array[2] == $password)
+            {
+                $_SESSION["authorized"] = true;
+                
+                header("Location: account.php");
+                /* correct password */
+            }
+            else
+            {
+                header("Location: main.php");
+                /* wrong password */
+            }
+            
+            mysqli_close($connection);
+        ?>
+    </body>
+</html>
+
+<!DOCTYPE html>
+<!-- account.php -->
+<?php
+session_start();
+
+if($_SESSION["authorized"] != true)
+{
+    header("Location: main.php");
+}
+else
+{
+    echo "welcome";
+}
+
+$exit = filter_input(INPUT_POST, "exit");
+if($exit == "true")
+{
+    session_destroy();
+    header("Location: main.php");
+}
+?>
+<html>
+    <head></head>
+    <body>    
+        <form action="account.php" method="post">
+            <input type="hidden" value="true" name="exit"> 
+            <input type="submit" value="exit">
+        </form>
     </body>
 </html>
