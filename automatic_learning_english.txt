@@ -335,167 +335,161 @@ public class ReadFile
 }
 
 ////////////////////////////////////////////////////////////
+task:
+get string from file by index
 
-<!DOCTYPE html>
-<!-- get string from file by index -->
-<html>
-    <head>      
-    </head>
-    
-    <body>
-        <?php
-            $file_names = "file_names.txt";
+<?php
+    $path = "file.txt";
 
-            $string = file($file_names);
-            
-            echo $string[1];
-        ?>
-    </body>
-</html>
-...........................................................
-<!DOCTYPE html>
-<!-- sending data using the POST method -->
-<html>
-    <head>
-    </head>
-    
-    <body>
-        <form action="get_data.php" method="post">
-            email
-            <input type="text" name="email"> 
-            <br>
-            
-            password
-            <input type="password" name="password">
-            <br>
-            
-            <input type="submit">
-        </form>
-    </body>
-</html>
+    $string = file($path);
 
-<!DOCTYPE html>
-<!-- get_data.php -->
-<html>
-    <head>      
-    </head>
-    
-    <body>
-        <?php
-            echo $_POST["email"];
-            
-            echo '<br>';
-            
-            echo $_POST["password"];
-        ?>
-    </body>
-</html>
-...........................................................
-<!DOCTYPE html>
-<!-- connection with mysql / get data -->
-<html>
-    <head></head>
-    <body>
-        <?php
-            /*
-              1)create database my_db;
-              2)use my_db;
-              3)create table user(
-                id int not null PRIMARY KEY AUTO_INCREMENT,
-                email varchar(255) not null unique,
-                password varchar(64) not null);
-              4)insert into user value
-                (null, "test@test.com", "123");
-            */
-
-            $connection = mysqli_connect(
-                    "localhost",
-                    "root",
-                    "12345",
-                    "my_db");
-
-            $sql = "select * from user "
-                    . "where email='test@test.com'";
-
-            $result = mysqli_query($connection, $sql);
-
-            $array = mysqli_fetch_array($result);
-
-            echo $array[1];
-            /* output: test@test.com */
-        ?>
-    </body>
-</html>
-...........................................................
-<!DOCTYPE html>
-<!-- logging in using mysql / creating and checking a session -->
-<!-- main.php -->
-<html>
-    <head></head>
-    <body>
-        <form action="user_login.php" method="post">
-            email
-            <input type="text" name="email"> 
-            <br>
-            
-            password
-            <input type="password" name="password">
-            <br>
-            
-            <input type="submit">
-        </form>
-    </body>
-</html>
-
-<!DOCTYPE html>
-<!-- user_login.php -->
-<?php 
-    session_start(); 
+    echo $string[1];
 ?>
-<html>
-    <head></head>
-    <body>
-        <?php        
-            $email = filter_input(INPUT_POST, "email");
-            $password = filter_input(INPUT_POST, "password");
+...........................................................
+task: 
+sending data using the POST method
 
-            $connection = mysqli_connect(
-                    "localhost",
-                    "root",
-                    "12345",
-                    "my_db");
+<!-- main.html -->
+<form action="get_data.php" method="post">
+    email
+    <input type="text" name="email"> 
+    <br>
 
-            $sql = "select * from user "
-                    . "where email='$email'";
+    password
+    <input type="password" name="password">
+    <br>
 
-            $result = mysqli_query($connection, $sql);
+    <input type="submit">
+</form>
 
-            $array = mysqli_fetch_array($result);
+/* get_data.php */
+<?php
+    echo $_POST["email"];
 
+    echo '<br>';
 
-            if($array[2] == $password)
-            {
-                $_SESSION["authorized"] = true;
-                
-                header("Location: account.php");
-                /* correct password */
-            }
-            else
-            {
-                header("Location: main.php");
-                /* wrong password */
-            }
+    echo $_POST["password"];
+?>
+...........................................................
+task:
+connection to mysql / get data
+
+/* database.php */
+<?php
+    /*
+      1)create database my_db;
+      2)use my_db;
+      3)create table user(
+        id int not null PRIMARY KEY AUTO_INCREMENT,
+        email varchar(255) not null unique,
+        password varchar(64) not null);
+      4)insert into user value
+        (null, "test@test.com", "12345");
+    */
+
+    $connection = mysqli_connect(
+            "localhost",
+            "root",
+            "12345",
+            "my_db");
+
+    $sql = "select * from user "
+            . "where email='test@test.com'";
+
+    $result = mysqli_query($connection, $sql);
+
+    $array = mysqli_fetch_array($result);
+
+    echo $array[2];
+    /* output: 12345 */
+?>
+...........................................................
+task:
+library for connecting to mysql
+
+/* database.php */
+<?php
+class database
+{            
+    private $connection;
+    
+    function __construct()
+    {
+        $this->connect();
+    }
             
-            mysqli_close($connection);
-        ?>
-    </body>
-</html>
-
+    private function connect()
+    {
+        $this->connection = mysqli_connect(
+                "localhost",
+                "root",
+                "12345",
+                "my_db");
+    }
+    
+    function find($table, $where)
+    {
+        $sql = "select * from $table where $where;";
+        
+        $result = mysqli_query($this->connection, $sql);
+        
+        return mysqli_fetch_array($result);
+    }
+    
+    function close()
+    {
+        mysqli_close($this->connection);
+    }
+}
+...........................................................
 <!DOCTYPE html>
+task:
+logging in using mysql / creating and checking a session
+
+/* main.php */
+<form action="user_login.php" method="post">
+    email
+    <input type="text" name="email"> 
+    <br>
+
+    password
+    <input type="password" name="password">
+    <br>
+
+    <input type="submit">
+</form>
+
+/* user_login.php */
+<?php 
+session_start(); 
+include_once './database.php';
+
+$email = filter_input(INPUT_POST, "email");
+$password = filter_input(INPUT_POST, "password");
+
+
+$db = new database();
+
+$array = $db->find("user", "email='$email'");
+
+
+if($array[2] == $password)
+{
+    $_SESSION["authorized"] = true;
+
+    header("Location: account.php");
+    /* correct password */
+}
+else
+{
+    header("Location: main.php");
+    /* wrong password */
+}
+$db->close();
+
 <!-- account.php -->
 <?php
 session_start();
-
 if($_SESSION["authorized"] != true)
 {
     header("Location: main.php");
@@ -504,20 +498,22 @@ else
 {
     echo "welcome";
 }
+...........................................................
+task:
+exit the session by click the button
 
+/* exit.php */
+<?php 
 $exit = filter_input(INPUT_POST, "exit");
+
 if($exit == "true")
 {
     session_destroy();
     header("Location: main.php");
 }
 ?>
-<html>
-    <head></head>
-    <body>    
-        <form action="account.php" method="post">
-            <input type="hidden" value="true" name="exit"> 
-            <input type="submit" value="exit">
-        </form>
-    </body>
-</html>
+<form action="account.php" method="post">
+    <input type="hidden" value="true" name="exit"> 
+    <input type="submit" value="exit">
+</form>
+
