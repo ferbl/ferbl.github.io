@@ -516,4 +516,14 @@ if($exit == "true")
     <input type="hidden" value="true" name="exit"> 
     <input type="submit" value="exit">
 </form>
-
+...........................................................
+p, h1, div
+{
+    font-family: monospace; 
+    font-size: 5vw;
+}
+img
+{
+    width: 50%;
+    height: auto;
+}
