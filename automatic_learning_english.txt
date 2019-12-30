@@ -517,6 +517,35 @@ if($exit == "true")
     <input type="submit" value="exit">
 </form>
 ...........................................................
+$email = filter_input(INPUT_POST, "email");
+$password = filter_input(INPUT_POST, "password");
+
+if(filter_var($email, FILTER_VALIDATE_EMAIL) == NULL)
+{
+    echo 'email not valid';
+}
+
+if(strlen($password) < 8)
+{
+    echo 'password < 8';
+}
+else if(strlen($password) > 24)
+{
+    echo 'password > 20';
+}
+else if(preg_match("@[0-9]+@", $password) == 0)
+{
+    echo 'password 0-9';
+}
+else if(preg_match("@[a-z]+@", $password) == 0)
+{
+    echo 'password a-z';
+}
+else if(preg_match("@[A-Z]+@", $password) == 0)
+{
+    echo 'password A-Z';
+}
+...........................................................
 p, h1, div
 {
     font-family: monospace; 
