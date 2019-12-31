@@ -106,7 +106,7 @@ voice-cmu-bdl-hsmm-5.2.jar
 voice-cmu-rms-hsmm-5.2.jar
 ...........................................................
 
-public class Text_to_image
+public class Text_to_speech
 {
     public static void main(String[] args) 
             throws MaryConfigurationException, 
@@ -517,35 +517,48 @@ if($exit == "true")
     <input type="submit" value="exit">
 </form>
 ...........................................................
-$email = filter_input(INPUT_POST, "email");
-$password = filter_input(INPUT_POST, "password");
+task:
+check email and password
 
-if(filter_var($email, FILTER_VALIDATE_EMAIL) == NULL)
-{
-    echo 'email not valid';
-}
-
-if(strlen($password) < 8)
-{
-    echo 'password < 8';
-}
-else if(strlen($password) > 24)
-{
-    echo 'password > 20';
-}
-else if(preg_match("@[0-9]+@", $password) == 0)
-{
-    echo 'password 0-9';
-}
-else if(preg_match("@[a-z]+@", $password) == 0)
-{
-    echo 'password a-z';
-}
-else if(preg_match("@[A-Z]+@", $password) == 0)
-{
-    echo 'password A-Z';
+<?php
+class email_and_password_check
+{               
+    function email_check($email)
+    {
+        if(filter_var($email, FILTER_VALIDATE_EMAIL) == NULL)
+        {
+            echo 'email not valid';
+        }
+    }
+    
+    function password_check($password)
+    {
+        if(strlen($password) < 8)
+        {
+            echo 'password < 8';
+        }
+        else if(strlen($password) > 20)
+        {
+            echo 'password > 20';
+        }
+        else if(preg_match("@[0-9]+@", $password) == false)
+        {
+            echo 'password 0-9';
+        }
+        else if(preg_match("@[a-z]+@", $password) == false)
+        {
+            echo 'password a-z';
+        }
+        else if(preg_match("@[A-Z]+@", $password) == false)
+        {
+            echo 'password A-Z';
+        }
+    }
 }
 ...........................................................
+task:
+auto resize text and images
+
 p, h1, div
 {
     font-family: monospace; 
