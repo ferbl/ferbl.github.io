@@ -569,3 +569,67 @@ img
     width: 50%;
     height: auto;
 }
+...........................................................
+<?php
+class database
+{            
+    private $connection;
+    
+    function __construct()
+    {
+        $this->connect();
+    }
+            
+    private function connect()
+    {
+        $this->connection = mysqli_connect(
+                "localhost",
+                "root",
+                "12345",
+                "my_db");
+    }
+    
+    function get($sql)
+    {        
+        $result = mysqli_query($this->connection, $sql);
+        
+        return mysqli_fetch_array($result);
+    }
+    
+    function run($sql)
+    {        
+        mysqli_query($this->connection, $sql);
+    }
+            
+    function close()
+    {
+        mysqli_close($this->connection);
+    }
+}
+
+<?php
+include_once './library/database.php';
+
+if( !empty($_POST) )
+{    
+    echo 'post';
+    
+    $email = filter_input(INPUT_POST, "email");
+    $password = filter_input(INPUT_POST, "password");
+
+    $db = new database();
+
+    $find = $db->get("select * from user where email='$email';");
+
+    if( empty($find) )
+    {
+        $insert = $db->run("insert into user "
+            . "value(null, '$email', '$password');");
+
+        $db->close();
+    }
+    else
+    {        
+        echo 'email exists';
+    }
+}
