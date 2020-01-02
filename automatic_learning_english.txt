@@ -570,66 +570,42 @@ img
     height: auto;
 }
 ...........................................................
+/* ajax_get.php */
 <?php
-class database
-{            
-    private $connection;
-    
-    function __construct()
+$get_one = filter_input(INPUT_GET, "AAA");
+$get_two = filter_input(INPUT_GET, "BBB");
+
+echo $get_one . " " . $get_two;
+
+/* file.html */
+<script>
+function send_message()
+{
+    var one = document.getElementById("ONE").value;
+    var two = document.getElementById("TWO").value;
+
+    var string = "ajax_get.php?AAA=" + one + "&BBB=" + two;
+
+
+    var request = new XMLHttpRequest();
+
+    request.open("GET", string, true);
+    request.send();
+
+    request.onreadystatechange = function()
     {
-        $this->connect();
-    }
-            
-    private function connect()
-    {
-        $this->connection = mysqli_connect(
-                "localhost",
-                "root",
-                "12345",
-                "my_db");
-    }
-    
-    function get($sql)
-    {        
-        $result = mysqli_query($this->connection, $sql);
-        
-        return mysqli_fetch_array($result);
-    }
-    
-    function run($sql)
-    {        
-        mysqli_query($this->connection, $sql);
-    }
-            
-    function close()
-    {
-        mysqli_close($this->connection);
-    }
+        if(this.readyState === 4 && this.status === 200)
+        {
+            document.getElementById("message")
+                    .innerHTML = this.responseText;
+        }
+    };
 }
+</script>
 
-<?php
-include_once './library/database.php';
+<input type="text" id="ONE"/>
+<input type="text" id="TWO"/>
 
-if( !empty($_POST) )
-{    
-    echo 'post';
-    
-    $email = filter_input(INPUT_POST, "email");
-    $password = filter_input(INPUT_POST, "password");
+<p onclick="send_message()">SEND</p>
 
-    $db = new database();
-
-    $find = $db->get("select * from user where email='$email';");
-
-    if( empty($find) )
-    {
-        $insert = $db->run("insert into user "
-            . "value(null, '$email', '$password');");
-
-        $db->close();
-    }
-    else
-    {        
-        echo 'email exists';
-    }
-}
+<h1 id="message"></h1>
