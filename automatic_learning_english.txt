@@ -570,16 +570,18 @@ img
     height: auto;
 }
 ...........................................................
+task:
+ajax GET
+
 /* ajax_get.php */
 <?php
 $get_one = filter_input(INPUT_GET, "AAA");
 $get_two = filter_input(INPUT_GET, "BBB");
-
 echo $get_one . " " . $get_two;
 
 /* file.html */
 <script>
-function send_message()
+function send_message_GET()
 {
     var one = document.getElementById("ONE").value;
     var two = document.getElementById("TWO").value;
@@ -606,6 +608,47 @@ function send_message()
 <input type="text" id="ONE"/>
 <input type="text" id="TWO"/>
 
-<p onclick="send_message()">SEND</p>
+<p onclick="send_message_GET()">SEND</p>
+
+<h1 id="message"></h1>
+...........................................................
+task:
+ajax POST
+
+/* ajax_get.php */
+<?php
+$get_one = filter_input(INPUT_POST, "AAA");
+$get_two = filter_input(INPUT_POST, "BBB");
+echo $get_one . " " . $get_two;
+
+/* file.html */
+<script>
+function send_message_POST()
+{
+    var one = document.getElementById("ONE").value;
+    var two = document.getElementById("TWO").value;
+    
+    var req = new XMLHttpRequest();
+   
+    req.onreadystatechange = function()
+    {
+        if(this.readyState === 4 && this.status === 200)
+        {
+            document.getElementById("message")
+                    .innerHTML = this.responseText;
+        }
+    };
+    req.open("POST", "ajax_get.php", true);
+    req.setRequestHeader("Content-type", 
+                         "application/x-www-form-urlencoded");
+                         
+    req.send("AAA=" + one + "&BBB=" + two);
+}
+</script>
+
+<input type="text" id="ONE"/>
+<input type="text" id="TWO"/>
+
+<p onclick="send_message_POST()">SEND</p>
 
 <h1 id="message"></h1>
