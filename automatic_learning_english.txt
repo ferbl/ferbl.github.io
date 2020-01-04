@@ -652,3 +652,59 @@ function send_message_POST()
 <p onclick="send_message_POST()">SEND</p>
 
 <h1 id="message"></h1>
+...........................................................
+/* ajax.js */
+function post(php_file, response_in_html, query_string)
+{
+    var request = new XMLHttpRequest();
+    
+    request.onreadystatechange = function()
+    {
+        if(this.readyState === 4 && this.status === 200)
+        {
+            document.getElementById(response_in_html)
+                    .innerHTML = this.responseText;
+        }
+    };
+    request.open("POST", php_file, true);
+    request.setRequestHeader(
+            "Content-type", 
+            "application/x-www-form-urlencoded");
+    request.send(query_string);
+}
+
+/* file.html */
+<script src="ajax.js"></script>
+<script>
+function login()
+{
+    var email    = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    
+    var query_string = "email=" + email +
+                       "&password=" + password;
+    
+    post("user_login.php", "message", query_string);
+}
+</script>
+
+email    <input type="text"     id="email"> 
+password <input type="password" id="password">
+
+<button onclick="login()">login</button>
+
+<h1 id="message"></h1>
+
+/* user_login.php */
+<?php
+$email = filter_input(INPUT_POST, "email");
+$password = filter_input(INPUT_POST, "password");
+
+if($email == "AAA" && $password == "AAA")
+{
+    echo 'correct password';
+}
+else
+{
+    echo 'wrong password';
+}
