@@ -708,3 +708,40 @@ else
 {
     echo 'wrong password';
 }
+...........................................................
+/* set_JS_variable.php */
+<?php
+function set_var($name)
+{
+    echo "'" . $name . "'" . ";";
+}
+
+/* file.php */
+<script>
+function start()
+{
+    <?php include_once './set_JS_variable.php'; ?>
+
+    var word = <?php set_var("hello")?>
+    
+    document.getElementById("set_words")
+            .innerHTML = word;
+
+    document.getElementById("set_audio")
+            .src = <?php set_var("1.wav") ?>
+
+    document.getElementById("set_image")
+            .src = <?php set_var("img.png") ?>
+}
+</script>
+
+<p id="set_words"> </p>
+
+<audio id="set_audio" controls>
+    Your browser does not support the
+    audio element
+</audio>
+
+<img id="set_image"/> 
+
+<button onclick="start()">START</button>
