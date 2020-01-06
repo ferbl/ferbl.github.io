@@ -709,39 +709,60 @@ else
     echo 'wrong password';
 }
 ...........................................................
-/* set_JS_variable.php */
+/* print.php */
 <?php
-function set_var($name)
+function set($value)
 {
-    echo "'" . $name . "'" . ";";
+    echo $value;
 }
 
-/* file.php */
-<script>
-function start()
-{
-    <?php include_once './set_JS_variable.php'; ?>
+/* audio_and_image.php */
+<?php
+include_once './print.php';
 
-    var word = <?php set_var("hello")?>
-    
-    document.getElementById("set_words")
-            .innerHTML = word;
+$index = (int) filter_input(INPUT_POST, "index");
 
-    document.getElementById("set_audio")
-            .src = <?php set_var("1.wav") ?>
+$words = str_replace(["\n", "\r"], "", file("words.txt"));
+?>
 
-    document.getElementById("set_image")
-            .src = <?php set_var("img.png") ?>
-}
-</script>
+<p> <?php set($words[$index]);?> </p>
 
-<p id="set_words"> </p>
-
-<audio id="set_audio" controls>
-    Your browser does not support the
-    audio element
+<audio controls 
+       src="<?php set($index . ".wav"); ?>">
+       Your browser does not support the audio element
 </audio>
 
-<img id="set_image"/> 
+<img id="set_image"
+     src="<?php set($index . ".png"); ?>"/> 
 
-<button onclick="start()">START</button>
+<form method="POST">
+    <input type="hidden" 
+           name="index" 
+           value="<?php set($index + 1); ?>">
+    <input type="submit" value="next">
+</form>
+...........................................................
+/* similar string */
+<script>
+var one = "aaaaa";
+var two = "aaaaacs";
+
+if(two.length > one.length)
+{
+    temp = one;
+    one = two;
+    two = temp;
+}
+
+var similar = 0;
+
+for(i = 0; one.length > i; i++)
+{
+    if(one.charAt(i) === two.charAt(i))
+    {
+        similar++;
+    }
+}
+console.log(similar / one.length);
+
+</script>
