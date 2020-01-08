@@ -784,3 +784,126 @@ function calc_sum_ASCII(string)
     return sum;
 }
 </script>
+...........................................................
+public class StringSimilarity
+{
+    public static void main(String[] args)
+    {        
+        levenshtein_distance set = new levenshtein_distance();
+        
+        set.check("aa", "ab");
+    }
+}
+
+class levenshtein_distance
+{
+    void check(String first, String second)
+    {
+        int first_length = first.length() + 1;
+        int second_length = second.length() + 1;
+        
+        int matrix[][] = 
+                new int[first_length][second_length];
+        
+        /* matrix setup */
+        for(int i = 0; first_length > i; i++)
+        {
+            matrix[i][0] = i;
+        }
+        for(int u = 0; second_length > u; u++)
+        {
+            matrix[0][u] = u;
+        }
+        
+        System.out.println(first);
+        System.out.println(second);
+        
+        /* i-down, u-right */
+        for(int i = 1; first_length > i; i++)
+        {
+            for(int u = 1; second_length > u; u++)
+            {
+                System.out.println(first.charAt(i - 1) + " " +
+                                  second.charAt(u - 1));
+                System.out.println("i=" + i + " u=" + u);
+                
+                
+                if(first.charAt(i - 1) == second.charAt(u - 1))
+                {
+                    System.out.println("CHARS EQUAL");
+                    print_2D_array(matrix, first_length, second_length);
+                    
+                    matrix[i][u] = matrix[i-1][u-1];
+                }
+                else
+                {
+                    System.out.println("left "    + matrix[i][u-1]);
+                    System.out.println("up "      + matrix[i-1][u]);
+                    System.out.println("up-left " + matrix[i-1][u-1]);
+                    print_2D_array(matrix, first_length, second_length);
+                    
+                    matrix[i][u] = 
+                            
+                    1 + min(matrix[i]   [u-1],  
+                            matrix[i-1] [u],    
+                            matrix[i-1] [u-1]);
+                } 
+            }
+        }
+        
+        System.out.println("RESULT");
+        print_2D_array(matrix, first_length, second_length);
+    }
+    
+    int min(int a, int b, int c)
+    {
+        return Math.min(Math.min(a, b), c);
+    }
+    
+    void print_2D_array(int array[][], int one, int two)
+    {
+        for(int i = 0; one > i; i++)
+        {
+            for(int u = 0; two > u; u++)
+            {
+                System.out.print(array[i][u] + " ");
+            }
+            System.out.println("");
+        }
+    }
+}
+output:
+aa
+ab
+a a
+i=1 u=1
+CHARS EQUAL
+0 1 2 
+1 0 0 
+2 0 0 
+a b
+i=1 u=2
+left 0
+up 2
+up-left 1
+0 1 2 
+1 0 0 
+2 0 0 
+a a
+i=2 u=1
+CHARS EQUAL
+0 1 2 
+1 0 1 
+2 0 0 
+a b
+i=2 u=2
+left 1
+up 1
+up-left 0
+0 1 2 
+1 0 1 
+2 1 0 
+RESULT
+0 1 2 
+1 0 1 
+2 1 1 
