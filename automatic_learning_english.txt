@@ -885,7 +885,7 @@ RESULT
 1 0 1 2 
 levenshtein distance = 2
 ...........................................................
-/* similar string */
+/* string similarity */
 <script>
 function levenshtein_distance(first, second)
 {    
@@ -939,5 +939,32 @@ function create_2D_array(rows)
     }
     return array;
 }
-console.log(levenshtein_distance("A", "ABC"));
+</script>
+
+<script>
+function string_similarity(first, second)
+{
+    if(second.length > first.length)
+    {
+        temp = first; first = second; second = temp;
+    }
+    
+    first  = first.toLowerCase();
+    second = second.toLowerCase();
+    
+    /*
+        ABC      = 3 [length]
+        AB       = 2 [length]
+        distance = 1
+        100%  / ABC      = 33.3% [one character percentage]
+        33.3% * distance = 33.3% [distance]
+        100% - [distance]= 66.6% [similary]
+    */
+
+    percentage_change  = 100 / first.length;
+    percentage_change *= levenshtein_distance(first, second);
+    
+    return 100 - percentage_change;
+}
+console.log(string_similarity("ABC", "AB"));
 </script>
