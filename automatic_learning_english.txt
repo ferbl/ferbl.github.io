@@ -968,3 +968,14 @@ function string_similarity(first, second)
 }
 console.log(string_similarity("ABC", "AB"));
 </script>
+...........................................................
+kaldi
+1) cd kaldi/tools/extras
+2) ./check_dependencies.sh
+sudo apt-get install [dependencies]
+3) cd kaldi/tools
+4) make
+5) cd kaldi/src
+6) ./configure --shared
+7) make depend
+8) make
