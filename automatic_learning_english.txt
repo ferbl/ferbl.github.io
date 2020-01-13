@@ -979,3 +979,27 @@ sudo apt-get install [dependencies]
 6) ./configure --shared
 7) make depend
 8) make
+...........................................................
+/* audio similarity */
+libraries: musicg-1.4.2.1.jar 
+import com.musicg.fingerprint.FingerprintManager;
+import com.musicg.fingerprint.FingerprintSimilarity;
+import com.musicg.fingerprint.FingerprintSimilarityComputer;
+import com.musicg.wave.Wave;
+
+public class  AudioSimilarity
+{
+    public static void main(String[] args)
+    {
+        byte[] one = new FingerprintManager()
+                .extractFingerprint(new Wave("original.wav"));
+        byte[] two = new FingerprintManager()
+                .extractFingerprint(new Wave("similar.wav"));
+        
+        FingerprintSimilarity similaruty =
+                new FingerprintSimilarityComputer(one, two)
+                .getFingerprintsSimilarity();
+        
+        System.out.println(similaruty.getScore());
+    }
+}
