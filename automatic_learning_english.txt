@@ -1003,3 +1003,57 @@ public class  AudioSimilarity
         System.out.println(similaruty.getScore());
     }
 }
+...........................................................
+<p>
+    <button id="start_button">RECORD</button>  
+    <button id="stop_button">STOP</button>
+</p>
+
+<audio id="audio_element" controls></audio>
+
+<script>
+function record_audio_from_microphone()
+{
+    var start = document.getElementById("start_button");
+    var stop  = document.getElementById("stop_button");
+    var audio = document.getElementById("audio_element");
+    
+    var media_recorder;
+    
+    const enable_audio = { audio: true };
+    
+    var run = function(stream)
+    {
+        console.log("works");
+        
+        media_recorder = new MediaRecorder(stream);
+        
+        start.addEventListener("click", start_recording);
+        stop.addEventListener("click", stop_recording);
+
+        media_recorder.addEventListener("dataavailable", save);
+    };
+    
+    function start_recording()
+    {
+        console.log("start_recording");
+        media_recorder.start();
+    }
+    function stop_recording()
+    {
+        console.log("stop_recording");
+        media_recorder.stop();
+    }
+    function save(link)
+    {
+        console.log("save");
+        audio.src = URL.createObjectURL(link.data);
+    }
+    
+    navigator.mediaDevices
+            .getUserMedia(enable_audio)
+            .then(run);
+}
+
+record_audio_from_microphone();
+</script>
