@@ -1004,11 +1004,9 @@ public class  AudioSimilarity
     }
 }
 ...........................................................
-<p>
-    <button id="start_button">RECORD</button>  
-    <button id="stop_button">STOP</button>
-</p>
 
+<button id="start_button">RECORD</button>  
+<button id="stop_button">STOP</button>
 <audio id="audio_element" controls></audio>
 
 <script>
@@ -1044,10 +1042,10 @@ function record_audio_from_microphone()
         console.log("stop_recording");
         media_recorder.stop();
     }
-    function save(link)
+    function save(blob)
     {
         console.log("save");
-        audio.src = URL.createObjectURL(link.data);
+        audio.src = URL.createObjectURL(blob.data);
     }
     
     navigator.mediaDevices
@@ -1056,4 +1054,21 @@ function record_audio_from_microphone()
 }
 
 record_audio_from_microphone();
+</script>
+<script>
+function upload(blob)
+{
+    var request = new XMLHttpRequest();
+
+    request.onreadystatechange = function()
+    {
+        if(this.readyState === 4 && this.status === 200)
+        {
+            console.log("upload");
+        }
+    };
+
+    request.open("POST", "file_upload.php", true);
+    request.send();
+}
 </script>
