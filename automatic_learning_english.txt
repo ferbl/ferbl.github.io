@@ -1004,6 +1004,7 @@ public class  AudioSimilarity
     }
 }
 ...........................................................
+/* record audio from microphone */
 
 <button id="start_button">RECORD</button>  
 <button id="stop_button">STOP</button>
@@ -1055,20 +1056,21 @@ function record_audio_from_microphone()
 
 record_audio_from_microphone();
 </script>
-<script>
-function upload(blob)
+...........................................................
+/* save POST file from form on the server */
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="my_file">
+    <input type="submit">
+</form>
+
+<?php
+$now_path = $_FILES["my_file"]["tmp_name"];
+$new_path = $_FILES["my_file"]["name"];
+
+if(move_uploaded_file($now_path, $new_path))
 {
-    var request = new XMLHttpRequest();
-
-    request.onreadystatechange = function()
-    {
-        if(this.readyState === 4 && this.status === 200)
-        {
-            console.log("upload");
-        }
-    };
-
-    request.open("POST", "file_upload.php", true);
-    request.send();
+    echo "FILE moved ";
+    echo "FILE PATH: " . $new_path;
+    echo "FILE TYPE: " . $_FILES["my_file"]["type"];
+    echo "FILE SIZE: " . $_FILES["my_file"]["size"];
 }
-</script>
