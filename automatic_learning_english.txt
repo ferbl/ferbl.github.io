@@ -1004,59 +1004,6 @@ public class  AudioSimilarity
     }
 }
 ...........................................................
-/* record audio from microphone */
-
-<button id="start_button">RECORD</button>  
-<button id="stop_button">STOP</button>
-<audio id="audio_element" controls></audio>
-
-<script>
-function record_audio_from_microphone()
-{
-    var start = document.getElementById("start_button");
-    var stop  = document.getElementById("stop_button");
-    var audio = document.getElementById("audio_element");
-    
-    var media_recorder;
-    
-    const enable_audio = { audio: true };
-    
-    var run = function(stream)
-    {
-        console.log("works");
-        
-        media_recorder = new MediaRecorder(stream);
-        
-        start.addEventListener("click", start_recording);
-        stop.addEventListener("click", stop_recording);
-
-        media_recorder.addEventListener("dataavailable", save);
-    };
-    
-    function start_recording()
-    {
-        console.log("start_recording");
-        media_recorder.start();
-    }
-    function stop_recording()
-    {
-        console.log("stop_recording");
-        media_recorder.stop();
-    }
-    function save(blob)
-    {
-        console.log("save");
-        audio.src = URL.createObjectURL(blob.data);
-    }
-    
-    navigator.mediaDevices
-            .getUserMedia(enable_audio)
-            .then(run);
-}
-
-record_audio_from_microphone();
-</script>
-...........................................................
 /* save POST file from form on the server */
 <form method="POST" enctype="multipart/form-data">
     <input type="file" name="my_file">
@@ -1074,3 +1021,83 @@ if(move_uploaded_file($now_path, $new_path))
     echo "FILE TYPE: " . $_FILES["my_file"]["type"];
     echo "FILE SIZE: " . $_FILES["my_file"]["size"];
 }
+...........................................................
+/* record audio from microphone & upload to server */
+<p>
+    <button id="start_button">RECORD</button>  
+    <button id="stop_button">STOP</button>
+</p>
+<audio id="audio_element" controls></audio>
+
+<script>
+function record_audio_from_microphone()
+{
+    var start = document.getElementById("start_button");
+    var stop  = document.getElementById("stop_button");
+    var media_recorder;
+    
+    const enable_audio = { audio: true };
+    
+    var run = function(stream)
+    {
+        console.log("works");
+        
+        media_recorder = new MediaRecorder(stream);
+        
+        start.addEventListener("click", start_recording);
+        stop.addEventListener("click", stop_recording);
+
+        media_recorder.addEventListener("dataavailable", 
+                                        set_blob);
+    };
+    
+    function start_recording()
+    {
+        console.log("start_recording");
+        media_recorder.start();
+    }
+    function stop_recording()
+    {
+        console.log("stop_recording");
+        media_recorder.stop();
+    }
+    function set_blob(blob)
+    {
+        var blob_audio = blob.data;
+        
+        set_recording_to_element(blob_audio);
+        upload_to_server(blob_audio);
+    }
+    function set_recording_to_element(blob_audio)
+    {
+        document.getElementById("audio_element")
+                .src = URL.createObjectURL(blob_audio);
+    }
+    function upload_to_server(blob_audio)
+    {
+        var file = new File([blob_audio], "speech.wav");
+        console.log(file);
+        
+        var req = new XMLHttpRequest();
+        var form = new FormData();
+
+        form.append("my_file", file);
+        req.open("POST", "upload_file.php", true);
+        req.send(form);
+    }
+    
+    navigator.mediaDevices
+            .getUserMedia(enable_audio)
+            .then(run);
+}
+
+record_audio_from_microphone();
+</script>
+
+/* upload_file.php */
+<?php
+$now_path = $_FILES["my_file"]["tmp_name"];
+$new_path = $_FILES["my_file"]["name"];
+
+move_uploaded_file($now_path, $new_path);
+
