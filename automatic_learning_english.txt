@@ -1101,6 +1101,22 @@ $new_path = $_FILES["my_file"]["name"];
 
 move_uploaded_file($now_path, $new_path);
 ...........................................................
+public class NN
+{
+    public static void main(String[] args)
+    {
+        double[][] X = 
+        { 
+            {0, 0}, {0, 1}, {1, 0}, {1, 1} 
+        };
+        
+        double[][] Y = 
+        { 
+            {0}, {1}, {1}, {0}
+        };
+    }
+}
+...........................................................
 class Main
 {
     public static void main(String[] args)
