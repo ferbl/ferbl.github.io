@@ -1116,6 +1116,16 @@ public class NN
         };
     }
 }
+class NN
+{
+    void transpose (double[][] matrix)
+    {
+        int one = matrix.length;
+        int two = matrix[0].length;
+        
+        System.out.println(one + " " + two);
+    }
+}
 ...........................................................
 class Main
 {
