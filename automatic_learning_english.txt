@@ -1125,6 +1125,10 @@ class NN
         
         System.out.println(one + " " + two);
     }
+    void sum(double[][] one, double[][] two)
+    {
+        
+    }
 }
 ...........................................................
 class Main
