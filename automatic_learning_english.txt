@@ -1146,6 +1146,42 @@ class NN
         return transposed;
     }
     
+    double[][] sum(double[][] first, double[][] second)
+    {
+        int one = first.length;
+        int two = first[0].length;
+        
+        double[][] sum = new double[one][two];
+        
+        for(int i = 0; one > i; i++)
+        {
+            for(int u = 0; two > u; u++)
+            {
+                sum[i][u] = first[i][u] + second[i][u];
+            }
+        }
+        
+        return sum;
+    }
+    
+    double[][] subtract(double[][] first, double[][] second)
+    {
+        int one = first.length;
+        int two = first[0].length;
+        
+        double[][] subtract = new double[one][two];
+        
+        for(int i = 0; one > i; i++)
+        {
+            for(int u = 0; two > u; u++)
+            {
+                subtract[i][u] = first[i][u] - second[i][u];
+            }
+        }
+        
+        return subtract;
+    }
+    
     void print_matrix(double[][] matrix)
     {         
         for(int i = 0; matrix.length > i; i++)
