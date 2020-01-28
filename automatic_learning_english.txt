@@ -1119,10 +1119,6 @@ public class Main_
         };
         
         NN nn = new NN();
-        
-        X = nn.transpose(X);
-        
-        nn.print_matrix(X);
     }
 }
 
@@ -1164,6 +1160,17 @@ class NN
         
         return sum;
     }
+    double[][] sum_of_multiplication(double[][] first, double[][] second)
+    {
+        int one_first  = first.length;
+        int two_first  = first[0].length;
+        int one_second = second.length;
+        int two_second = second[0].length;
+        
+        double[][] sum = new double[one_first][one_second];
+        
+        return sum;
+    }
     
     double[][] subtract(double[][] first, double[][] second)
     {
@@ -1177,6 +1184,23 @@ class NN
             for(int u = 0; two > u; u++)
             {
                 subtract[i][u] = first[i][u] - second[i][u];
+            }
+        }
+        
+        return subtract;
+    }
+    double[][] subtract(double[][] first, double second)
+    {
+        int one = first.length;
+        int two = first[0].length;
+        
+        double[][] subtract = new double[one][two];
+        
+        for(int i = 0; one > i; i++)
+        {
+            for(int u = 0; two > u; u++)
+            {
+                subtract[i][u] = first[i][u] - second;
             }
         }
         
