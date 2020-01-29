@@ -1240,6 +1240,11 @@ class NN
         return multiply;
     }
     
+    double sigmoid(double x)
+    {
+        return 1 / ( 1 + Math.exp(-x) );
+    }
+    
     void print_matrix(double[][] matrix)
     {         
         for(int i = 0; matrix.length > i; i++)
