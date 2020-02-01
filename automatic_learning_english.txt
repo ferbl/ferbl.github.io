@@ -1162,12 +1162,22 @@ class NN
     }
     double[][] sum_of_multiplication(double[][] first, double[][] second)
     {
-        int one_first  = first.length;
-        int two_first  = first[0].length;
-        int one_second = second.length;
-        int two_second = second[0].length;
+        int first_1  = first.length;
+        int first_2  = first[0].length;
+        int second_2 = second[0].length;
         
-        double[][] sum = new double[one_first][one_second];
+        double[][] sum = new double[first_1][second_2];
+        
+        for(int i = 0; first_1 > i; i++)
+        {
+            for(int u = 0; second_2 > u; u++)
+            {
+                for(int y = 0; first_2 > y; y++)
+                {
+                    sum[i][u] += first[i][y] * second[y][u];
+                }
+            }
+        }
         
         return sum;
     }
