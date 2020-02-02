@@ -1250,6 +1250,23 @@ class NN
         return multiply;
     }
     
+    double[][] divide(double[][] first, double second)
+    {
+        int one = first.length;
+        int two = first[0].length;
+        
+        double[][] divide = new double[one][two];
+        
+        for(int i = 0; one > i; i++)
+        {
+            for(int u = 0; two > u; u++)
+            {
+                divide[i][u] = first[i][u] / second;
+            }
+        }
+        return divide;
+    }
+    
     void dot(double[][] first, double[][] second)
     {
         int first_1 = first.length;
