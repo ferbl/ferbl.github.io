@@ -1310,6 +1310,45 @@ class NN
         }
     }
 }
+
+class _Perceptron
+{
+    double bias;
+    double[] weight;
+    
+    void train(double input[][], 
+               int output[], 
+               double _bias, 
+               double learning_rate,
+               int epoch)
+    {
+        int input_length  = input[0].length;
+        int output_length = output.length;
+                
+        bias = _bias;
+        weight = new double[input_length];
+                
+        System.out.println(input_length + " " + output_length);
+        
+        
+        Random random = new Random();
+
+        for(int i = 0; input_length > i; i++)
+        {
+            weight[i] = random.nextDouble();
+        }
+        
+        for(int i = 0; epoch > i; i++)
+        {
+            int total_error = 0;
+            
+            for(int u = 0; output_length > u; u++)
+            {
+                
+            }
+        }
+    }
+}
 ...........................................................
 class Main
 {
