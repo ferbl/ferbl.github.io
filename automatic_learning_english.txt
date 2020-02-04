@@ -1328,6 +1328,7 @@ class _Perceptron
         bias = _bias;
         weight = new double[input_length];
                 
+        
         System.out.println(input_length + " " + output_length);
         
         
@@ -1344,8 +1345,40 @@ class _Perceptron
             
             for(int u = 0; output_length > u; u++)
             {
+                int out = calc(input[u]);
+                int error = output[u] - out;
                 
+                total_error += error;
+                
+                for(int y = 0; input_length > y; y++)
+                {
+                    double delta = learning_rate * input[u][y] * error;
+                    weight[y] += delta;
+                }
             }
+            if(total_error == 0)
+            {
+                break;
+            }
+        }
+    }
+    
+    int calc(double input[])
+    {
+        double sum = 0;
+        
+        for(int i = 0; input.length > i; i++)
+        {
+            sum += weight[i] * input[i];
+        }
+        
+        if(sum > bias)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
         }
     }
 }
