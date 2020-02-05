@@ -1327,17 +1327,12 @@ class _Perceptron
                 
         bias = _bias;
         weight = new double[input_length];
-                
         
-        System.out.println(input_length + " " + output_length);
+        System.out.println("input_length " + input_length);
+        System.out.println("output_length " + output_length);
         
-        
-        Random random = new Random();
-
-        for(int i = 0; input_length > i; i++)
-        {
-            weight[i] = random.nextDouble();
-        }
+        weight[0] = 0.1111111;
+        weight[1] = 0.5555555;
         
         for(int i = 0; epoch > i; i++)
         {
@@ -1345,7 +1340,7 @@ class _Perceptron
             
             for(int u = 0; output_length > u; u++)
             {
-                int out = calc(input[u]);
+                int out = calc( input[u] );
                 int error = output[u] - out;
                 
                 total_error += error;
@@ -1369,6 +1364,10 @@ class _Perceptron
         
         for(int i = 0; input.length > i; i++)
         {
+            System.out.println("w " + weight[i]);
+            System.out.println("in " + input[i] );
+            System.out.println("sum " + weight[i] * input[i]);
+            
             sum += weight[i] * input[i];
         }
         
