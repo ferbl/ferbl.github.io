@@ -1331,23 +1331,31 @@ class _Perceptron
         System.out.println("input_length " + input_length);
         System.out.println("output_length " + output_length);
         
-        weight[0] = 0.1111111;
-        weight[1] = 0.5555555;
+        weight[0] = 0.111;
+        weight[1] = 0.555;
         
         for(int i = 0; epoch > i; i++)
         {
             int total_error = 0;
+            System.out.println("total err " + total_error);
             
             for(int u = 0; output_length > u; u++)
-            {
+            {          
+                System.out.println("u = " + u);
+                
                 int out = calc( input[u] );
+                System.out.println("out " + out);
+                
                 int error = output[u] - out;
+                System.out.println("error " + error);
                 
                 total_error += error;
                 
                 for(int y = 0; input_length > y; y++)
                 {
                     double delta = learning_rate * input[u][y] * error;
+                    System.out.println("delta " + delta);
+                    
                     weight[y] += delta;
                 }
             }
@@ -1364,12 +1372,14 @@ class _Perceptron
         
         for(int i = 0; input.length > i; i++)
         {
+            System.out.println("**************");
             System.out.println("w " + weight[i]);
-            System.out.println("in " + input[i] );
+            System.out.println("in " + (int)input[i] );
             System.out.println("sum " + weight[i] * input[i]);
             
             sum += weight[i] * input[i];
         }
+        System.out.println("^^^^^^^^^^^^^^");
         
         if(sum > bias)
         {
