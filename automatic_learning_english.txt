@@ -1322,24 +1322,21 @@ class _Perceptron
                double learning_rate,
                int epoch)
     {
-        int input_length  = input[0].length;
-        int output_length = output.length;
+        int inputs  = input[0].length;
+        int outputs = output.length;
                 
         bias = _bias;
-        weight = new double[input_length];
+        weight = new double[inputs];
         
-        System.out.println("input_length " + input_length);
-        System.out.println("output_length " + output_length);
+        System.out.println("inputs " + inputs);
+        System.out.println("outputs " + outputs);
         
         weight[0] = 0.111;
         weight[1] = 0.555;
         
         for(int i = 0; epoch > i; i++)
         {
-            int total_error = 0;
-            System.out.println("total err " + total_error);
-            
-            for(int u = 0; output_length > u; u++)
+            for(int u = 0; outputs > u; u++)
             {          
                 System.out.println("u = " + u);
                 
@@ -1349,19 +1346,15 @@ class _Perceptron
                 int error = output[u] - out;
                 System.out.println("error " + error);
                 
-                total_error += error;
-                
-                for(int y = 0; input_length > y; y++)
+                for(int y = 0; inputs > y; y++)
                 {
-                    double delta = learning_rate * input[u][y] * error;
+                    double delta = learning_rate 
+                            * input[u][y] 
+                            * error;
                     System.out.println("delta " + delta);
                     
                     weight[y] += delta;
                 }
-            }
-            if(total_error == 0)
-            {
-                break;
             }
         }
     }
@@ -1381,14 +1374,8 @@ class _Perceptron
         }
         System.out.println("^^^^^^^^^^^^^^");
         
-        if(sum > bias)
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
+        if(sum > bias) return 1;
+        else return 0;
     }
 }
 ...........................................................
