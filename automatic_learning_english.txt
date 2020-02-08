@@ -1313,66 +1313,51 @@ class NN
 
 class _Perceptron
 {
-    double bias;
-    double[] weight;
-    
-    void train(double input[][], 
-               int output[], 
-               double _bias, 
-               double learning_rate,
-               int epoch)
+    double input[][] = 
     {
-        int inputs  = input[0].length;
-        int outputs = output.length;
-                
-        bias = _bias;
-        weight = new double[inputs];
-        
-        System.out.println("inputs " + inputs);
-        System.out.println("outputs " + outputs);
-        
-        weight[0] = 0.111;
-        weight[1] = 0.555;
-        
-        for(int i = 0; epoch > i; i++)
+        {0, 0}, 
+        {0, 1}, 
+        {1, 0}, 
+        {1, 1}
+    };
+    int output[]  = {0, 0, 0, 1};
+    int epoch = 1;
+    
+    double weight[] = {0.111, 0.555};
+    double rate = 0.2;
+    double bias = 0.1;
+    
+    void start()
+    {
+        for(int i1 = 0; epoch > i1; i1++)
         {
-            for(int u = 0; outputs > u; u++)
-            {          
-                System.out.println("u = " + u);
-                
-                int out = calc( input[u] );
-                System.out.println("out " + out);
-                
-                int error = output[u] - out;
-                System.out.println("error " + error);
-                
-                for(int y = 0; inputs > y; y++)
-                {
-                    double delta = learning_rate 
-                            * input[u][y] 
-                            * error;
-                    System.out.println("delta " + delta);
-                    
-                    weight[y] += delta;
-                }
-            }
+            output();
         }
     }
-    
+    void input(int i2, int error)
+    {
+        for(int i4 = 0; input[0].length > i4; i4++)
+        {
+            double delta = rate * input[i2][i4] * error;
+            weight[i4] += delta;
+        }
+    }
+    void output()
+    {
+        for(int i2 = 0; output.length > i2; i2++)
+        {
+            int error = output[i2] - calc(input[i2]);
+            input(i2, error);
+        }
+    }
     int calc(double input[])
     {
         double sum = 0;
         
-        for(int i = 0; input.length > i; i++)
+        for(int i3 = 0; input.length > i3; i3++)
         {
-            System.out.println("**************");
-            System.out.println("w " + weight[i]);
-            System.out.println("in " + (int)input[i] );
-            System.out.println("sum " + weight[i] * input[i]);
-            
-            sum += weight[i] * input[i];
+            sum += weight[i3] * input[i3];
         }
-        System.out.println("^^^^^^^^^^^^^^");
         
         if(sum > bias) return 1;
         else return 0;
