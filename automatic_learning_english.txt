@@ -1339,14 +1339,25 @@ class _Perceptron
         for(int i4 = 0; input[0].length > i4; i4++)
         {
             double delta = rate * input[i2][i4] * error;
+            System.out.println("delta " + delta 
+                                + " = " + rate 
+                                + " * " + (int)input[i2][i4] 
+                                + " * " + error);
+            
             weight[i4] += delta;
+            System.out.println("weight " + weight[i4] + " += " + delta);
         }
     }
     void output()
     {
         for(int i2 = 0; output.length > i2; i2++)
         {
-            int error = output[i2] - calc(input[i2]);
+            int calc  = calc(input[i2]);
+            int error = output[i2] - calc;
+            
+            System.out.println("error " + error 
+                                + " = " + output[i2] 
+                                + " - " + calc);
             input(i2, error);
         }
     }
@@ -1357,10 +1368,22 @@ class _Perceptron
         for(int i3 = 0; input.length > i3; i3++)
         {
             sum += weight[i3] * input[i3];
+            
+            System.out.println("sum " + sum 
+                                + " = " + weight[i3] 
+                                + " * " + (int)input[i3]);
         }
         
-        if(sum > bias) return 1;
-        else return 0;
+        if(sum > bias)
+        {
+            System.out.println("sum > bias");
+            return 1;
+        }
+        else if(sum < bias)
+        {
+            System.out.println("sum < bias");
+        }
+        return 0;
     }
 }
 ...........................................................
