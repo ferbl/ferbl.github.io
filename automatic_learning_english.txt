@@ -1446,10 +1446,17 @@ class _Perceptron
 }
 ...........................................................
 class NN
-{
-    double sigmoid(int x)
+{    
+    double[] sigmoid(double x[])
     {
-        return 1 / (1 + Math.exp(-x));
+        double result[] = {0, 0, 0, 0};
+        
+        for(int i = 0; x.length > i; i++)
+        {
+            result[i] = 1 / (1 + Math.exp( -x[i] ));
+        }
+        
+        return result;
     }
     
     double sigmoid_derivative(double x)
@@ -1465,14 +1472,45 @@ class NN
     int training_outputs[] = {0, 0, 1, 1};
     
     /* random weights */
-    double weights[] = {0.85956061, 0.1645695, 0.48347596};
+    double weights[] = {  0.9, 
+                          0.2, 
+                          0.5  };
     
     void training()
     {
-        for(int i = 0; 10 > i; i++)
+        for(int i = 0; 1 > i; i++)
         {
+            double outputs[] = sigmoid( dot(training_inputs, weights) );
             
+            double error[] = subtract(training_outputs, outputs);
         }
+    }
+    
+    double[] dot(int inputs[][], double weights[])
+    { 
+        double result[] = {0, 0, 0, 0};
+        
+        for(int i = 0; inputs.length > i; i++)
+        {
+            for(int u = 0; inputs[0].length > u; u++)
+            {
+                result[i] += inputs[i][u] * weights[u];
+            }
+        }
+        
+        return result;
+    }
+
+    double[] subtract(int training_outputs[], double outputs[])
+    {
+        double result[] = {0, 0, 0, 0};
+        
+        for(int i = 0; training_outputs.length > i; i++)
+        {
+            result[i] = training_outputs[i] - outputs[i];
+        }
+        
+        return result;
     }
     
 }
