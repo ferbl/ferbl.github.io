@@ -1446,7 +1446,7 @@ class _Perceptron
 }
 ...........................................................
 class NN
-{    
+{        
     double[] sigmoid(double x[])
     {
         double result[] = {0, 0, 0, 0};
@@ -1459,9 +1459,16 @@ class NN
         return result;
     }
     
-    double sigmoid_derivative(double x)
+    double[] sigmoid_derivative(double x[])
     {
-        return x * (1 - x);
+        double result[] = {0, 0, 0, 0};
+        
+        for(int i = 0; x.length > i; i++)
+        {
+            result[i] = x[i] * (1 - x[i]);
+        }
+        
+        return result;
     }
     
     int training_inputs[][] = {  {0, 0, 1}, 
@@ -1483,6 +1490,8 @@ class NN
             double outputs[] = sigmoid( dot(training_inputs, weights) );
             
             double error[] = subtract(training_outputs, outputs);
+            
+            double adjustment[] = multiply(error, sigmoid_derivative(outputs));
         }
     }
     
@@ -1508,6 +1517,18 @@ class NN
         for(int i = 0; training_outputs.length > i; i++)
         {
             result[i] = training_outputs[i] - outputs[i];
+        }
+        
+        return result;
+    }
+    
+    double[] multiply(double error[], double sigmoid_derivative[])
+    {
+        double result[] = {0, 0, 0, 0};
+        
+        for(int i = 0; error.length > i; i++)
+        {
+            result[i] = error[i] * sigmoid_derivative[i];
         }
         
         return result;
