@@ -1454,6 +1454,8 @@ class NN
         for(int i = 0; x.length > i; i++)
         {
             result[i] = 1 / (1 + Math.exp( -x[i] ));
+            
+            System.out.println(result[i]);
         }
         
         return result;
@@ -1492,6 +1494,8 @@ class NN
             double error[] = subtract(training_outputs, outputs);
             
             double adjustment[] = multiply(error, sigmoid_derivative(outputs));
+            
+            sum_with_weights( dot_(transpose(training_inputs), adjustment) );
         }
     }
     
@@ -1532,6 +1536,49 @@ class NN
         }
         
         return result;
+    }
+    
+    int[][] transpose(int matrix[][])
+    {
+        int one = matrix.length;
+        int two = matrix[0].length;
+        
+        int transposed[][] = new int[two][one];
+        
+        for(int i = 0; one > i; i++)
+        {
+            for(int u = 0; two > u; u++)
+            {
+                transposed[u][i] = matrix[i][u];
+            }
+        }
+        
+        return transposed;
+    }
+    
+    double[] dot_(int[][] transpose, double[] adjustment)
+    {
+        double result[] = {0, 0, 0};
+        
+        for(int i = 0; transpose.length > i; i++)
+        {
+            for(int u = 0; transpose[0].length > u; u++)
+            {
+                result[i] += transpose[i][u] * adjustment[u];
+            }
+        }
+        
+        return result;
+    }
+
+    void sum_with_weights(double[] dot_)
+    {
+        for(int i = 0; weights.length > i; i++)
+        {
+            weights[i] += dot_[i];
+            
+            //System.out.println(weights[i]);
+        }
     }
     
 }
