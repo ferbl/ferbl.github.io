@@ -1454,8 +1454,6 @@ class NN
         for(int i = 0; x.length > i; i++)
         {
             result[i] = 1 / (1 + Math.exp( -x[i] ));
-            
-            System.out.println(result[i]);
         }
         
         return result;
@@ -1489,16 +1487,16 @@ class NN
     {
         for(int i = 0; 1 > i; i++)
         {
-            double normalization[] = 
+            double outputs[] = 
                     sigmoid( dot(training_inputs, weights) );
             
             double error[] = 
-                    subtract(training_outputs, normalization);
+                    subtract(training_outputs, outputs);
             
             double adjustment[] = 
-                    multiply(error, sigmoid_derivative(normalization));
+                    multiply(error, sigmoid_derivative(outputs));
             
-            sum_weights
+            sum_to_weights
             ( 
                     dot_(transpose(training_inputs), adjustment) 
             );
@@ -1577,15 +1575,72 @@ class NN
         return result;
     }
 
-    void sum_weights(double[] dot_)
+    void sum_to_weights(double[] dot_)
     {
         for(int i = 0; weights.length > i; i++)
         {
             weights[i] += dot_[i];
-            
-            //System.out.println(weights[i]);
         }
     }
-    
 }
+/*
+training_inputs:
+ 0 0 1
+ 0 1 1
+ 1 0 1
+ 1 1 1
+training_outputs:
+ 0 0 1 1
+
+weights:
+0.9  0.2  0.5
+
+dot(training_inputs, weights)
+0*0.9 + 0*0.2 + 1*0.5 = 0.5
+0*0.9 + 1*0.2 + 1*0.5 = 0.7
+1*0.9 + 0*0.2 + 1*0.5 = 1.4
+1*0.9 + 1*0.2 + 1*0.5 = 1.6
+
+outputs: sigmoid( dot(training_inputs, weights) )
+1 / (1 + e^-0.5) = 0.62245933
+1 / (1 + e^-0.7) = 0.66818777
+1 / (1 + e^-1.4) = 0.80218389
+1 / (1 + e^-1.6) = 0.83201839
+
+error: subtract(training_outputs, outputs)
+0 - 0.62245933 = -0.62245933
+0 - 0.66818777 = -0.66818777
+1 - 0.80218389 = 0.19781611
+1 - 0.83201839 = 0.16798161
+
+sigmoid_derivative(outputs)
+0.62245933 * (1 - 0.62245933) = 0.23500371
+0.66818777 * (1 - 0.66818777) = 0.22171287
+0.80218389 * (1 - 0.80218389) = 0.15868490
+0.83201839 * (1 - 0.83201839) = 0.13976379
+
+adjustment: multiply(error, sigmoid_derivative(outputs))
+-0.62245933 * 0.23500371 = -0.14628025
+-0.66818777 * 0.22171287 = -0.14814583
+ 0.19781611 * 0.15868490 =  0.03139043
+ 0.16798161 * 0.13976379 =  0.02347775
+
+transpose(training_inputs)
+0 0 1 1
+0 1 0 1
+1 1 1 1
+
+dot(transpose(training_inputs), adjustment) 
+0*-0.14628025 + 0*-0.14814583 + 1*0.03139043 + 1*0.02347775 =  0.05486818
+0*-0.14628025 + 1*-0.14814583 + 0*0.03139043 + 1*0.02347775 = -0.12466808
+0*-0.14628025 + 0*-0.14814583 + 1*0.03139043 + 1*0.02347775 = -0.23955791
+
+sum_to_weights( dot(transpose(training_inputs), adjustment) )
+0.9 +  0.05486818 = 0.95486818
+0.2 + -0.12466808 = 0.07533192
+0.5 + -0.23955791 = 0.26044209
+
+new weights:
+0.95486818  0.07533192  0.26044209
+*/
 
