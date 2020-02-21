@@ -1655,7 +1655,7 @@ training_inputs = np.array([  [ 10,  10],
                               [ 50,  50],  
                               [-20, -20],
                               [-40, -40]  ])
-                              
+                     
 training_outputs = np.array( [1, 1, 0, 0] )
 
 weight_1 = 0.2
@@ -1672,8 +1672,14 @@ bias_3 = 0.3
 for iteration in range(1):
     
     sum_hidden_1 = weight_1 * training_inputs[0] + weight_2 * training_inputs[2] + bias_1
+    hidden_1 = sigmoid(sum_hidden_1)
     
     sum_hidden_2 = weight_3 * training_inputs[0] + weight_4 * training_inputs[2] + bias_2
+    hidden_2 = sigmoid(sum_hidden_2)
     
-    print (sum_hidden_1)
-    print (sum_hidden_2)
+    sum_output = weight_5 * hidden_1 + weight_6 * hidden_2 + bias_3
+    output = sigmoid(sum_output)
+    
+    print (hidden_1)
+    print (hidden_2)
+    print (output)
