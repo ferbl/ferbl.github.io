@@ -1668,6 +1668,7 @@ weight_6 = 0.6
 bias_1 = 0.1
 bias_2 = 0.2
 bias_3 = 0.3
+learn_rate = 0.1
 
 for iteration in range(1):
 
@@ -1685,7 +1686,7 @@ for iteration in range(1):
 # INPUT /____W4__\|     |/
 #                 | H2  |
 #                 |_____|
-    
+
     sum_hidden_1  = weight_1 * training_inputs[0]
     sum_hidden_1 += weight_2 * training_inputs[2]
     sum_hidden_1 += bias_1
@@ -1706,26 +1707,31 @@ for iteration in range(1):
     
     output = sigmoid(sum_output)
     
-    # derivative
-    derivative_weight_5 = hidden_1 * sigmoid_derivative(sum_output)
-    derivative_weight_6 = hidden_2 * sigmoid_derivative(sum_output)
+    # derivatives
+    der_weight_5 = hidden_1 * sigmoid_der(sum_output)
+    der_weight_6 = hidden_2 * sigmoid_der(sum_output)
     
-    derivative_bias_3 = sigmoid_derivative(sum_output)
+    der_bias_3 = sigmoid_der(sum_output)
     
     
-    derivative_hidden_1 = weight_5 * sigmoid_derivative(sum_output)
+    der_hidden_1 = weight_5 * sigmoid_der(sum_output)
     
-    derivative_hidden_2 = weight_6 * sigmoid_derivative(sum_output)
+    der_hidden_2 = weight_6 * sigmoid_der(sum_output)
     
     # INPUT <- H1
-    derivative_hidden_1_weight_1 = training_inputs[0] * sigmoid_derivative(sum_hidden_1)
-    derivative_hidden_1_weight_2 = training_inputs[2] * sigmoid_derivative(sum_hidden_1)
+    der_hidden_1_weight_1 = training_inputs[0] * sigmoid_der(sum_hidden_1)
+    der_hidden_1_weight_2 = training_inputs[2] * sigmoid_der(sum_hidden_1)
     
-    derivative_hidden_1_bias_1 = sigmoid_derivative(sum_hidden_1)
+    der_hidden_1_bias_1 = sigmoid_der(sum_hidden_1)
     
     # INPUT <- H2
-    derivative_hidden_2_weight_3 = training_inputs[0] * sigmoid_derivative(sum_hidden_2)
-    derivative_hidden_2_weight_4 = training_inputs[2] * sigmoid_derivative(sum_hidden_2)
+    der_hidden_2_weight_3 = training_inputs[0] * sigmoid_der(sum_hidden_2)
+    der_hidden_2_weight_4 = training_inputs[2] * sigmoid_der(sum_hidden_2)
 
-    derivative_hidden_2_bias_2 = sigmoid_derivative(sum_hidden_2)
+    der_hidden_2_bias_2 = sigmoid_der(sum_hidden_2)
     
+    # update
+    weight_1 -= learn_rate * der_hidden_1 * der_hidden_1_weight_1
+    weight_2 -= learn_rate * der_hidden_1 * der_hidden_1_weight_2
+    bias_1   -= learn_rate * der_hidden_1 * der_hidden_1_bias_1
+    print (weight_1, weight_2, bias_1)
