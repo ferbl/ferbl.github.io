@@ -1734,4 +1734,7 @@ for iteration in range(1):
     weight_1 -= learn_rate * der_hidden_1 * der_hidden_1_weight_1
     weight_2 -= learn_rate * der_hidden_1 * der_hidden_1_weight_2
     bias_1   -= learn_rate * der_hidden_1 * der_hidden_1_bias_1
-    print (weight_1, weight_2, bias_1)
+    
+    weight_3 -= learn_rate * der_hidden_2 * der_hidden_2_weight_3
+    weight_4 -= learn_rate * der_hidden_2 * der_hidden_2_weight_4
+    bias_2   -= learn_rate * der_hidden_2 * der_hidden_2_bias_2
