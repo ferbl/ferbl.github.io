@@ -1743,3 +1743,9 @@ for inputs, outputs in zip(training_inputs, training_outputs):
     weight_6 -= learn_rate * der_weight_6
     bias_3   -= learn_rate * der_bias_3
     
+def feedforward(x):
+    hidden_1 = sigmoid(weight_1 * x[0] + weight_2 * x[1] + bias_1)
+    hidden_2 = sigmoid(weight_3 * x[0] + weight_4 * x[1] + bias_2)
+    output   = sigmoid(weight_5 * hidden_1 + weight_6 * hidden_2 + bias_3)
+    return output
+    
