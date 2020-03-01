@@ -1651,10 +1651,10 @@ def sigmoid_der(x):
     fx = sigmoid(x)
     return fx * (1 - fx)
 
-training_inputs = np.array([ [ 10,  10],  #0
-                             [-20, -20],  #1
-                             [ 30,  30],  #2
-                             [-40, -40] ])#3
+training_inputs = np.array([ [ 10,  10],  #A
+                             [-20, -20],  #Z
+                             [ 30,  30],  #A
+                             [-40, -40] ])#Z
                    
 training_outputs = np.array( [1, 0, 1, 0] )
 
@@ -1670,10 +1670,10 @@ bias_2 = 0.1
 bias_3 = 0.1
 learn_rate = 0.1
 
-for inputs, outputs in zip(training_inputs, training_outputs):
-
+for iteration in range(100):
+  for inputs, outputs in zip(training_inputs, training_outputs):
 #                  _b1__
-# INPUT _____W1___|     |
+# INPUT0_____W1___|     |
 #       \        /| H1  |
 #        \      / |_____|\
 #         \    W2         \
@@ -1683,29 +1683,30 @@ for inputs, outputs in zip(training_inputs, training_outputs):
 #          /  \             / |_____|
 #         /    W3          W6
 #        /      \  _b2__  /
-# INPUT /____W4__\|     |/
+# INPUT1/____W4__\|     |/
 #                 | H2  |
 #                 |_____|
-
+    #
     sum_hidden_1  = weight_1 * inputs[0]
     sum_hidden_1 += weight_2 * inputs[1]
     sum_hidden_1 += bias_1
     
     hidden_1 = sigmoid( sum_hidden_1 )
     
-    
+    # 
     sum_hidden_2  = weight_3 * inputs[0]
     sum_hidden_2 += weight_4 * inputs[1]
     sum_hidden_2 += bias_2
     
     hidden_2 = sigmoid(sum_hidden_2)
     
-    
+    #
     sum_output  = weight_5 * hidden_1
     sum_output += weight_6 * hidden_2
     sum_output += bias_3
     
     output = sigmoid(sum_output)
+    
     
     # derivatives
     der_weight_5 = hidden_1 * sigmoid_der(sum_output)
@@ -1731,17 +1732,20 @@ for inputs, outputs in zip(training_inputs, training_outputs):
     der_hidden_2_bias_2 = sigmoid_der(sum_hidden_2)
     
     # update
-    weight_1 -= learn_rate * der_hidden_1 * der_hidden_1_weight_1
-    weight_2 -= learn_rate * der_hidden_1 * der_hidden_1_weight_2
-    bias_1   -= learn_rate * der_hidden_1 * der_hidden_1_bias_1
+    predict = outputs - output
+    lp = learn_rate * predict
     
-    weight_3 -= learn_rate * der_hidden_2 * der_hidden_2_weight_3
-    weight_4 -= learn_rate * der_hidden_2 * der_hidden_2_weight_4
-    bias_2   -= learn_rate * der_hidden_2 * der_hidden_2_bias_2
+    weight_1 += lp * der_hidden_1 * der_hidden_1_weight_1
+    weight_2 += lp * der_hidden_1 * der_hidden_1_weight_2
+    bias_1   += lp * der_hidden_1 * der_hidden_1_bias_1
+    
+    weight_3 += lp * der_hidden_2 * der_hidden_2_weight_3
+    weight_4 += lp * der_hidden_2 * der_hidden_2_weight_4
+    bias_2   += lp * der_hidden_2 * der_hidden_2_bias_2
        
-    weight_5 -= learn_rate * der_weight_5
-    weight_6 -= learn_rate * der_weight_6
-    bias_3   -= learn_rate * der_bias_3
+    weight_5 += lp * der_weight_5
+    weight_6 += lp * der_weight_6
+    bias_3   += lp * der_bias_3
     
 def feedforward(x):
     hidden_1 = sigmoid(weight_1 * x[0] + weight_2 * x[1] + bias_1)
@@ -1749,3 +1753,5 @@ def feedforward(x):
     output   = sigmoid(weight_5 * hidden_1 + weight_6 * hidden_2 + bias_3)
     return output
     
+print ( "A ", feedforward( [ 20, 20] ) )
+print ( "Z ", feedforward( [ -7, -8] ) )
