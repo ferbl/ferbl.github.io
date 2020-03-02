@@ -1686,63 +1686,62 @@ for iteration in range(100):
 # INPUT1/____W4__\|     |/
 #                 | H2  |
 #                 |_____|
-    #
-    sum_hidden_1  = weight_1 * inputs[0]
-    sum_hidden_1 += weight_2 * inputs[1]
+
+    # INPUT0, INPUT1 -> H1
+    sum_hidden_1  = inputs[0] * weight_1
+    sum_hidden_1 += inputs[1] * weight_2 
     sum_hidden_1 += bias_1
     
     hidden_1 = sigmoid( sum_hidden_1 )
     
-    # 
-    sum_hidden_2  = weight_3 * inputs[0]
-    sum_hidden_2 += weight_4 * inputs[1]
+    # INPUT0, INPUT1 -> H2 
+    sum_hidden_2  = inputs[0] * weight_3
+    sum_hidden_2 += inputs[1] * weight_4 
     sum_hidden_2 += bias_2
     
     hidden_2 = sigmoid(sum_hidden_2)
     
-    #
-    sum_output  = weight_5 * hidden_1
-    sum_output += weight_6 * hidden_2
+    # H1, H2 -> O1
+    sum_output  = hidden_1 * weight_5
+    sum_output += hidden_2 * weight_6
     sum_output += bias_3
     
     output = sigmoid(sum_output)
     
-    
     # derivatives
+    # INPUT  H1
+    der_weight_1 = inputs[0] * sigmoid_der(sum_hidden_1)
+    der_weight_2 = inputs[1] * sigmoid_der(sum_hidden_1)
+    
+    der_bias_1 = sigmoid_der(sum_hidden_1)
+    
+    # INPUT  H2
+    der_weight_3 = inputs[0] * sigmoid_der(sum_hidden_2)
+    der_weight_4 = inputs[1] * sigmoid_der(sum_hidden_2)
+
+    der_bias_2 = sigmoid_der(sum_hidden_2)
+    
+    # H1, H2  O1
     der_weight_5 = hidden_1 * sigmoid_der(sum_output)
     der_weight_6 = hidden_2 * sigmoid_der(sum_output)
     
     der_bias_3 = sigmoid_der(sum_output)
     
-    
     der_hidden_1 = weight_5 * sigmoid_der(sum_output)
-    
     der_hidden_2 = weight_6 * sigmoid_der(sum_output)
-    
-    # INPUT <- H1
-    der_hidden_1_weight_1 = inputs[0] * sigmoid_der(sum_hidden_1)
-    der_hidden_1_weight_2 = inputs[1] * sigmoid_der(sum_hidden_1)
-    
-    der_hidden_1_bias_1 = sigmoid_der(sum_hidden_1)
-    
-    # INPUT <- H2
-    der_hidden_2_weight_3 = inputs[0] * sigmoid_der(sum_hidden_2)
-    der_hidden_2_weight_4 = inputs[1] * sigmoid_der(sum_hidden_2)
-
-    der_hidden_2_bias_2 = sigmoid_der(sum_hidden_2)
     
     # update
     predict = outputs - output
     lp = learn_rate * predict
     
-    weight_1 += lp * der_hidden_1 * der_hidden_1_weight_1
-    weight_2 += lp * der_hidden_1 * der_hidden_1_weight_2
-    bias_1   += lp * der_hidden_1 * der_hidden_1_bias_1
+    weight_1 += lp * der_hidden_1 * der_weight_1
+    weight_2 += lp * der_hidden_1 * der_weight_2
+    bias_1   += lp * der_hidden_1 * der_bias_1
     
-    weight_3 += lp * der_hidden_2 * der_hidden_2_weight_3
-    weight_4 += lp * der_hidden_2 * der_hidden_2_weight_4
-    bias_2   += lp * der_hidden_2 * der_hidden_2_bias_2
-       
+    weight_3 += lp * der_hidden_2 * der_weight_3
+    weight_4 += lp * der_hidden_2 * der_weight_4
+    bias_2   += lp * der_hidden_2 * der_bias_2
+    
     weight_5 += lp * der_weight_5
     weight_6 += lp * der_weight_6
     bias_3   += lp * der_bias_3
@@ -1755,3 +1754,4 @@ def feedforward(x):
     
 print ( "A ", feedforward( [ 20, 20] ) )
 print ( "Z ", feedforward( [ -7, -8] ) )
+
