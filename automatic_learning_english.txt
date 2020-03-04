@@ -980,6 +980,16 @@ sudo apt-get install [dependencies]
 7) make depend
 8) make
 ...........................................................
+import speech_recognition as sr
+
+r = sr.Recognizer()
+
+with sr.AudioFile("audio.wav") as source:
+
+    audio = r.record( source )
+    
+    print ( r.recognize_google(audio) )
+...........................................................
 /* audio similarity */
 libraries: musicg-1.4.2.1.jar 
 import com.musicg.fingerprint.FingerprintManager;
