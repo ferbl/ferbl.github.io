@@ -1808,10 +1808,15 @@ bias_1              bias_2               bias_3
 0.10000182578671102 0.10000182578671102 -2.4006428303784246
 ...........................................................
 import scipy.io.wavfile
+import numpy as np
+from scipy import spatial
 
-data = scipy.io.wavfile.read( "audio.wav" )
+data1 = scipy.io.wavfile.read("audio.wav")
+data2 = scipy.io.wavfile.read("audiomy.wav")
 
-print (data)
+array1 = np.array( data1[1] )
+array2 = np.array( data2[1] )
 
-
+result = 1 - spatial.distance.cosine(array1, array2)
+print (result)
 
