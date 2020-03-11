@@ -1820,3 +1820,6 @@ array2 = np.array( data2[1] )
 result = 1 - spatial.distance.cosine(array1, array2)
 print (result)
 
+np.savetxt("sample_rate1.txt", array1, delimiter=",")
+np.savetxt("sample_rate2.txt", array2, delimiter=",")
+
