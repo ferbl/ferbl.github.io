@@ -1817,7 +1817,10 @@ data2 = scipy.io.wavfile.read("audiomy.wav")
 array1 = np.array( data1[1] )
 array2 = np.array( data2[1] )
 
-result = 1 - spatial.distance.cosine(array1, array2)
+clipped1 = array1[(array1 > 200) | (-200 > array1)]
+clipped2 = array2[(array2 > 200) | (-200 > array2)]
+
+result = 1 - spatial.distance.cosine(clipped1, clipped2)
 print (result)
 
 np.savetxt("sample_rate1.txt", array1, delimiter=",")
