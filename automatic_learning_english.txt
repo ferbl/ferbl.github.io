@@ -1809,6 +1809,7 @@ bias_1              bias_2               bias_3
 ...........................................................
 import scipy.io.wavfile
 import numpy as np
+import difflib
 from scipy import spatial
 
 data1 = scipy.io.wavfile.read("audio.wav")
@@ -1817,11 +1818,14 @@ data2 = scipy.io.wavfile.read("audiomy.wav")
 array1 = np.array( data1[1] )
 array2 = np.array( data2[1] )
 
-clipped1 = array1[(array1 > 200) | (-200 > array1)]
-clipped2 = array2[(array2 > 200) | (-200 > array2)]
+clipped1 = array1[(array1 > 10) | (-10 > array1)]
+clipped2 = array2[(array2 > 10) | (-10 > array2)]
 
 result = 1 - spatial.distance.cosine(clipped1, clipped2)
 print (result)
+
+result = difflib.SequenceMatcher(None, array1, array2)
+print (result.ratio())
 
 np.savetxt("sample_rate1.txt", array1, delimiter=",")
 np.savetxt("sample_rate2.txt", array2, delimiter=",")
