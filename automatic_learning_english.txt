@@ -1818,8 +1818,8 @@ data2 = scipy.io.wavfile.read("audiomy.wav")
 array1 = np.array( data1[1] )
 array2 = np.array( data2[1] )
 
-clipped1 = array1[(array1 > 10) | (-10 > array1)]
-clipped2 = array2[(array2 > 10) | (-10 > array2)]
+clipped1 = array1[(array1 >  1) | ( -1 > array1)]
+clipped2 = array2[(array2 > 30) | (-30 > array2)]
 
 result = 1 - spatial.distance.cosine(clipped1, clipped2)
 print (result)
@@ -1828,6 +1828,9 @@ result = difflib.SequenceMatcher(None, array1, array2)
 print (result.ratio())
 
 result = np.mean( clipped1 != clipped2[ :len(clipped1) ] )
+print (result)
+
+result = stats.pearsonr(clipped1, clipped2)
 print (result)
 
 np.savetxt("sample_rate1.txt", array1, delimiter=",")
