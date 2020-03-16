@@ -1811,6 +1811,7 @@ import scipy.io.wavfile
 import numpy as np
 import difflib
 from scipy import spatial
+from scipy import stats
 
 data1 = scipy.io.wavfile.read("audio.wav")
 data2 = scipy.io.wavfile.read("audiomy.wav")
@@ -1818,8 +1819,8 @@ data2 = scipy.io.wavfile.read("audiomy.wav")
 array1 = np.array( data1[1] )
 array2 = np.array( data2[1] )
 
-clipped1 = array1[(array1 >  1) | ( -1 > array1)]
-clipped2 = array2[(array2 > 30) | (-30 > array2)]
+clipped1 = array1[(array1 > 1) | (-1 > array1)]
+clipped2 = array2[(array2 > 1) | (-1 > array2)]
 
 result = 1 - spatial.distance.cosine(clipped1, clipped2)
 print (result)
@@ -1832,6 +1833,9 @@ print (result)
 
 result = stats.pearsonr(clipped1, clipped2)
 print (result)
+
+np.fft.fft(clipped1)
+np.fft.fft(clipped2)
 
 np.savetxt("sample_rate1.txt", array1, delimiter=",")
 np.savetxt("sample_rate2.txt", array2, delimiter=",")
