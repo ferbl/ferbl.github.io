@@ -1833,6 +1833,8 @@ print (result)
 
 result = stats.pearsonr(clipped1, clipped2)
 print (result)
+result = stats.pointbiserialr(clipped1, clipped2)
+print (result)
 
 np.fft.fft(clipped1)
 np.fft.fft(clipped2)
