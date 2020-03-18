@@ -1812,6 +1812,8 @@ import numpy as np
 import difflib
 from scipy import spatial
 from scipy import stats
+from scipy.fftpack import fft
+import matplotlib.pyplot as plt
 
 data1 = scipy.io.wavfile.read("audio.wav")
 data2 = scipy.io.wavfile.read("audiomy.wav")
@@ -1836,8 +1838,10 @@ print (result)
 result = stats.pointbiserialr(clipped1, clipped2)
 print (result)
 
-np.fft.fft(clipped1)
-np.fft.fft(clipped2)
+rate, data = scipy.io.wavfile.read("audio.wav")
+fft_out = fft(data)
+plt.plot(data, np.abs(fft_out))
+plt.show()
 
 np.savetxt("sample_rate1.txt", array1, delimiter=",")
 np.savetxt("sample_rate2.txt", array2, delimiter=",")
