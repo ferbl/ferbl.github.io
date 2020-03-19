@@ -1838,9 +1838,10 @@ print (result)
 result = stats.pointbiserialr(clipped1, clipped2)
 print (result)
 
-rate, data = scipy.io.wavfile.read("audio.wav")
-fft_out = fft(data)
-plt.plot(data, np.abs(fft_out))
+fft_out1 = fft(data1[1])
+fft_out2 = fft(data2[1])
+plt.plot(data1[1], np.abs(fft_out1))
+plt.plot(data2[1], np.abs(fft_out2))
 plt.show()
 
 np.savetxt("sample_rate1.txt", array1, delimiter=",")
