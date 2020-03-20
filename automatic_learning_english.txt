@@ -1824,13 +1824,17 @@ array2 = np.array( data2[1] )
 clipped1 = array1[(array1 > 1) | (-1 > array1)]
 clipped2 = array2[(array2 > 1) | (-1 > array2)]
 
+min_length = min( len(clipped1), len(clipped2) )
+clipped1 = clipped1[:min_length]
+clipped2 = clipped2[:min_length]
+
 result = 1 - spatial.distance.cosine(clipped1, clipped2)
 print (result)
 
 result = difflib.SequenceMatcher(None, array1, array2)
 print (result.ratio())
 
-result = np.mean( clipped1 != clipped2[ :len(clipped1) ] )
+result = np.mean( clipped1 != clipped2 )
 print (result)
 
 result = stats.pearsonr(clipped1, clipped2)
@@ -1838,10 +1842,10 @@ print (result)
 result = stats.pointbiserialr(clipped1, clipped2)
 print (result)
 
-fft_out1 = fft(data1[1])
-fft_out2 = fft(data2[1])
-plt.plot(data1[1], np.abs(fft_out1))
-plt.plot(data2[1], np.abs(fft_out2))
+fft_out1 = fft(clipped1)
+fft_out2 = fft(clipped2)
+plt.plot(clipped1, np.abs(fft_out1))
+plt.plot(clipped2, np.abs(fft_out2))
 plt.show()
 
 np.savetxt("sample_rate1.txt", array1, delimiter=",")
