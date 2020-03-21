@@ -1842,10 +1842,13 @@ print (result)
 result = stats.pointbiserialr(clipped1, clipped2)
 print (result)
 
-fft_out1 = fft(clipped1)
-fft_out2 = fft(clipped2)
-plt.plot(clipped1, np.abs(fft_out1))
-plt.plot(clipped2, np.abs(fft_out2))
+fft_out1 = np.abs( fft(clipped1) )
+fft_out2 = np.abs( fft(clipped2) )
+result = stats.pearsonr(fft_out1, fft_out2)
+print (result)
+
+plt.plot(clipped1, fft_out1)
+plt.plot(clipped2, fft_out2)
 plt.show()
 
 np.savetxt("sample_rate1.txt", array1, delimiter=",")
