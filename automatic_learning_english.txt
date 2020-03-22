@@ -1065,6 +1065,8 @@ function record_audio_from_microphone()
     {
         console.log("start_recording");
         media_recorder.start();
+        
+        /*setTimeout(stop_recording, 5000);*/
     }
     function stop_recording()
     {
