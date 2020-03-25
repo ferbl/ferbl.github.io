@@ -1065,8 +1065,6 @@ function record_audio_from_microphone()
     {
         console.log("start_recording");
         media_recorder.start();
-        
-        /*setTimeout(stop_recording, 5000);*/
     }
     function stop_recording()
     {
@@ -1114,39 +1112,126 @@ $new_path = $_FILES["my_file"]["name"];
 move_uploaded_file($now_path, $new_path);
 ...........................................................
 /*  */
-<progress value="0" id="progress_bar"></progress>
+<p>
+    <button id="start_button">RECORD</button> 
+</p>
+<p>
+    <audio id="audio_element" controls></audio>
+</p>
+<p>
+    <progress value="0" id="progress_bar"></progress>
+</p>
 
-<script>   
-function fixed_time()
+<script> 
+function record_audio_from_microphone()
 {
-    var duration = 
-    <?php
-    echo exec("ffprobe "
-            . "-i audio5.wav "
-            . "-show_entries format=duration "
-            . "-v quiet "
-            . '-of csv="p=0"');
-    ?>;
-    document.getElementById("progress_bar")
-            .max = duration;
-
-    var time = 0;
-
-    var interval = setInterval(function()
+    var start = document.getElementById("start_button");
+    var media_recorder;
+    
+    const enable_audio = { audio: true };
+    
+    var run = function(stream)
     {
-        if(time > duration)
-        {
-            clearInterval(interval);
-            /*stop_recording();*/
-        }
+        console.log("works");
         
-        document.getElementById("progress_bar")
-                .value = time;
-        time += 0.100;
+        media_recorder = new MediaRecorder(stream);
+        
+        start.addEventListener("click", start_recording);
 
-    }, 100);
+        media_recorder.addEventListener("dataavailable", 
+                                        set_blob);
+    };
+    
+    function start_recording()
+    {
+        console.log("start_recording");
+        media_recorder.start();
+        
+        fixed_time();
+    }
+    function stop_recording()
+    {
+        console.log("stop_recording");
+        media_recorder.stop();
+    }
+    function set_blob(blob)
+    {
+        var blob_audio = blob.data;
+        
+        set_recording_to_element(blob_audio);
+        upload_to_server(blob_audio);
+    }
+    function set_recording_to_element(blob_audio)
+    {
+        document.getElementById("audio_element")
+                .src = URL.createObjectURL(blob_audio);
+    }
+    function upload_to_server(blob_audio)
+    {
+        var file = new File([blob_audio], "speech.wav");
+        console.log(file);
+        
+        var req = new XMLHttpRequest();
+        var form = new FormData();
+
+        form.append("my_file", file);
+        req.open("POST", "record_audio3.php", true);
+        req.send(form);
+    }
+    
+    navigator.mediaDevices
+            .getUserMedia(enable_audio)
+            .then(run);
+    
+    function fixed_time()
+    {
+        var duration = 
+        <?php
+        echo exec("ffprobe "
+                . "-i audio5.wav "
+                . "-show_entries format=duration "
+                . "-v quiet "
+                . '-of csv="p=0"');
+        ?>;         
+        document.getElementById("progress_bar")
+               .max = duration;
+
+        var time = 0;
+
+        var interval = setInterval(function()
+        {
+            if(time > duration)
+            {
+                clearInterval(interval);
+                stop_recording();
+            }
+
+            document.getElementById("progress_bar")
+                    .value = time;
+            time += 0.01;
+
+        }, 10);
+    }
 }
+record_audio_from_microphone();
 </script>
+
+<?php
+$now_path = $_FILES["my_file"]["tmp_name"];
+$new_path = $_FILES["my_file"]["name"];
+
+move_uploaded_file($now_path, $new_path);
+
+if($new_path != NULL)
+{
+    exec("rm out.wav");
+    
+    exec("ffmpeg "
+            . "-i speech.wav "
+            . "-acodec pcm_s16le "
+            . "-ac 1 "
+            . "-ar 16000 out.wav");
+}
 ...........................................................
 import numpy as np
 
