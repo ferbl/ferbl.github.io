@@ -1975,4 +1975,32 @@ plt.show()
 
 np.savetxt("sample_rate1.txt", array1, delimiter=",")
 np.savetxt("sample_rate2.txt", array2, delimiter=",")
+...........................................................
+import scipy.io.wavfile
+import numpy as np
+from scipy import stats
+from scipy.fftpack import fft
 
+def similarity_two_audio(name_1, name_2):
+
+    data1 = scipy.io.wavfile.read(name_1)
+    data2 = scipy.io.wavfile.read(name_2)
+
+    array1 = np.array( data1[1] )
+    array2 = np.array( data2[1] )
+
+    clipped1 = array1[(array1 > 1) | (-1 > array1)]
+    clipped2 = array2[(array2 > 1) | (-1 > array2)]
+
+    min_length = min(len(clipped1), len(clipped2))
+    clipped1 = clipped1[:min_length]
+    clipped2 = clipped2[:min_length]
+
+    result = stats.pearsonr(clipped1, clipped2)
+
+    fft_out1 = np.abs( fft(clipped1) )
+    fft_out2 = np.abs( fft(clipped2) )
+    result = stats.pearsonr(fft_out1, fft_out2)
+    print (result)
+    
+similarity_two_audio("audio.wav", "audiomy.wav")
