@@ -2004,3 +2004,16 @@ def similarity_two_audio(name_1, name_2):
     print (result)
     
 similarity_two_audio("audio.wav", "audiomy.wav")
+...........................................................
+import matplotlib.pyplot as plt
+import scipy.io.wavfile
+import numpy as np
+from scipy import signal
+
+rate, data = scipy.io.wavfile.read("audio.wav")
+frequencies, times, spectrogram = signal.spectrogram(data, rate)
+
+plt.pcolormesh(times, frequencies, np.log(spectrogram))
+plt.ylabel('Frequency [Hz]')
+plt.xlabel('Time [sec]')
+plt.show()
