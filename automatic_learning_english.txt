@@ -2013,7 +2013,9 @@ from scipy import signal
 rate, data = scipy.io.wavfile.read("audio.wav")
 frequencies, times, spectrogram = signal.spectrogram(data, rate)
 
+plt.subplots_adjust(0.0, 0.0, 1.0, 1.0, 0.2, 0.2)
+
 plt.pcolormesh(times, frequencies, np.log(spectrogram))
-plt.ylabel('Frequency [Hz]')
-plt.xlabel('Time [sec]')
+plt.xticks([])
+plt.yticks([])
 plt.show()
