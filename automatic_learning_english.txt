@@ -2011,6 +2011,10 @@ import numpy as np
 from scipy import signal
 
 rate, data = scipy.io.wavfile.read("audio.wav")
+
+data = data[ np.nonzero(data) ]
+print ( "sec:", len(data) / rate )
+
 frequencies, times, spectrogram = signal.spectrogram(data, rate)
 
 plt.subplots_adjust(0.0, 0.0, 1.0, 1.0, 0.2, 0.2)
