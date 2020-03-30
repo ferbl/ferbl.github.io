@@ -2023,3 +2023,24 @@ plt.pcolormesh(times, frequencies, np.log(spectrogram))
 plt.xticks([])
 plt.yticks([])
 plt.show()
+...........................................................
+import matplotlib.pyplot as plt
+import scipy.io.wavfile
+import numpy as np
+from scipy import signal
+from scipy import stats
+
+rate1, data1 = scipy.io.wavfile.read("audio.wav")
+rate2, data2 = scipy.io.wavfile.read("audiomy.wav)
+
+data1 = data1[ np.nonzero(data1) ]
+print ( "sec:", len(data1) / rate1 )
+    
+data2 = data2[ np.nonzero(data2) ]
+print ( "sec:", len(data2) / rate2 )
+
+frequencies1, times1, spectrogram1 = signal.spectrogram(data1, rate1)
+frequencies2, times2, spectrogram2 = signal.spectrogram(data2, rate2)
+    
+for x, y in zip(spectrogram1, spectrogram2):
+    result = stats.pearsonr(x, y)
