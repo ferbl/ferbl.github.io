@@ -2041,9 +2041,18 @@ print ( "sec:", len(data2) / rate2 )
 
 frequencies1, times1, spectrogram1 = signal.spectrogram(data1, rate1)
 frequencies2, times2, spectrogram2 = signal.spectrogram(data2, rate2)
+#
+min_length = min(len(spectrogram1[0]), len(spectrogram2[0])) 
 
-min_length = min(len(spectrogram1[0]), len(spectrogram2[0]))
-    
-for x in spectrogram1[:min_length]:
+for x in spectrogram1:
     for y in spectrogram2:
-        result = stats.pearsonr(x[:min_length], y[:min_length]) [0]
+        result = stats.pearsonr(x[:min_length], y[:min_length]) [0]        
+#
+spectrogram1 = np.ravel(spectrogram1)
+spectrogram2 = np.ravel(spectrogram2)
+
+min_length = min(len(spectrogram1), len(spectrogram2))
+
+for x in range(8):
+    shift = x * 1000
+    result = stats.pearsonr(spectrogram1[ :min_length ], spectrogram2[ shift : min_length + shift ])
