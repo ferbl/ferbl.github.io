@@ -2053,6 +2053,9 @@ spectrogram2 = np.ravel(spectrogram2)
 
 min_length = min(len(spectrogram1), len(spectrogram2))
 
-for x in range(8):
+difference = len(spectrogram1) - len(spectrogram2)
+difference = np.abs(difference / 1000)
+
+for x in range( int(difference) ):
     shift = x * 1000
     result = stats.pearsonr(spectrogram1[ :min_length ], spectrogram2[ shift : min_length + shift ])
