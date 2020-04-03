@@ -2059,3 +2059,6 @@ difference = np.abs(difference / 1000)
 for x in range( int(difference) ):
     shift = x * 1000
     result = stats.pearsonr(spectrogram1[ :min_length ], spectrogram2[ shift : min_length + shift ])
+    
+    if int(result[1] * 10000) > 0:
+        print (result)
