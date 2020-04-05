@@ -1232,6 +1232,16 @@ if($new_path != NULL)
             . "-ac 1 "
             . "-ar 16000 out.wav");
 }
+
+import sys
+import scipy.io.wavfile
+import numpy as np
+
+rate, data = scipy.io.wavfile.read(sys.argv[1])
+
+data = data[ np.nonzero(data) ]
+# seconds
+print ( len(data) / rate )
 ...........................................................
 import numpy as np
 
