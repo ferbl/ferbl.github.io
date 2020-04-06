@@ -1187,14 +1187,11 @@ function record_audio_from_microphone()
     {
         var duration = 
         <?php
-        echo exec("ffprobe "
-                . "-i audio5.wav "
-                . "-show_entries format=duration "
-                . "-v quiet "
-                . '-of csv="p=0"');
+        echo exec("python get_duration.py audio5.wav");
         ?>;         
+        
         document.getElementById("progress_bar")
-               .max = duration;
+                .max = duration;
 
         var time = 0;
 
@@ -1216,6 +1213,7 @@ function record_audio_from_microphone()
 record_audio_from_microphone();
 </script>
 
+record_audio3.php
 <?php
 $now_path = $_FILES["my_file"]["tmp_name"];
 $new_path = $_FILES["my_file"]["name"];
@@ -1233,6 +1231,7 @@ if($new_path != NULL)
             . "-ar 16000 out.wav");
 }
 
+get_duration.py
 import sys
 import scipy.io.wavfile
 import numpy as np
