@@ -2080,7 +2080,9 @@ spectrogram2 = np.ravel(spectrogram2)
 
 min_length = min(len(spectrogram1), len(spectrogram2))
 
-result = stats.pearsonr(spectrogram1[:min_length], spectrogram2[:min_length]) 
+result = stats.pearsonr(spectrogram1[:min_length], spectrogram2[:min_length])
 
+if result[0] > 0.01:
+    print (result)
 
 
