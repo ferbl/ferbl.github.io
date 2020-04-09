@@ -1241,6 +1241,32 @@ rate, data = scipy.io.wavfile.read(sys.argv[1])
 data = data[ np.nonzero(data) ]
 # seconds
 print ( len(data) / rate )
+
+similarity_audio.py
+import sys
+import numpy as np
+import scipy.io.wavfile
+from scipy import signal
+from scipy import stats
+
+rate1, data1 = scipy.io.wavfile.read(sys.argv[1])
+rate2, data2 = scipy.io.wavfile.read(sys.argv[2])
+
+data1 = data1[ np.nonzero(data1) ]
+data2 = data2[ np.nonzero(data2) ]
+
+frequencies1, times1, spectrogram1 = signal.spectrogram(data1, rate1)
+frequencies2, times2, spectrogram2 = signal.spectrogram(data2, rate2)   
+
+spectrogram1 = np.ravel(spectrogram1)
+spectrogram2 = np.ravel(spectrogram2)
+
+min_length = min(len(spectrogram1), len(spectrogram2))
+
+result = stats.pearsonr(spectrogram1[:min_length], spectrogram2[:min_length])
+    
+if result[0] > 0.01:
+    print ("yes")
 ...........................................................
 import numpy as np
 
