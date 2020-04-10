@@ -1209,6 +1209,14 @@ function record_audio_from_microphone()
 
         }, 10);
     }
+    function check_pronunciation()
+    {
+        <?php
+            echo exec("python similarity_audio.py "
+                    . "audio5.wav "
+                    . "audio5c1.wav");
+        ?>
+    }
 }
 record_audio_from_microphone();
 </script>
