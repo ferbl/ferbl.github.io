@@ -1214,7 +1214,7 @@ function record_audio_from_microphone()
         <?php
             echo exec("python similarity_audio.py "
                     . "audio5.wav "
-                    . "audio5c1.wav");
+                    . "out.wav");
         ?>
     }
 }
@@ -1273,7 +1273,7 @@ min_length = min(len(spectrogram1), len(spectrogram2))
 
 result = stats.pearsonr(spectrogram1[:min_length], spectrogram2[:min_length])
     
-if result[0] > 0.01:
+if result[0] > 0.01 and result[1] > 0.01:
     print ("yes")
 ...........................................................
 import numpy as np
