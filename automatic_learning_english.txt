@@ -1112,15 +1112,14 @@ $new_path = $_FILES["my_file"]["name"];
 move_uploaded_file($now_path, $new_path);
 ...........................................................
 /*  */
-<p>
-    <button id="start_button">RECORD</button> 
-</p>
-<p>
-    <audio id="audio_element" controls></audio>
-</p>
-<p>
-    <progress value="0" id="progress_bar"></progress>
-</p>
+
+<button id="start_button">RECORD</button> 
+
+<audio id="audio_element" controls></audio>
+
+<progress value="0" id="progress_bar"></progress>
+
+<p id="pronunciation">...</p>
 
 <script> 
 function record_audio_from_microphone()
@@ -1177,6 +1176,8 @@ function record_audio_from_microphone()
         form.append("my_file", file);
         req.open("POST", "record_audio3.php", true);
         req.send(form);
+        
+        check_pronunciation();
     }
     
     navigator.mediaDevices
@@ -1211,11 +1212,19 @@ function record_audio_from_microphone()
     }
     function check_pronunciation()
     {
-        <?php
-            echo exec("python similarity_audio.py "
-                    . "audio5.wav "
-                    . "out.wav");
-        ?>
+        var req = new XMLHttpRequest();
+
+        req.open("POST", "check_pronunciation.php", true);
+        req.send();
+        
+        req.onreadystatechange = function()
+        {
+            if(this.readyState === 4 && this.status === 200)
+            {
+                document.getElementById("pronunciation")
+                        .innerHTML = this.responseText;
+            }
+        };
     }
 }
 record_audio_from_microphone();
@@ -1238,6 +1247,10 @@ if($new_path != NULL)
             . "-ac 1 "
             . "-ar 16000 out.wav");
 }
+
+check_pronunciation.php
+<?php
+echo exec("python main9.py audio5.wav out.wav");
 
 get_duration.py
 import sys
