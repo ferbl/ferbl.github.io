@@ -2133,12 +2133,13 @@ if result[0] > 0.01:
     print (result)
 #
 difference = len(spectrogram2) - len(spectrogram1)
-x = len(spectrogram1) - difference
+cut = len(spectrogram1) - difference
 
-first_part  = spectrogram1[:x]
-second_part = spectrogram1[x:]
+first_part  = spectrogram1[ :cut]  # get the initial elements 
+second_part = spectrogram1[cut: ]  # get the finite elements
     
-second_part = np.repeat(second_part, 2)
-
+second_part  = np.repeat(second_part, 2) 
 spectrogram1 = np.concatenate((first_part, second_part))
+
+result = stats.pearsonr(spectrogram1, spectrogram2)
 
