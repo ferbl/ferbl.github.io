@@ -2133,7 +2133,7 @@ if result[0] > 0.01:
     print (result)
 #
 difference = len(spectrogram2) - len(spectrogram1)
-cut = len(spectrogram1) - difference
+cut = len(spectrogram1) - difference  # if cut > 0
 
 first_part  = spectrogram1[ :cut]  # get the initial elements 
 second_part = spectrogram1[cut: ]  # get the finite elements
