@@ -2144,4 +2144,15 @@ second_part = np.repeat(second_part, 2)
 data1 = np.concatenate((first_part, second_part))
 
 result = stats.pearsonr(data1, data2)
+#
+spectrogram1 = np.ravel(spectrogram1)
+spectrogram2 = np.ravel(spectrogram2)
+
+stats.describe(spectrogram2)
+
+
+
+
+
+
 
