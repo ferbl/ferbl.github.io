@@ -2151,8 +2151,7 @@ spectrogram2 = np.ravel(spectrogram2)
 stats.describe(spectrogram2)
 
 stats.wasserstein_distance(data1, data2)
-
-
+stats.energy_distance(data1, data2)
 
 
 
