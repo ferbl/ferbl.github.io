@@ -2148,9 +2148,11 @@ result = stats.pearsonr(data1, data2)
 spectrogram1 = np.ravel(spectrogram1)
 spectrogram2 = np.ravel(spectrogram2)
 
+values = []
+
 stats.describe(spectrogram2)
 
-stats.wasserstein_distance(data1, data2)
+values.append( stats.wasserstein_distance(data1, data2) )
 stats.energy_distance(data1, data2)
 
 
