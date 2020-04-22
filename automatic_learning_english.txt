@@ -2148,10 +2148,20 @@ result = stats.pearsonr(data1, data2)
 spectrogram1 = np.ravel(spectrogram1)
 spectrogram2 = np.ravel(spectrogram2)
 
-values = []
+correct   = []
+incorrect = []
+
+def _correct(one, two):
+ rate1, data1 = scipy.io.wavfile.read(one)
+ rate2, data2 = scipy.io.wavfile.read(two)
+ correct.append( stats.wasserstein_distance(data1, data2) )
+
+def _incorrect(one, two):
+ rate1, data1 = scipy.io.wavfile.read(one)
+ rate2, data2 = scipy.io.wavfile.read(two)
+ incorrect.append( stats.wasserstein_distance(data1, data2) )
 
 stats.describe(spectrogram2)
-
 values.append( stats.wasserstein_distance(data1, data2) )
 stats.energy_distance(data1, data2)
 
