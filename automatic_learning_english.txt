@@ -2160,6 +2160,11 @@ def _incorrect(one, two):
  rate1, data1 = scipy.io.wavfile.read(one)
  rate2, data2 = scipy.io.wavfile.read(two)
  incorrect.append( stats.wasserstein_distance(data1, data2) )
+ 
+def __correct(value):
+ for x in correct:
+  if x+10 > value and value > x:
+   print (x)
 
 stats.describe(spectrogram2)
 values.append( stats.wasserstein_distance(data1, data2) )
